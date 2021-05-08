@@ -1,27 +1,22 @@
 # TennisBooking
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
+Sovellus mahdollistaa tenniskentän varauksen suoraan webissä, joten pelaajien ei tarvitsee enää mennä fyysisesti tenniskentälle varaamaan vuoroa paperisille varauslistoille.
+Sovellus näyttää tehdyt varaukset ja vapaana olevat ajat kullekkin kentälle.
 
-## Development server
+## Sovelluksen toiminnallisuus
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Tähän kirjoitetaan toiminnallisuus lyhyesti
 
-## Code scaffolding
+## Kuvaus teknologiosta
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Lyhyehkö kuvaus eri teknologioiden käyttämisestä työssä.
 
-## Build
+Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Reflektio ja ajankäyttö
 
-## Running unit tests
+Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen?
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Mitä tietoja/taitoja sinun tulee vielä kehittää?
