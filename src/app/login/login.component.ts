@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+// import { LoginData } from '../logindata'; // otetaan sisään testikäyttäjän tunnnus ja salasana
 
 @Component({
   selector: 'app-login',
