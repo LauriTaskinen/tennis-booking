@@ -7,8 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { BookingComponent } from './booking/booking.component';
 import { MeComponent } from './me/me.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,10 +17,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
     BookingComponent,
     MeComponent,
     NavbarComponent,
-    FooterComponent,
     SignInComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
