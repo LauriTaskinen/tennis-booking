@@ -1,26 +1,27 @@
-<div>
+<nav>
   <a href="#">Tennis Booking</a>
   <button class="navbar-toggler" type="button"> Valikko </button>
-</div>
 
-<div>
-  <ul>
+  <div>
+    <ul>
 
-    <div *ngIf="router.url == '/login'">
-      <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#login" routerLink="login">Kirjaudu
-          sisään</a></li>
-    </div>
-    <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking'  )">
-      <li><a href="#login" routerLink="login">Kirjaudu
-          ulos</a></li>
-    </div>
-    <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-      <li><a href="/booking#booking">Varaa
-          kenttä</a></li>
-    </div>
-    <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-      <li><a href="/booking#me">Minä</a>
-      </li>
-    </div>
-  </ul>
-</div>
+      <div *ngIf="router.url == '/login'">
+        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#login" routerLink="login">Kirjaudu
+            sisään</a></li>
+      </div>
+      <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking'  )">
+        <li><a href="#login" routerLink="login">Kirjaudu
+            ulos</a></li>
+      </div>
+      <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
+        <li><a href="/booking#booking">Varaa
+            kenttä</a></li>
+      </div>
+      <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
+        <li><a href="/booking#me">Minä</a>
+        </li>
+      </div>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
