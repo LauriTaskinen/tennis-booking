@@ -12,7 +12,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  loggedIn() {
+  logIn() {
     this.router.navigate(['/booking']);
+  }
+
+  signIn() {
+    this.router.navigate(['/sign-in'])
   }
 }

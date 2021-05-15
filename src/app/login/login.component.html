@@ -9,17 +9,14 @@
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h2>Kirjaudu sisään</h2>
-        <p class="lead">This is a great place to talk about your webpage. This template is purposefully unstyled so
-          you can use it as a boilerplate or starting point for you own landing page designs! This template features:
+        <p class="lead">
+          Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.
         </p>
-        <ul>
-          <li>Clickable nav links that smooth scroll to page sections</li>
-          <li>Responsive behavior when clicking nav links perfect for a one page website</li>
-          <li>Bootstrap's scrollspy feature which highlights which section of the page you're on in the navbar</li>
-          <li>Minimal custom CSS so you are free to explore your own unique design options</li>
-        </ul>
       </div>
-      <button (click)="loggedIn()">Kirjaudu sisään</button>
+      <div class="w-100 justify-content-center ">
+        <button class="btn btn-primary" (click)="logIn()">Kirjaudu sisään</button>
+        <button class="btn btn-primary" (click)="signIn()">Rekisteröidy</button>
+      </div>
     </div>
   </div>
 </section>
