@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  buttonVisible: boolean = false;
-
   constructor(public router: Router) {}
 
   ngOnInit(): void {}

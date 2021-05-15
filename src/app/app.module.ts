@@ -9,7 +9,12 @@ import { MeComponent } from './me/me.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu'; //tätä ei nyt käytetä
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { MatTabsModule } from '@angular/material/tabs';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatTabsModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatIconModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
