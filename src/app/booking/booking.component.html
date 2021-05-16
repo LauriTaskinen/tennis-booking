@@ -1,9 +1,12 @@
-<section id="booking">
+<section id="login">
   <div class="container">
     <app-me></app-me>
-    <h2>Tässä voit tehdä kenttävarauksen</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita
-      quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore
-      ut velit dignissimos.</p>
+    <H2>Tee uusi varaus</H2>
+    <mat-form-field appearance="fill">
+      <mat-label>Avaa varauskalenteri</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+    </mat-form-field>
   </div>
 </section>

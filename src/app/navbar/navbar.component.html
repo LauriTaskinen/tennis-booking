@@ -3,7 +3,8 @@
 
   <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
   <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-    <a mat-button *ngFor="let item of navItems" [href]='item.path' fxHide.xs>
+    <a mat-button *ngFor="let item of navItems" [href]='item.path' [fxShow]="item.desktopView"
+      [fxShow.xs]="item.mobileView" [fxShow.sm]="item.tabletView">
       <mat-icon class="mr">{{item.icon}}</mat-icon>
       {{item.label}}
     </a>
@@ -13,11 +14,13 @@
     </button>
     <mat-menu #dropMenu="matMenu">
       <ng-container *ngFor="let item of navItems">
-        <a [href]='item.path' mat-menu-item>
-          <mat-icon class="mr">{{item.icon}}</mat-icon>
-          {{item.label}}
-        </a>
-        <mat-divider></mat-divider>
+        <div [fxShow]="!item.desktopView" [fxShow.xs]="!item.mobileView" [fxShow.sm]="!item.tabletView">
+          <a [href]='item.path' mat-menu-item>
+            <mat-icon class="mr">{{item.icon}}</mat-icon>
+            {{item.label}}
+          </a>
+          <mat-divider></mat-divider>
+        </div>
       </ng-container>
     </mat-menu>
   </div>

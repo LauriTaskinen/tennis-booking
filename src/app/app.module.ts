@@ -51,7 +51,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+// Material Datepicker
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,8 +103,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSortModule,
     MatTableModule,
     FlexLayoutModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
