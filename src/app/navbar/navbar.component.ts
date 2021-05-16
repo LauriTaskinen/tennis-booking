@@ -7,6 +7,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  navItems = [
+    {
+      label: 'Kirjaudu ulos',
+      icon: 'arrow_back',
+      path: 'login',
+    },
+    {
+      label: 'Varaa Kenttä',
+      icon: 'calendar_today',
+      path: 'booking#booking',
+    },
+    {
+      label: 'Omat varaukseni',
+      icon: 'perm_identity',
+      path: 'booking#me',
+    },
+  ];
+
   constructor(public router: Router) {}
 
   ngOnInit(): void {}
