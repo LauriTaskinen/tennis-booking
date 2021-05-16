@@ -51,6 +51,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MeComponent,
     NavbarComponent,
     SignInComponent,
+    LoginDialogComponent,
   ],
   imports: [
     AppRoutingModule,
