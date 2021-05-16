@@ -1,0 +1,15 @@
+#login-form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.register{
+  display: flex;
+  align-items: center;
+}
+
+.register > p{
+  padding: 0px;
+  margin: 0px;
+}

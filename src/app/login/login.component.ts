@@ -1,6 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 // import { LoginData } from '../logindata'; // otetaan sisään testikäyttäjän tunnnus ja salasana
+
 
 @Component({
   selector: 'app-login',
@@ -8,15 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {}
 
-  logIn() {
-    this.router.navigate(['/booking']);
+  openDialog() {
+    this.dialog.open(LoginDialogComponent);
   }
 
-  signIn() {
-    this.router.navigate(['/sign-in']);
-  }
 }
