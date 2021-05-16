@@ -1,44 +1,26 @@
-<div *ngIf="router.url == '/login'">
-  <!--<p class="nav-item"><a class="nav-link js-scroll-trigger" href="#login" routerLink="login">Kirjaudu
-      sisään</a></p>-->
-</div>
-<div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking'  )">
-  <p><a href="#login" routerLink="login">Kirjaudu
-      ulos</a></p>
-</div>
-<div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-  <button mat-button [matMenuTriggerFor]="menu">Valikko</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item><a href="/booking#booking">Varaa
-        kenttä</a></button>
-    <button mat-menu-item><a href="/booking#me">Omat varaukseni</a></button>
-  </mat-menu>
-</div>
-<!--
-      <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-        <li><a href="/booking#booking">Varaa
-            kenttä</a></li>
-      </div>
-      <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
-        <li><a href="/booking#me">Minä</a>
-        </li>
-      </div>
-    -->
-
 <mat-toolbar fxLayout="row" color="primary">
-  <span fxFlex>Tennis Booking</span>
-  <button mat-button fx.Hide.xs><a href="/booking#booking">Varaa
-      kenttä</a></button>
-  <button mat-button fx.Hide.xs><a href="/booking#me">Omat varaukseni</a></button>
-  <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #dropMenu="matMenu">
-    <button mat-menu-item><a href="/booking#booking">Varaa
-        kenttä</a></button>
-    <button mat-menu-item><a href="/booking#me">Omat varaukseni</a></button>
-    <mat-divider></mat-divider>
-  </mat-menu>
+  <a mat-button href='#'><span fxFlex>Tennis booking</span></a>
+
+  <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
+  <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
+    <a mat-button *ngFor="let item of navItems" [href]='item.path' fxHide.xs>
+      <mat-icon class="mr">{{item.icon}}</mat-icon>
+      {{item.label}}
+    </a>
+
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #dropMenu="matMenu">
+      <ng-container *ngFor="let item of navItems">
+        <a [href]='item.path' mat-menu-item>
+          <mat-icon class="mr">{{item.icon}}</mat-icon>
+          {{item.label}}
+        </a>
+        <mat-divider></mat-divider>
+      </ng-container>
+    </mat-menu>
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
