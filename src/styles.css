@@ -22,3 +22,8 @@ p{
   height: 100%;
   width: 100%;
 }
+
+.button-group > button{
+  padding: 0.2em 1em;
+  margin-right: 2em;
+}
