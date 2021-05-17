@@ -53,6 +53,8 @@ import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Material Datepicker
 import { MatNativeDateModule } from '@angular/material/core';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +63,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MeComponent,
     NavbarComponent,
     SignInComponent,
+    LoginDialogComponent,
   ],
   imports: [
     AppRoutingModule,

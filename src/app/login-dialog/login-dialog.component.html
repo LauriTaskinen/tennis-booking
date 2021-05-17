@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 mat-dialog-title>Kirjaudu sisään</h1>
+  <!-- <div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div> -->
+  <div mat-dialog-actions>
+
+    <form id="login-form" #loginForm="ngForm" (ngSubmit)="logIn(loginForm)">
+      <mat-form-field>
+        <mat-label>
+          Sähköposti:
+        </mat-label>
+        <input matInput id="email" type="email" name="sahkoposti" required ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          Salasana:
+        </mat-label>
+        <input matInput id="password" type="password" name="salasana" required ngModel>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Lähetä</button>
+
+      <div class="register">
+        <p>Etkö ole vielä rekisteröitynyt?</p>
+        <button mat-button type="button" (click)="signIn()">Rekisteröidy nyt</button>
+      </div>
+
+      <p> tai kirjaudu sisään Google-tunnuksilla</p>
+
+    </form>
+  </div>
+</div>
