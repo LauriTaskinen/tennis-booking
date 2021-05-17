@@ -6,8 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./booking.component.css'],
 })
 export class BookingComponent implements OnInit {
-  startDate = new Date(2021, 5, 1);
+  minDate: Date = new Date();
+  touchUi = true;
+
+  dateChanged($event: { target: { value: any } }) {
+    console.log($event);
+    //myBookings.push($event.target.value);
+  }
 
   constructor() {}
   ngOnInit(): void {}
 }
+
+const myBookings = [];

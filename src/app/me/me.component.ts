@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./me.component.css'],
 })
 export class MeComponent implements OnInit {
+  displayedColumns: string[] = ['date'];
+  dataSource = [];
   constructor() {}
 
   ngOnInit(): void {}
