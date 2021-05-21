@@ -1,3 +1,4 @@
+//Rajapintaluokka NavItem määrittää navigointipalkin oliot.
 export interface NavItem {
   label: string;
   icon: string;

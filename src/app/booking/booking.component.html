@@ -8,5 +8,44 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
     </mat-form-field>
+    <br>
+    <div *ngIf="dayChosen">
+      <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
+      <ul>
+        <li>
+          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1)"> Varaa <div *ngIf="timeChosen === slot1">
+              </div>
+            </button> </p>
+        </li>
+        <li>
+          <p> 10:00 - 12:00 <button (click)="pickTime(this.slot2)">Varaa<div *ngIf="timeChosen === slot2">
+
+              </div></button> </p>
+        </li>
+        <li>
+          <p> 12:00 - 14:00 <button (click)="pickTime(this.slot3)">Varaa<div *ngIf="timeChosen === slot3">
+              </div></button> </p>
+        </li>
+        <li>
+          <p> 14:00 - 16:00 <button (click)="pickTime(this.slot4)">Varaa<div *ngIf="timeChosen === slot4">
+              </div></button> </p>
+        </li>
+        <li>
+          <p> 16:00 - 18:00 <button (click)="pickTime(this.slot5)">Varaa<div *ngIf="timeChosen === slot5">
+              </div></button> </p>
+        </li>
+        <li>
+          <p> 18:00 - 20:00 <button (click)="pickTime(this.slot6)">Varaa<div *ngIf="timeChosen === slot6">
+              </div></button> </p>
+        </li>
+      </ul>
+      <div *ngIf="timeChosen">
+        <h3>Varauksesi:</h3>
+        <p>{{pickedTime.getDate()}}/{{pickedTime.getMonth()+1}}/{{pickedTime.getFullYear()}} klo {{timeChosen}}</p>
+        <Button>Vahvista varaus </Button>
+      </div>
+    </div>
+
+
   </div>
 </section>
