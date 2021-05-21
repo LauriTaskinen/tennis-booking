@@ -4,7 +4,6 @@ import { LoginComponent } from './login/login.component';
 import { BookingComponent } from './booking/booking.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { MeComponent } from './me/me.component';
 import { BookingGuard } from './booking.guard';
 
 const routes: Routes = [

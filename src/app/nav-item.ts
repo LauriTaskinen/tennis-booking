@@ -5,4 +5,6 @@ export interface NavItem {
   mobileView: boolean;
   tabletView: boolean;
   desktopView: boolean;
+  logIn?: Function;
+  logOut?: Function;
 }

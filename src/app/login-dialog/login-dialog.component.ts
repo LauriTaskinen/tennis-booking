@@ -18,19 +18,14 @@ export class LoginDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //nämä auth-serviceen?
   signIn(): void {
     this.router.navigate(['/sign-in']);
     this.dialog.closeAll();
   }
 
   logIn(data: NgForm): void {
-    if (this.auth.loggedIn) {
-      console.log(data.value);
-      data.resetForm();
-      this.router.navigate(['/booking']);
-      this.dialog.closeAll();
-    } else {
-      throw 'Sisäänkirjautuminen epäonnistui';
-    }
+    this.auth.signIn(data.value.sahkoposti, data.value.salasana);
+    data.resetForm();
   }
 }

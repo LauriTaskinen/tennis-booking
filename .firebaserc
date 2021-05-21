@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "booking-tennis": {
+      "hosting": {
+        "tennis-booking": [
+          "booking-tennis"
+        ]
+      }
+    }
+  }
+}

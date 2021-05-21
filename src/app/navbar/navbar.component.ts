@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements OnInit {
       mobileView: true,
       tabletView: true,
       desktopView: true,
+      logOut: this.auth.signOut()
     },
     {
       label: 'Varaa Kenttä',
@@ -34,9 +36,8 @@ export class NavbarComponent implements OnInit {
     },
   ];
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, public auth: AuthService) {}
 
   ngOnInit(): void {}
 }
 
-class MyComponent {}
