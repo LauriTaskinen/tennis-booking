@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingService } from '../booking.service';
 
 @Component({
   selector: 'app-me',
@@ -6,7 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./me.component.css'],
 })
 export class MeComponent implements OnInit {
-  constructor() {}
+  mybookings: any;
 
-  ngOnInit(): void {}
+  constructor(private book: BookingService) {}
+
+  ngOnInit(): void {
+    this.getDataFromS();
+  }
+
+  getDataFromS = () =>
+    this.book.getPersonalBookings().subscribe((res) => (this.mybookings = res));
+
+  //let mydata = this.book.getPersonalBookings().get();
+  // console.log(mydata.subscribe());
 }

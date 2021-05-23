@@ -2,5 +2,28 @@
   <div class="container">
     <h2>Omat varaukseni</h2>
 
+    <thead>
+      <th>Nimi</th>
+      <th>Päivä</th>
+      <th>Aika</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of mybookings">
+        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().name}}</td>
+        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().date}}</td>
+        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().time}}</td>
+
+        <td [class.fade]="booking.payload.doc.data()">
+          <span *ngFor="let joku of booking.payload.doc.data().data">
+            {{joku}}
+          </span>
+        </td>
+
+
+
+
+
+      </tr>
+    </tbody>
   </div>
 </section>
