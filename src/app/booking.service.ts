@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
-  form = new FormGroup({
-    name: new FormControl(''),
-    date: new FormControl(''),
-    time: new FormControl(''),
-  });
 
   constructor(private store: AngularFirestore, private auth: AuthService) {}
 
-  testPrint(info: any) {
-    console.log(info);
-  }
+  // testPrint(info: any) {
+  //   console.log(info);
+  // }
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object) {
@@ -44,15 +38,6 @@ export class BookingService {
 
     //console.log(doc.data()))
   }
-
-  updateBookingData(data: any) {
-    return this.store
-      .collection('Bookings')
-      .doc(data.payload.doc.uid)
-      .set({ completed: true }, { merge: true });
-  }
-
-  getAllBookings() {}
 
   cancelBooking() {}
 }

@@ -8,22 +8,17 @@
       <th>Aika</th>
     </thead>
     <tbody>
+
+
       <tr *ngFor="let booking of mybookings">
-        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().name}}</td>
-        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().date}}</td>
-        <td [class.fade]="booking.payload.doc.data()">{{booking.payload.doc.data().time}}</td>
-
-        <td [class.fade]="booking.payload.doc.data()">
-          <span *ngFor="let joku of booking.payload.doc.data().data">
-            {{joku}}
-          </span>
-        </td>
-
-
-
-
+        <div *ngIf="booking.payload.doc.data().name === currentUserName && booking.payload.doc.data().date >= currentDate ">
+          <td>{{booking.payload.doc.data().name}}</td>
+          <td>{{booking.payload.doc.data().date}}</td>
+          <td>{{booking.payload.doc.data().time}}</td>
+        </div>
 
       </tr>
+
     </tbody>
   </div>
 </section>

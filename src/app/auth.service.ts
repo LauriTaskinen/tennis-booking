@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import firebase from 'firebase/app'
 @Injectable({
@@ -14,7 +15,8 @@ export class AuthService {
   constructor(
     private auth: AngularFireAuth,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) {
     this.loggedIn = false;
     this.user = auth.onAuthStateChanged((user) => {
@@ -28,16 +30,27 @@ export class AuthService {
     });
   }
 
-
-  signUp(name:string, email: string, password: string): void {
+  signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then((userData) => 
+      .then((userData) =>
         userData.user?.updateProfile({
           displayName: name,
-        }))
+        })
+      )
+      .then(() =>
+        this.snackbar.open(
+          'Rekisteröinti onnistui! Voit nyt kirjautua sisään.',
+          'sulje',
+          { duration: 3000 }
+        )
+      )
       .catch((error) => {
         console.log(error.message);
+        //huono snackbar
+        this.snackbar.open('Rekisteröinti epäonnistui', 'sulje', {
+          duration: 3000,
+        });
       });
   }
 
@@ -46,7 +59,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((userData) => (this.user = userData.user))
       .then(() => {
-        console.log( this.user);
+        console.log(this.user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       });

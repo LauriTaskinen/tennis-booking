@@ -27,3 +27,11 @@ p{
   padding: 0.2em 1em;
   margin-right: 2em;
 }
+
+.snackbar {
+  color: aliceblue;
+}
+
+.snackbarAction {
+  color: blue;
+}

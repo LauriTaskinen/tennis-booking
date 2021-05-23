@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service'
+import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
-
 
 @Component({
   selector: 'app-booking',
@@ -51,9 +50,15 @@ export class BookingComponent implements OnInit {
       date: this.pickedTime.toLocaleDateString(),
       time: this.timeChosen,
     });
-    console.log('booked!')
+    console.log('booked!');
     //"lomakkeen" nollaus
   }
 
-  ngOnInit(): void {}
+  /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
+    Näin tietokanta ei pääse koskaan paisumaan*/
+  deleteOldBookings() {}
+
+  ngOnInit(): void {
+    this.deleteOldBookings();
+  }
 }
