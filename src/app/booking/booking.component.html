@@ -41,8 +41,8 @@
       </ul>
       <div *ngIf="timeChosen">
         <h3>Varauksesi:</h3>
-        <p>{{pickedTime.getDate()}}/{{pickedTime.getMonth()+1}}/{{pickedTime.getFullYear()}} klo {{timeChosen}}</p>
-        <Button>Vahvista varaus </Button>
+        <p>{{pickedTime.toLocaleDateString()}} klo {{timeChosen}}</p>
+        <button (click)="confirmBooking()">Vahvista varaus </button>
       </div>
     </div>
 

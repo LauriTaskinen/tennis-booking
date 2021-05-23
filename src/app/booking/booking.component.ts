@@ -1,5 +1,7 @@
-import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service'
+import { BookingService } from '../booking.service';
+
 
 @Component({
   selector: 'app-booking',
@@ -20,7 +22,7 @@ export class BookingComponent implements OnInit {
   slot5: string;
   slot6: string;
 
-  constructor() {
+  constructor(private book: BookingService, private auth: AuthService) {
     this.slot1 = '08-10';
     this.slot2 = '10-12';
     this.slot3 = '12-14';
@@ -30,17 +32,27 @@ export class BookingComponent implements OnInit {
     this.pickedTime = new Date();
   }
 
-  dateChanged($event: { target: { value: any } }) {
+  dateChanged($event: { target: { value: any } }): void {
     //console.log($event);
     this.pickedTime = $event.target.value;
-    return (this.dayChosen = true);
+    this.dayChosen = true;
     //myBookings.push($event.target.value);
   }
 
-  pickTime(slot: string) {
+  pickTime(slot: string): void {
     this.timeChosen = slot;
     console.log(slot);
-    return this.booked;
+  }
+
+  confirmBooking() {
+    this.book.createBooking({
+      name: this.auth.user.displayName,
+      email: this.auth.user.email,
+      date: this.pickedTime.toLocaleDateString(),
+      time: this.timeChosen,
+    });
+    console.log('booked!')
+    //"lomakkeen" nollaus
   }
 
   ngOnInit(): void {}

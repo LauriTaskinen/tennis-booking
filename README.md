@@ -20,3 +20,6 @@ Miten työ onnistui? Mikä oli helppoa, mikä vaikeaa?
 Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen?
 
 Mitä tietoja/taitoja sinun tulee vielä kehittää?
+
+
+Lähteet:

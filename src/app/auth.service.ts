@@ -28,24 +28,25 @@ export class AuthService {
     });
   }
 
-  signUp(email: string, password: string): void {
+
+  signUp(name:string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then((userData) => (this.user = userData))
-      .then(() => {
-        console.log('Signed up' + this.user.email);
-      })
+      .then((userData) => 
+        userData.user?.updateProfile({
+          displayName: name,
+        }))
       .catch((error) => {
-        console.log('virhe' + error);
+        console.log(error.message);
       });
   }
 
   signIn(email: string, password: string): void {
     this.auth
       .signInWithEmailAndPassword(email, password)
-      .then((userData) => (this.user = userData))
+      .then((userData) => (this.user = userData.user))
       .then(() => {
-        console.log('logged in' + this.user.user.email);
+        console.log( this.user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       });
@@ -56,6 +57,7 @@ export class AuthService {
       .signOut()
       .then(() => {
         console.log('Logged out');
+        this.router.navigate(['login']);
       })
       .catch((error) => {
         console.log(error.message);
