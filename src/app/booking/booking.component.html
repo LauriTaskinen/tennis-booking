@@ -13,7 +13,7 @@
       <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
       <ul>
         <li>
-          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1)"> Varaa <div *ngIf="timeChosen === slot1">
+          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1) "> Varaa <div *ngIf="timeChosen === slot1">
               </div>
             </button> </p>
         </li>
@@ -41,7 +41,7 @@
       </ul>
       <div *ngIf="timeChosen">
         <h3>Varauksesi:</h3>
-        <p>{{pickedTime.toLocaleDateString()}} klo {{timeChosen}}</p>
+        <p>{{dateChosen.toLocaleDateString()}} klo {{timeChosen}}</p>
         <button (click)="confirmBooking()">Vahvista varaus </button>
       </div>
     </div>

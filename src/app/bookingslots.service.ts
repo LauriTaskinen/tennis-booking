@@ -13,16 +13,12 @@ export class BookingslotsService {
   bSlotsCollection: AngularFirestoreCollection<Slot> | undefined;
   slots: Observable<any[]> | undefined;
 
-  constructor(public afs: AngularFirestore) {}
+  constructor(public store: AngularFirestore) {}
 
-  createBookingSlots(info: object) {
-    return (
-      this.afs
-        .collection('bookingSlots')
-        .add(info)
-        //errorin näyttö näytöllä lisättävä
-        .catch((error) => console.log(error))
-    );
+  createBookingSlots(docName: string) {
+    return this.store.collection('bookingSlots').doc(docName);
+    //errorin näyttö näytöllä lisättävä
+    //.catch((error) => console.log(error))
   }
 
   // haetaan bookingSlots collectionista slotit.
@@ -30,8 +26,12 @@ export class BookingslotsService {
   // metodi valueChanges() mahdollistaa reaktiivisen tiedon käsittelyn.
   // valueChanges() palauttaa observablen, joka tilataan booking-componentissa.
   getBookingSlots() {
-    this.slots = this.afs.collection('bookingSlots').valueChanges();
+    this.slots = this.store.collection('bookingSlots').valueChanges();
     return this.slots;
+  }
+
+  updateSlots(docName: string, slot: object) {
+    this.store.collection('bookingSlots').doc(docName).set(slot);
   }
 
   /*

@@ -3,6 +3,11 @@
 
   <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
   <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
+    <a mat-button (click)="logOutMethod()" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"
+      [fxShow.xs]="logOutItem.mobileView" [fxShow.sm]="logOutItem.tabletView">
+      <mat-icon class="mr">{{logOutItem.icon}}</mat-icon>
+      {{logOutItem.label}}
+    </a>
     <a mat-button *ngFor="let item of navItems" [href]='item.path' [fxShow]="item.desktopView"
       [fxShow.xs]="item.mobileView" [fxShow.sm]="item.tabletView">
       <mat-icon class="mr">{{item.icon}}</mat-icon>
