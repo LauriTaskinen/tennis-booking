@@ -16,7 +16,9 @@ export class NavbarComponent implements OnInit {
       mobileView: true,
       tabletView: true,
       desktopView: true,
-      logOut: this.auth.signOut()
+      //tämä aiheuttaa uloskirjautumisen aina uudelleenladattaessa
+      //muutettava uloskirjautuminen erilleen ngforista
+      logOut: this.auth.logOut()
     },
     {
       label: 'Varaa Kenttä',

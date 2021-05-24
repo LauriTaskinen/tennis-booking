@@ -19,13 +19,13 @@ export class LoginDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   //nämä auth-serviceen?
-  signIn(): void {
+  signUp(): void {
     this.router.navigate(['/sign-in']);
     this.dialog.closeAll();
   }
 
   logIn(data: NgForm): void {
-    this.auth.signIn(data.value.sahkoposti, data.value.salasana);
+    this.auth.logIn(data.value.sahkoposti, data.value.salasana);
     data.resetForm();
   }
 }

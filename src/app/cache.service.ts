@@ -9,7 +9,7 @@ export class CacheService {
 
   save(): void {
     let currentUser = this.auth.user;
-    localStorage.setItem('currentUser', currentUser);
+    localStorage.setItem('currentUser', currentUser.id);
     console.log('userdata set in cache');
   }
 

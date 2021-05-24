@@ -15,7 +15,7 @@ export class BookingGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      if(this.auth.user){
+      if(this.auth.userState){
         console.log('no guard')
         return true;
       } else{
