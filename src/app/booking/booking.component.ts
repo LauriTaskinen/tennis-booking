@@ -53,7 +53,8 @@ export class BookingComponent implements OnInit {
 
   confirmBooking() {
     this.book.createBooking({
-      name: this.auth.user.displayName,
+      id: this.auth.user.id,
+      name: this.auth.user.name,
       email: this.auth.user.email,
       date: this.pickedTime.toLocaleDateString(),
       time: this.timeChosen,

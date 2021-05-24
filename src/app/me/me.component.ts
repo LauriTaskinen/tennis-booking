@@ -9,12 +9,15 @@ import { AuthService } from '../auth.service';
 })
 export class MeComponent implements OnInit {
   mybookings: any;
-  currentUserName: any;
+  //nämä vaihdettava uid:hen (myös tallennettava uid syöttövaiheessa)
+  currentUserID: string;
+  currentUserName: string;
   currentDate: string;
 
   constructor(private book: BookingService, public auth: AuthService) {
-    this.currentUserName = this.auth.user.displayName;
+    this.currentUserID = this.auth.user.id;
     this.currentDate = new Date().toLocaleDateString();
+    this.currentUserName = this.auth.user.name!;
   }
 
   ngOnInit(): void {

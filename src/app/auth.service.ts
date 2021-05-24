@@ -3,14 +3,15 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import User from './user';
 
 // import firebase from 'firebase/app'
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  loggedIn: boolean;
-  user: any;
+  userState: any;
+  user: User;
 
   constructor(
     private auth: AngularFireAuth,
@@ -18,8 +19,12 @@ export class AuthService {
     public dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
-    this.loggedIn = false;
-    this.user = auth.onAuthStateChanged((user) => {
+    this.user ={
+      id: '',
+      name: '',
+      email: '',
+    }
+    this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
         console.log('there is user');
         return true;
@@ -54,18 +59,25 @@ export class AuthService {
       });
   }
 
-  signIn(email: string, password: string): void {
+  logIn(email: string, password: string): void {
     this.auth
       .signInWithEmailAndPassword(email, password)
-      .then((userData) => (this.user = userData.user))
+      .then((userData) => {
+        this.user = {
+          id: userData.user!.uid,
+          name: userData.user!.displayName,
+          email: userData.user!.email
+        };
+      })
       .then(() => {
         console.log(this.user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
-      });
+      })
+      .catch((error) => console.log(error.message));
   }
 
-  signOut(): void {
+  logOut(): void {
     this.auth
       .signOut()
       .then(() => {
