@@ -11,7 +11,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -57,6 +57,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Material Datepicker
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+
+import { BookingslotsService } from './bookingslots.service';
 
 @NgModule({
   declarations: [
@@ -116,7 +118,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
   providers: [
     MatDatepickerModule,
     { provide: MAT_DATE_LOCALE, useValue: 'fi' },
-    
+    BookingslotsService,
   ],
   bootstrap: [AppComponent],
 })

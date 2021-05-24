@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from '../auth.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,10 +16,10 @@ export class NavbarComponent implements OnInit {
       mobileView: true,
       tabletView: true,
       desktopView: true,
-      logOut: this.auth.signOut()
+      logOut: this.auth.signOut(),
     },
     {
-      label: 'Varaa Kenttä',
+      label: 'Varaa kenttä',
       icon: 'calendar_today',
       path: 'booking#booking',
       mobileView: false,
@@ -40,4 +40,3 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 }
-

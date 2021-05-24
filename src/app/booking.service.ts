@@ -6,7 +6,6 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class BookingService {
-
   constructor(private store: AngularFirestore, private auth: AuthService) {}
 
   // testPrint(info: any) {
@@ -24,6 +23,7 @@ export class BookingService {
     );
   }
 
+  // hakee käyttäjän varaukset tietokannasta
   getPersonalBookings() {
     return this.store.collection('Bookings').snapshotChanges();
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
+import { BookingslotsService } from '../bookingslots.service';
+import { Slot } from '../slot';
 
 @Component({
   selector: 'app-booking',
@@ -21,7 +23,13 @@ export class BookingComponent implements OnInit {
   slot5: string;
   slot6: string;
 
-  constructor(private book: BookingService, private auth: AuthService) {
+  // slots: any[] | undefined;
+
+  constructor(
+    private book: BookingService,
+    private auth: AuthService,
+    private timeSlots: BookingslotsService
+  ) {
     this.slot1 = '08-10';
     this.slot2 = '10-12';
     this.slot3 = '12-14';
@@ -50,6 +58,9 @@ export class BookingComponent implements OnInit {
       date: this.pickedTime.toLocaleDateString(),
       time: this.timeChosen,
     });
+    this.timeSlots.createBookingSlots({
+      //tähän tieto sloteista mitkä luodaan
+    });
     console.log('booked!');
     //"lomakkeen" nollaus
   }
@@ -58,7 +69,12 @@ export class BookingComponent implements OnInit {
     Näin tietokanta ei pääse koskaan paisumaan*/
   deleteOldBookings() {}
 
+  // tilataan tieto vapaista sloteista observablena servicestä
   ngOnInit(): void {
+    this.timeSlots.getBookingSlots().subscribe((slots) => {
+      console.log(slots);
+      //this.slots = slots;
+    });
     this.deleteOldBookings();
   }
 }
