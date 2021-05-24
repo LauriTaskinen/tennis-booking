@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class MeComponent implements OnInit {
   mybookings: any;
+  //nämä vaihdettava uid:hen (myös tallennettava uid syöttövaiheessa)
   currentUserName: any;
   currentDate: string;
 
