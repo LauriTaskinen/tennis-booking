@@ -22,8 +22,26 @@
     </mat-form-field>
     <br>
     <div *ngIf="dayChosen">
-      <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
 
+      <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
+      <!--
+      <mat-selection-list class="times" #times [multiple]="false">
+        <mat-list-option *ngFor="let slot of slots" [value]="slot">
+          {{slot}}
+        </mat-list-option>
+      </mat-selection-list>
+    -->
+      <mat-selection-list #times [multiple]="false">
+        <button mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
+          [disabled]="slotUnavailable(slot)">
+          {{slot}}
+        </button>
+      </mat-selection-list>
+
+
+
+
+      <!--
       <ul>
         <li *ngFor="let slot of slots">
           {{slot}}
@@ -31,6 +49,7 @@
         </li>
       </ul>
 
+      -->
       <!-- <ul>
         <li>
           <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1)" [disabled]="slotUnavailable()"> Varaa <div *ngIf="timeChosen === slot1">

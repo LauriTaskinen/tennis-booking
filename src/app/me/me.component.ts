@@ -15,7 +15,7 @@ export class MeComponent implements OnInit {
   currentUserName: string;
   currentDate: string;
 
-  columnsToDisplay = ['date', 'time'];
+  columnsToDisplay = ['date', 'time', 'delete'];
 
   constructor(private book: BookingService, public auth: AuthService) {
     this.currentUserID = this.auth.user.id;
