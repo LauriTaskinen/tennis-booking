@@ -1,32 +1,6 @@
 <h2>Omat varaukseni</h2>
 <p>{{currentUserName}}</p>
 
-<!-- Aika sarake
-<table mat-table class="mat-elevation-z8">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-    <p>{{currentUserName}}</p>
-    <thead>
-      <th>Päivä</th>
-      <th>Aika</th>
-    </thead>
-    <tbody>
-      
-      <tr *ngFor="let booking of mybookings">
-        <div *ngIf="booking.payload.doc.data().id === currentUserID && booking.payload.doc.data().date >= currentDate ">
-          <td>{{booking.payload.doc.data().date}}</td>
-          <td>{{booking.payload.doc.data().time}}</td>
-          <td>
-            <button (click)="cancel(booking.payload.doc.id)">peruuta</button>
-          </td>
-        </div>
-
-</table>
--->
-
-
 <thead>
   <th>Päivä</th>
   <th>Aika</th>
@@ -37,8 +11,9 @@
     <div *ngIf="booking.payload.doc.data().id === currentUserID && booking.payload.doc.data().date >= currentDate ">
       <td>{{booking.payload.doc.data().date}}</td>
       <td>{{booking.payload.doc.data().time}}</td>
+      <td>
+        <button (click)="cancel(booking.payload.doc.id)">peruuta</button>
+      </td>
     </div>
-
   </tr>
-
 </tbody>
