@@ -13,6 +13,9 @@
         <div *ngIf="booking.payload.doc.data().id === currentUserID && booking.payload.doc.data().date >= currentDate ">
           <td>{{booking.payload.doc.data().date}}</td>
           <td>{{booking.payload.doc.data().time}}</td>
+          <td>
+            <button (click)="cancel(booking.payload.doc.id)">peruuta</button>
+          </td>
         </div>
 
       </tr>

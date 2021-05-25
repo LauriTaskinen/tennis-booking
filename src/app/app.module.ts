@@ -58,7 +58,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
-import { BookingslotsService } from './bookingslots.service';
 
 @NgModule({
   declarations: [
@@ -118,7 +117,6 @@ import { BookingslotsService } from './bookingslots.service';
   providers: [
     MatDatepickerModule,
     { provide: MAT_DATE_LOCALE, useValue: 'fi' },
-    BookingslotsService,
   ],
   bootstrap: [AppComponent],
 })

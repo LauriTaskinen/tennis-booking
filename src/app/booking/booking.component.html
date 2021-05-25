@@ -11,9 +11,17 @@
     <br>
     <div *ngIf="dayChosen">
       <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
+
       <ul>
+        <li *ngFor="let slot of slots">
+          {{slot}}
+          <button (click)="pickTime(slot)" [disabled]="slotUnavailable(slot)">Varaa</button>
+        </li>
+      </ul>
+      
+      <!-- <ul>
         <li>
-          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1) "> Varaa <div *ngIf="timeChosen === slot1">
+          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1)" [disabled]="slotUnavailable()"> Varaa <div *ngIf="timeChosen === slot1">
               </div>
             </button> </p>
         </li>
@@ -38,7 +46,7 @@
           <p> 18:00 - 20:00 <button (click)="pickTime(this.slot6)">Varaa<div *ngIf="timeChosen === slot6">
               </div></button> </p>
         </li>
-      </ul>
+      </ul> -->
       <div *ngIf="timeChosen">
         <h3>Varauksesi:</h3>
         <p>{{dateChosen.toLocaleDateString()}} klo {{timeChosen}}</p>
