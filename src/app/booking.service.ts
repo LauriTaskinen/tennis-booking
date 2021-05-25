@@ -35,8 +35,11 @@ export class BookingService {
     //console.log(doc.data()))
   }
 
-
   cancelBooking(id: string) {
     this.store.collection('Bookings').doc(id).delete();
+  }
+
+  formatBookingDate(date: Date): string {
+    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
   }
 }

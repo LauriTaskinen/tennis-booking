@@ -1,4 +1,3 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
@@ -34,7 +33,7 @@ export class BookingComponent implements OnInit {
     //console.log($event);
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
-    this.getTimeSlots(this.formatBookingDate(this.dateChosen));
+    this.getTimeSlots(this.book.formatBookingDate(this.dateChosen));
     //myBookings.push($event.target.value);
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
@@ -43,10 +42,6 @@ export class BookingComponent implements OnInit {
     this.timeChosen = slot;
 
     console.log(slot);
-  }
-
-  formatBookingDate(date: Date): string {
-    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
   }
 
   // tämä metodi laukaisee kaksi metodia
@@ -64,7 +59,7 @@ export class BookingComponent implements OnInit {
       id: this.auth.user.id,
       name: this.auth.user.name,
       email: this.auth.user.email,
-      date: this.formatBookingDate(this.dateChosen),
+      date: this.book.formatBookingDate(this.dateChosen),
       time: this.timeChosen,
     });
     // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);

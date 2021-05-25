@@ -14,9 +14,11 @@ export class MeComponent implements OnInit {
   currentUserName: string;
   currentDate: string;
 
+  columnsToDisplay = ['date', 'time'];
+
   constructor(private book: BookingService, public auth: AuthService) {
     this.currentUserID = this.auth.user.id;
-    this.currentDate = new Date().toLocaleDateString();
+    this.currentDate = book.formatBookingDate(new Date());
     this.currentUserName = this.auth.user.name!;
   }
 
@@ -28,8 +30,8 @@ export class MeComponent implements OnInit {
     this.book.getPersonalBookings().subscribe((res) => (this.mybookings = res));
   }
 
-  cancel(id:string) {
-    console.log(id)
+  cancel(id: string) {
+    console.log(id);
     this.book.cancelBooking(id);
   }
 
