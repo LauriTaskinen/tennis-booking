@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
-import { BookingslotsService } from '../bookingslots.service';
 
-import { Slot } from '../slot';
 
 @Component({
   selector: 'app-booking',
@@ -18,48 +16,35 @@ export class BookingComponent implements OnInit {
   timeChosen = '';
   dateChosen: Date; //valitsee päivän
   booked = 'Varattu';
-  slot1: string;
-  slot2: string;
-  slot3: string;
-  slot4: string;
-  slot5: string;
-  slot6: string;
 
-  slots: any[] | undefined;
+  slots = ['08-10', '10-12', '12-14', '14-16', '16-18', '18-20'];
 
-  slot: {};
+  timeSlot: Array<object>;
 
   constructor(
     private book: BookingService,
     private auth: AuthService,
-    private timeSlots: BookingslotsService
   ) {
     //muuttujia joiden arvoja ovat kellonajat
-    this.slot1 = '08-10';
-    this.slot2 = '10-12';
-    this.slot3 = '12-14';
-    this.slot4 = '14-16';
-    this.slot5 = '16-18';
-    this.slot6 = '18-20';
 
     // kalenterista valittu päivä muuttujassa
     this.dateChosen = new Date();
 
-    this.slot = {
-      time: this.timeChosen,
-    };
+    this.timeSlot = [];
   }
 
   dateChanged($event: { target: { value: Date } }): void {
     //console.log($event);
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
+    this.getTimeSlots(this.dateChosen.toLocaleDateString());
     //myBookings.push($event.target.value);
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
   pickTime(slot: string): void {
     // muuttuja timeChosen saa nyt arvokseen slotin arvon eli vaikka 12-14
     this.timeChosen = slot;
+
     console.log(slot);
   }
   // tämä metodi laukaisee kaksi metodia
@@ -80,29 +65,36 @@ export class BookingComponent implements OnInit {
       date: this.dateChosen.toLocaleDateString(),
       time: this.timeChosen,
     });
-    this.timeSlots.updateSlots(this.dateChosen.toString(), this.slot);
+    // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);
     console.log('booked!');
     //"lomakkeen" nollaus
   }
-
-  //tähän updateSlots, jossa valittu slotti muutetaan trueksi.
-  //eli otetaan valittu (timeChosen = 8-10) ja sanotaan, että päivitä
-  //sen niminen kenttä dokumentista trueksi.
-  //updateSlots(timechosen){
-  //
-  //}
-  //tähän tieto sloteista mitkä luodaan
 
   /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
     Näin tietokanta ei pääse koskaan paisumaan*/
   deleteOldBookings() {}
 
+  getTimeSlots(date: any) {
+    this.book.getPersonalBookings().subscribe((bookings: any) => {
+      this.timeSlot = [];
+      for (let i = 0; i < bookings.length; i++) {
+        if (bookings[i].payload.doc.data().date === date) {
+          this.timeSlot.push({
+            time: bookings[i].payload.doc.data().time,
+            date: bookings[i].payload.doc.data().date,
+          });
+        }
+      }
+      console.log(this.timeSlot);
+      return this.timeSlot;
+    });
+  }
+
+  slotUnavailable(slot: string): boolean {
+    return this.timeSlot.some((s: any) => s.time === slot);
+  }
   // tilataan tieto vapaista sloteista observablena servicestä
   ngOnInit(): void {
-    this.timeSlots.getBookingSlots().subscribe((slots) => {
-      console.log(slots);
-      this.slots = slots;
-    });
     this.deleteOldBookings();
   }
 }

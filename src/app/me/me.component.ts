@@ -24,8 +24,14 @@ export class MeComponent implements OnInit {
     this.getDataFromS();
   }
 
-  getDataFromS = () =>
+  getDataFromS() {
     this.book.getPersonalBookings().subscribe((res) => (this.mybookings = res));
+  }
+
+  cancel(id:string) {
+    console.log(id)
+    this.book.cancelBooking(id);
+  }
 
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());

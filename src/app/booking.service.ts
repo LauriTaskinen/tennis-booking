@@ -8,10 +8,6 @@ import { AuthService } from './auth.service';
 export class BookingService {
   constructor(private store: AngularFirestore, private auth: AuthService) {}
 
-  // testPrint(info: any) {
-  //   console.log(info);
-  // }
-
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object) {
     return (
@@ -39,5 +35,8 @@ export class BookingService {
     //console.log(doc.data()))
   }
 
-  cancelBooking() {}
+
+  cancelBooking(id: string) {
+    this.store.collection('Bookings').doc(id).delete();
+  }
 }
