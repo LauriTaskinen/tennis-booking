@@ -72,7 +72,7 @@ export class BookingComponent implements OnInit {
   deleteOldBookings() {}
 
   getTimeSlots(date: any) {
-    this.book.getPersonalBookings().subscribe((bookings: any) => {
+    this.book.getAllBookings().subscribe((bookings: any) => {
       this.timeSlot = [];
       for (let i = 0; i < bookings.length; i++) {
         if (bookings[i].payload.doc.data().date === date) {
