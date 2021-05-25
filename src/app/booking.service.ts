@@ -21,20 +21,14 @@ export class BookingService {
 
   // hakee käyttäjän varaukset tietokannasta
   getPersonalBookings() {
-    return this.store.collection('Bookings').snapshotChanges();
-
-    /*let mydata = this.store.collection('Bookings').doc(this.auth.user.uid);
-    let rres: any;
-    mydata.get().subscribe((res) => (rres = res));
-
-    for (const booking of rres) {
-      console.log(booking.payload.doc.data());
-    }
-    */
-
-    //console.log(doc.data()))
+    return this.store
+      .collection('Bookings', (ref) => ref.where('id', '==', this.auth.user.id))
+      .snapshotChanges();
   }
 
+  getAllBookings() {
+    return this.store.collection('Bookings').snapshotChanges();
+  }
 
   cancelBooking(id: string) {
     this.store.collection('Bookings').doc(id).delete();

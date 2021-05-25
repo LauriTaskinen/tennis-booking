@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-me',
@@ -25,11 +26,13 @@ export class MeComponent implements OnInit {
   }
 
   getDataFromS() {
-    this.book.getPersonalBookings().subscribe((res) => (this.mybookings = res));
+    this.book.getPersonalBookings().subscribe((bookings) => {
+      this.mybookings = bookings;
+    });
   }
 
-  cancel(id:string) {
-    console.log(id)
+  cancel(id: string) {
+    console.log(id);
     this.book.cancelBooking(id);
   }
 
