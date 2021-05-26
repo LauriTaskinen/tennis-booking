@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
 
@@ -7,7 +8,8 @@ import { BookingService } from '../booking.service';
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css'],
 })
-export class BookingComponent implements OnInit {
+export class BookingComponent implements OnInit, OnDestroy {
+  allBookingsSub: Subscription | null;
   minDate: Date = new Date();
   touchUi = true;
   dayChosen = false; // tämä vaikuttaa vain siihen tuleeko kellonaikojen valinta näkyviin HTML-templaatissa
@@ -21,7 +23,7 @@ export class BookingComponent implements OnInit {
   timeSlot: Array<object>;
 
   constructor(private book: BookingService, private auth: AuthService) {
-    //muuttujia joiden arvoja ovat kellonajat
+    this.allBookingsSub = null;
 
     // kalenterista valittu päivä muuttujassa
     this.dateChosen = new Date();
@@ -68,7 +70,7 @@ export class BookingComponent implements OnInit {
   }
 
   getTimeSlots(date: any) {
-    this.book.getAllBookings().subscribe((bookings: any) => {
+    this.allBookingsSub = this.book.getAllBookings().subscribe((bookings: any) => {
       this.timeSlot = [];
       for (let i = 0; i < bookings.length; i++) {
         if (bookings[i].payload.doc.data().date === date) {
@@ -89,5 +91,8 @@ export class BookingComponent implements OnInit {
 
   ngOnInit(): void {
  
+  }
+  ngOnDestroy():void {
+    this.allBookingsSub?.unsubscribe()
   }
 }

@@ -1,39 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
   styleUrls: ['./me.component.css'],
 })
-export class MeComponent implements OnInit {
+export class MeComponent implements OnInit, OnDestroy {
+  personalBookingsSub: Subscription;
   mybookings: any;
-  //nämä vaihdettava uid:hen (myös tallennettava uid syöttövaiheessa)
   currentUserID: string;
   currentUserName: string;
   currentDate: string;
-
   columnsToDisplay = ['date', 'time', 'delete'];
 
-  constructor(private book: BookingService, public auth: AuthService) {
-    this.currentUserID = this.auth.user.id;
+  constructor(private book: BookingService, private auth: AuthService) {
+    this.currentUserID = this.auth.userState ? this.auth.user.id : '';
     this.currentDate = book.formatBookingDate(new Date());
-    this.currentUserName = this.auth.user.name!;
+    this.currentUserName = this.auth.userState ? this.auth.user.name! : '';
+    this.personalBookingsSub = this.getBookings();
   }
 
   ngOnInit(): void {
-    this.getDataFromS();
+    // this.getDataFromS();
   }
 
-  dateMonthAgo() {
+  dateMonthAgo(): Date {
     let date = new Date();
     date.setDate(date.getDate() - 30);
     return date;
   }
 
-  getDataFromS() {
-    this.book.getPersonalBookings().subscribe((bookings) => {
+  getBookings() {
+    return this.book.getPersonalBookings().subscribe((bookings: any) => {
       this.mybookings = bookings;
     });
   }
@@ -51,4 +52,7 @@ export class MeComponent implements OnInit {
 
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());
+  ngOnDestroy(): void {
+    this.personalBookingsSub.unsubscribe()
+  }
 }

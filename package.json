@@ -39,5 +39,8 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3",
     "jsonc-parser": "^3.0.0"
+  },
+  "resolutions": {
+    "dns-packet": ">=5.2.2"
   }
 }

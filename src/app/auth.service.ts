@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import firebase from 'firebase/app';
 import User from './user';
 
 // import firebase from 'firebase/app'
@@ -33,6 +34,21 @@ export class AuthService {
         return false;
       }
     });
+  }
+
+  googleAuth() {
+    return this.googleLogin(new firebase.auth.GoogleAuthProvider());
+  }
+
+  googleLogin(provider: any) {
+    return this.auth
+      .signInWithPopup(provider)
+      .then(() => {
+        console.log('Sisäänkirjautuminen onnistui');
+      })
+      .catch((error: any) => {
+        console.log(error.message);
+      });
   }
 
   signUp(name: string, email: string, password: string): void {

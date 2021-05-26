@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class BookingService {
   constructor(private store: AngularFirestore, private auth: AuthService) {}
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
-  createBooking(info: object) {
+  createBooking(info: object): Promise<any> {
     return (
       this.store
         .collection('Bookings')
@@ -20,18 +21,22 @@ export class BookingService {
   }
 
   // hakee käyttäjän varaukset tietokannasta
-  getPersonalBookings() {
+  getPersonalBookings(): Observable<any> {
     return this.store
       .collection('Bookings', (ref) => ref.where('id', '==', this.auth.user.id))
       .snapshotChanges();
   }
 
-  getAllBookings() {
+  getAllBookings(): Observable<any> {
     return this.store.collection('Bookings').snapshotChanges();
   }
 
   deleteBooking(id: string): void {
-    this.store.collection('Bookings').doc(id).delete();
+    this.store
+      .collection('Bookings')
+      .doc(id)
+      .delete()
+      .catch((error) => console.log(error));
   }
 
   formatBookingDate(date: Date): string {
