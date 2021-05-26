@@ -1,22 +1,19 @@
 <app-me></app-me>
 <section id="booking">
   <div class="container">
-
-
-    <!--Korjaa tyhjä väli css:llä-->
     <H2>Tee uusi varaus</H2>
-    <H3>Uuden varauksen tekeminen on helppoa:</H3>
+    <p>Uuden varauksen tekeminen on helppoa:
+    </p>
     <p>1. Klikkaa kalenteria aloittaaksesi varauksen tekeminen.<br> 2. Valitse itsellesi sopiva päivä <br> 3. Varaa
       sopiva aika vapaana olevista ajoista.<br><strong> HUOM! Voit varata maksimissaan yhden (1) vuoron/päivä.
       </strong><br> 4. Vahvista vielä varauksesi klikkaamalla <strong>vahvista
         varaus</strong>
       -painikketta.<br><br><br>Tekemäsi varaukset siirtyy <strong>Omat varaukseni</strong> -näkymään.
 
-
     </p>
     <!--Varauskalenterissa käytetty Angular materialin datepickeriä-->
-    <mat-form-field appearance="fill">
-      <mat-label>Valitse päivämäärä</mat-label>
+    <mat-form-field appearance="fill" class="datepicker">
+      <mat-label>Avaa varauskalenteri</mat-label>
       <input matInput [matDatepicker]="picker" [min]="minDate" (dateChange)="dateChanged($event)">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker touchUi #picker></mat-datepicker>
@@ -32,7 +29,7 @@
         </mat-list-option>
       </mat-selection-list>
     -->
-      <mat-selection-list #times [multiple]="false">
+      <mat-selection-list [multiple]="false">
         <button mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
           [disabled]="slotUnavailable(slot)">
           {{slot}}

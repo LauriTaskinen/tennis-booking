@@ -1,5 +1,7 @@
 table {
-  width: 25%;
+  width: 60%;
+  max-width: 600px;
+  min-width: 35%;
   margin-bottom: 50px;
 }
 
@@ -9,4 +11,12 @@ i {
 
 .fade {
   color: black;
+}
+
+.h2 {
+  padding-top: 0vh;
+}
+
+.greeting {
+  font-size: 1.5vh;
 }

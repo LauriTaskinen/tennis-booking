@@ -12,11 +12,24 @@ import { MatDialog } from '@angular/material/dialog';
 export class LoginDialogComponent implements OnInit {
   constructor(
     private router: Router,
-    private auth: AuthService,
+    public auth: AuthService,
     public dialog: MatDialog
   ) {}
+  showAlert = false;
 
-  ngOnInit(): void {}
+  closeAlert() {
+    this.auth.errorMessage = false;
+  }
+  /*
+  openAlert() {
+    if ((this.auth.errorMessage = true)) {
+      this.showAlert = true;
+    }
+  }
+*/
+  ngOnInit(): void {
+    this.auth.errorMessage = false;
+  }
 
   //nämä auth-serviceen?
   signUp(): void {

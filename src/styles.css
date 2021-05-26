@@ -1,29 +1,37 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
-h1, h2, h3{
+h1,
+h2,
+h3 {
   padding-top: 5vh;
   padding-bottom: 1vh;
 }
 
-p{
+p {
   padding-bottom: 2vh;
 }
 
-.container{
+.container {
   margin: auto;
   width: 90%;
   height: 90%;
 }
 
-.background{
+.background {
   height: 100%;
   width: 100%;
 }
 
-.button-group > button{
+.button-group > button {
   padding: 0.2em 1em;
   margin-right: 2em;
 }

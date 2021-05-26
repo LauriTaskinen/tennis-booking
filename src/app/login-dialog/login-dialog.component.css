@@ -1,16 +1,23 @@
-#login-form{
+#login-form {
   display: flex;
   flex-direction: column;
   padding-bottom: 5vh;
   width: 500px;
 }
 
-.register{
+.register {
   display: flex;
   align-items: center;
 }
 
-.register > p{
+.register > p {
   padding: 0px;
   margin: 0px;
+}
+.loginError {
+  color: red;
+  margin-right: 5px;
+}
+.closeAlert {
+  margin-bottom: 10px;
 }

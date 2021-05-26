@@ -13,6 +13,7 @@ import User from './user';
 export class AuthService {
   userState: any;
   user: User;
+  errorMessage: boolean = false;
 
   constructor(
     private auth: AngularFireAuth,
@@ -20,11 +21,11 @@ export class AuthService {
     public dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
-    this.user ={
+    this.user = {
       id: '',
       name: '',
       email: '',
-    }
+    };
     this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
         console.log('there is user');
@@ -36,6 +37,13 @@ export class AuthService {
     });
   }
 
+  // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
+
+  openAlert() {
+    this.errorMessage = true;
+  }
+
+  // Kirjautuminen Googlen -tunniksilla
   googleAuth() {
     return this.googleLogin(new firebase.auth.GoogleAuthProvider());
   }
@@ -43,8 +51,13 @@ export class AuthService {
   googleLogin(provider: any) {
     return this.auth
       .signInWithPopup(provider)
-      .then(() => {
+      .then((result: any) => {
         console.log('Sisäänkirjautuminen onnistui');
+      })
+      .then(() => {
+        console.log(this.user);
+        this.router.navigate(['booking']);
+        this.dialog.closeAll();
       })
       .catch((error: any) => {
         console.log(error.message);
@@ -82,7 +95,7 @@ export class AuthService {
         this.user = {
           id: userData.user!.uid,
           name: userData.user!.displayName,
-          email: userData.user!.email
+          email: userData.user!.email,
         };
       })
       .then(() => {
@@ -90,7 +103,10 @@ export class AuthService {
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        this.openAlert();
+        console.log(error.message);
+      });
   }
 
   logOut(): void {
