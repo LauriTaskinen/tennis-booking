@@ -30,11 +30,16 @@ export class BookingService {
     return this.store.collection('Bookings').snapshotChanges();
   }
 
-  cancelBooking(id: string) {
+  deleteBooking(id: string): void {
     this.store.collection('Bookings').doc(id).delete();
   }
 
   formatBookingDate(date: Date): string {
     return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
   }
+  // getOldBookings(date: Date) {
+  //   return this.store.collection('Bookings', (ref) =>
+  //     ref.where('date', '<=', date).get()
+  //   );
+  // }
 }

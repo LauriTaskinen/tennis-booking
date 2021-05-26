@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-me',
@@ -27,15 +26,27 @@ export class MeComponent implements OnInit {
     this.getDataFromS();
   }
 
+  dateMonthAgo() {
+    let date = new Date();
+    date.setDate(date.getDate() - 30);
+    return date;
+  }
+
   getDataFromS() {
     this.book.getPersonalBookings().subscribe((bookings) => {
       this.mybookings = bookings;
     });
   }
 
-  cancel(id: string) {
+  cancelBooking(id: string) {
     console.log(id);
-    this.book.cancelBooking(id);
+    this.book.deleteBooking(id);
+  }
+
+  /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
+    Näin tietokanta ei pääse koskaan paisumaan*/
+  deleteOldBookings() {
+    // this.book.getOldBookings(this.dateMonthAgo());
   }
 
   //let mydata = this.book.getPersonalBookings().get();

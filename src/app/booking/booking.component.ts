@@ -67,10 +67,6 @@ export class BookingComponent implements OnInit {
     //"lomakkeen" nollaus
   }
 
-  /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
-    Näin tietokanta ei pääse koskaan paisumaan*/
-  deleteOldBookings() {}
-
   getTimeSlots(date: any) {
     this.book.getAllBookings().subscribe((bookings: any) => {
       this.timeSlot = [];
@@ -90,8 +86,8 @@ export class BookingComponent implements OnInit {
   slotUnavailable(slot: string): boolean {
     return this.timeSlot.some((s: any) => s.time === slot);
   }
-  // tilataan tieto vapaista sloteista observablena servicestä
+
   ngOnInit(): void {
-    this.deleteOldBookings();
+ 
   }
 }
