@@ -1,30 +1,28 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-me',
-  templateUrl: './me.component.html',
-  styleUrls: ['./me.component.css'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css'],
 })
-export class MeComponent implements OnInit, OnDestroy {
-  personalBookingsSub: Subscription;
-  mybookings: any;
+export class AdminComponent implements OnInit {
+  allbookings: any;
   currentUserID: string;
   currentUserName: string;
   currentDate: string;
-  columnsToDisplay = ['date', 'time', 'delete'];
+  columnsToDisplay = ['name', 'date', 'time', 'delete'];
 
+  // private auth: AuthService
   constructor(private book: BookingService, private auth: AuthService) {
     this.currentUserID = this.auth.userState ? this.auth.user.id : '';
     this.currentDate = book.formatBookingDate(new Date());
     this.currentUserName = this.auth.userState ? this.auth.user.name! : '';
-    this.personalBookingsSub = this.getBookings();
   }
 
-  ngOnInit(): void {
-    // this.getDataFromS();
+  ngOnInit() {
+    this.getAllBookings();
   }
 
   dateMonthAgo(): Date {
@@ -33,10 +31,10 @@ export class MeComponent implements OnInit, OnDestroy {
     return date;
   }
 
-  getBookings() {
-    return this.book.getPersonalBookings().subscribe((bookings: any) => {
-      this.mybookings = bookings;
-    });
+  getAllBookings() {
+    this.book
+      .getPersonalBookings()
+      .subscribe((res) => (this.allbookings = res));
   }
 
   cancelBooking(id: string) {
@@ -46,13 +44,9 @@ export class MeComponent implements OnInit, OnDestroy {
 
   /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
     Näin tietokanta ei pääse koskaan paisumaan*/
-  deleteOldBookings() {
-    // this.book.getOldBookings(this.dateMonthAgo());
-  }
+  //deleteOldBookings() {
+  // this.book.getOldBookings(this.dateMonthAgo());
 
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());
-  ngOnDestroy(): void {
-    this.personalBookingsSub.unsubscribe();
-  }
 }

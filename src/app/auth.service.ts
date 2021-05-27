@@ -3,10 +3,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import firebase from 'firebase/app';
+import firebase from 'firebase/app'; //tutorialissa auth
 import User from './user';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import 'firebase/auth';
 
-// import firebase from 'firebase/app'
 @Injectable({
   providedIn: 'root',
 })
@@ -14,13 +20,25 @@ export class AuthService {
   userState: any;
   user: User;
   errorMessage: boolean = false;
+  user$: Observable<any>;
 
   constructor(
-    private auth: AngularFireAuth,
+    public auth: AngularFireAuth,
+    private afs: AngularFirestore,
+
     public router: Router,
     public dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
+    this.user$ = this.auth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.afs.doc<any>(`bookings/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
     this.user = {
       id: '',
       name: '',
@@ -37,13 +55,42 @@ export class AuthService {
     });
   }
 
-  // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
+  /////////////////////////////////////////////////////////
 
+  async googleSignin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential = await this.auth.signInWithPopup(provider);
+    return this.updateUserData(credential.user);
+  }
+
+  /////////////////////////////////////////////////////////
+
+  async signOut() {
+    await this.auth.signOut();
+    return this.router.navigate(['booking']);
+  }
+
+  //////////////////////////////////////////////////////////
+
+  private updateUserData({ uid, email, displayName, photoURL }: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `bookings/${uid}`
+    );
+    const data = {
+      uid,
+      email,
+      displayName,
+      photoURL,
+    };
+    return userRef.set(data, { merge: true });
+  }
+
+  // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
   openAlert() {
     this.errorMessage = true;
   }
 
-  // Kirjautuminen Googlen -tunniksilla
+  /* Kirjautuminen Googlen -tunniksilla
   googleAuth() {
     return this.googleLogin(new firebase.auth.GoogleAuthProvider());
   }
@@ -63,7 +110,7 @@ export class AuthService {
         console.log(error.message);
       });
   }
-
+*/
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)

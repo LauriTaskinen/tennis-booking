@@ -1,14 +1,23 @@
-<section id="me">
+<section id="admin">
   <div class="container" fxLayout="column" fxLayoutAlign="center center">
-    <br>
-    <p class="greeting">Hei! {{currentUserName}}</p>
 
-    <h2 class="h2"> Omat varaukset</h2>
+    <h2 class="h2"> Kaikki varaukset</h2>
 
 
-    <table class="table" mat-table [dataSource]="mybookings" class="mat-elevation-z8">
+    <table class="table" mat-table [dataSource]="allbookings" class="mat-elevation-z8">
       <!-- <div *ngIf="booking.payload.doc.data().date >= currentDate"> -->
       <!-- Date Column -->
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nimi </th>
+        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef> Puhelinnumero </th>
+        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().phone}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Päivä </th>
         <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().date}} </td>

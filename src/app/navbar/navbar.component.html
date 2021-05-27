@@ -1,21 +1,32 @@
-<mat-toolbar fxLayout="row" color="primary">
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-around center" color="primary">
   <a class="tennis" mat-button href='#'><span fxFlex>Tennis booking</span></a>
 
   <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
-  <div *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' )">
+  <div
+    *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' ||router.url == '/admin' )">
+
     <a mat-button (click)="logOutMethod()" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"
       [fxShow.xs]="logOutItem.mobileView" [fxShow.sm]="logOutItem.tabletView">
       <mat-icon class="mr">{{logOutItem.icon}}</mat-icon>
       {{logOutItem.label}}
     </a>
-    <a mat-button *ngFor="let item of navItems" [href]='item.path' [fxShow]="item.desktopView"
+
+    <a mat-button [routerLink]="['/admin']" [href]='adminItem.path' [fxShow]="adminItem.desktopView"
+      [fxShow.xs]="adminItem.mobileView" [fxShow.sm]="adminItem.tabletView">
+      <mat-icon class="mr">{{adminItem.icon}}</mat-icon>
+      {{adminItem.label}}
+    </a>
+
+    <a class="navbuttons" mat-button *ngFor="let item of navItems" [href]='item.path' [fxShow]="item.desktopView"
       [fxShow.xs]="item.mobileView" [fxShow.sm]="item.tabletView">
       <mat-icon class="mr">{{item.icon}}</mat-icon>
       {{item.label}}
     </a>
+
     <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
       <mat-icon>more_vert</mat-icon>
     </button>
+
     <mat-menu #dropMenu="matMenu">
       <ng-container *ngFor="let item of navItems">
         <div [fxShow]="!item.desktopView" [fxShow.xs]="!item.mobileView" [fxShow.sm]="!item.tabletView">

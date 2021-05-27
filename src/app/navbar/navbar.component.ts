@@ -9,17 +9,6 @@ import { AuthService } from '../auth.service';
 })
 export class NavbarComponent implements OnInit {
   navItems = [
-    /*{
-      label: 'Kirjaudu ulos',
-      icon: 'arrow_back',
-      path: 'login',
-      mobileView: true,
-      tabletView: true,
-      desktopView: true,
-      //tämä aiheuttaa uloskirjautumisen aina uudelleenladattaessa
-      //muutettava uloskirjautuminen erilleen ngforista
-      logOut: this.auth.logOut(),
-    },*/
     {
       label: 'Varaa kenttä',
       icon: 'calendar_today',
@@ -33,20 +22,27 @@ export class NavbarComponent implements OnInit {
       icon: 'perm_identity',
       path: 'booking#me',
       mobileView: false,
-      tabletView: true,
+      tabletView: false,
       desktopView: true,
     },
   ];
 
   logOutItem = {
     label: 'Kirjaudu ulos',
-    icon: 'arrow_back',
+    icon: 'logout',
     path: 'login',
     mobileView: true,
     tabletView: true,
     desktopView: true,
-    //tämä aiheuttaa uloskirjautumisen aina uudelleenladattaessa
-    //muutettava uloskirjautuminen erilleen ngforista
+  };
+
+  adminItem = {
+    label: 'Admin',
+    icon: 'leaderboard',
+    path: 'admin',
+    mobileView: true,
+    tabletView: true,
+    desktopView: true,
   };
 
   logOutMethod() {
