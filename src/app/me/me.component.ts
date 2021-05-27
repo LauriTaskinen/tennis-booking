@@ -57,7 +57,7 @@ export class MeComponent implements OnInit, OnDestroy {
 
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());
-  ngOnDestroy() {
-    // this.personalBookingsSub.unsubscribe();
+  ngOnDestroy(): void {
+    this.personalBookingsSub.unsubscribe();
   }
 }

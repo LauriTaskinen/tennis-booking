@@ -57,6 +57,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Material Datepicker
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
     NavbarComponent,
     SignInComponent,
     LoginDialogComponent,
+    AdminComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -1,5 +1,5 @@
 <section id="login">
-  <div class="container">
+  <div class="container" fxLayout="column" fxLayoutAlign="center center">
     <header class="loginFont">
       <div>
         <h1>Tervetuloa Tennis Booking sivustolle</h1>
@@ -18,6 +18,19 @@
       </p>
     </div>
     <button mat-raised-button color="primary" type="button" (click)="openDialog()">Kirjaudu sisään</button><br>
-    <button mat-stroked-button type="button" class="cookies" id='cookie'> Muuta evästeasetuksiani</button>
   </div>
 </section>
+
+
+<!--
+<div *ngIf="auth.user$ | async as user; else login">
+  {{user | json }}
+  <hr>
+  <button mat-raised-button color="warn" type="button" (click)="auth.signOut()">
+    Sign Out
+  </button>
+</div>
+<ng-template #login>
+  <button class="button" (click)="auth.googleSignin()"></button>
+</ng-template>
+-->

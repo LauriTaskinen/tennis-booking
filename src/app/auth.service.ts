@@ -7,8 +7,13 @@ import { CacheService } from './cache.service';
 import firebase from 'firebase/app';
 import User from './user';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+import 'firebase/auth';
 
-// import firebase from 'firebase/app'
 @Injectable({
   providedIn: 'root',
 })
@@ -17,36 +22,79 @@ export class AuthService {
   UserData: Observable<any>
   user: User | undefined;
   errorMessage: boolean = false;
+  // user: Observable<any>;
 
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private cache: CacheService
+    private cache: CacheService,
+    private store: AngularFirestore,
   ) {
     this.UserData = this.auth.authState
-    // this.userState = auth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     // this.user!.id = user.uid;
-    //     // this.user!.name = user.displayName;
-    //     // this.user!.email = user.email;
-    //     console.log('there is user');
-    //     return true;
-    //   } else {
-    //     console.log('no user');
-    //     return false;
-    //   }
-    // });
+
+    // this.user = this.auth.authState.pipe(
+    //   switchMap((user) => {
+    //     if (user) {
+    //       return this.store.doc<any>(`bookings/${user.uid}`).valueChanges();
+    //     } else {
+    //       return of(null);
+    //     }
+    //   })
+    // );
+    this.user = {
+      id: '',
+      name: '',
+      email: '',
+    };
+    this.userState = auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log('there is user');
+        return true;
+      } else {
+        console.log('no user');
+        return false;
+      }
+    });
   }
 
-  // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
+  /////////////////////////////////////////////////////////
 
+  // async googleSignin() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   const credential = await this.auth.signInWithPopup(provider);
+  //   return this.updateUserData(credential.user);
+  // }
+
+  /////////////////////////////////////////////////////////
+
+  // async signOut() {
+  //   await this.auth.signOut();
+  //   return this.router.navigate(['booking']);
+  // }
+
+  //////////////////////////////////////////////////////////
+
+  // private updateUserData({ uid, email, displayName, photoURL }: any) {
+  //   const userRef = this.store.doc(
+  //     `bookings/${uid}`
+  //   );
+  //   const data = {
+  //     uid,
+  //     email,
+  //     displayName,
+  //     photoURL,
+  //   };
+  //   return userRef.set(data, { merge: true });
+  // }
+
+  // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
   openAlert() {
     this.errorMessage = true;
   }
 
-  // Kirjautuminen Googlen -tunniksilla
+  /* Kirjautuminen Googlen -tunniksilla
   googleAuth() {
     return this.googleLogin(new firebase.auth.GoogleAuthProvider());
   }
@@ -66,7 +114,7 @@ export class AuthService {
         console.log(error.message);
       });
   }
-
+*/
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)

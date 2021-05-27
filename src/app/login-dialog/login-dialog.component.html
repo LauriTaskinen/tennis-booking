@@ -35,11 +35,18 @@
       <p> tai kirjaudu sisään Google-tunnuksilla</p>
 
       <!-- kutsuu googleAuth() AuthServicestä-->
-      <div class="formGroup">
-        <button mat-raised-button color="warn" type="button" (click)="auth.googleAuth()">
-          Kirjaudu Google-tunnuksilla
-        </button>
+
+      <div *ngIf="auth.user$ | async as user; else login">
+        {{user | json}}
+        <div class="formGroup">
+          <button mat-raised-button color="warn" type="button" (click)="auth.signOut()">
+            Sign Out
+          </button>
+        </div>
       </div>
+      <ng-template #login>
+        <button class="button" (click)="auth.googleSignin()"></button>
+      </ng-template>
     </form>
   </div>
 </div>

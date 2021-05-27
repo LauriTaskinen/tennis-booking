@@ -28,7 +28,7 @@ export class BookingService {
       .snapshotChanges();
   }
 
-  getAllBookings(): Observable<any> {
+  getAllBookings() {
     return this.store.collection('Bookings').snapshotChanges();
   }
 

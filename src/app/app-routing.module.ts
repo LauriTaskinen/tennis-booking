@@ -5,6 +5,7 @@ import { BookingComponent } from './booking/booking.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BookingGuard } from './booking.guard';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'booking', component: BookingComponent, canActivate: [BookingGuard] },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({
