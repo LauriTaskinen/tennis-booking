@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
+import { CacheService } from '../cache.service';
 
 @Component({
   selector: 'app-booking',
@@ -22,7 +23,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   timeSlot: Array<object>;
 
-  constructor(private book: BookingService, private auth: AuthService) {
+  constructor(private book: BookingService, private auth: AuthService, private cache: CacheService) {
     this.allBookingsSub = null;
 
     // kalenterista valittu päivä muuttujassa
@@ -58,9 +59,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   confirmBooking() {
     this.book.createBooking({
-      id: this.auth.user.id,
-      name: this.auth.user.name,
-      email: this.auth.user.email,
+      id: this.cache.getItem('currentUserID'),
       date: this.book.formatBookingDate(this.dateChosen),
       time: this.timeChosen,
     });
@@ -70,29 +69,29 @@ export class BookingComponent implements OnInit, OnDestroy {
   }
 
   getTimeSlots(date: any) {
-    this.allBookingsSub = this.book.getAllBookings().subscribe((bookings: any) => {
-      this.timeSlot = [];
-      for (let i = 0; i < bookings.length; i++) {
-        if (bookings[i].payload.doc.data().date === date) {
-          this.timeSlot.push({
-            time: bookings[i].payload.doc.data().time,
-            date: bookings[i].payload.doc.data().date,
-          });
+    this.allBookingsSub = this.book
+      .getAllBookings()
+      .subscribe((bookings: any) => {
+        this.timeSlot = [];
+        for (let i = 0; i < bookings.length; i++) {
+          if (bookings[i].payload.doc.data().date === date) {
+            this.timeSlot.push({
+              time: bookings[i].payload.doc.data().time,
+              date: bookings[i].payload.doc.data().date,
+            });
+          }
         }
-      }
-      console.log(this.timeSlot);
-      return this.timeSlot;
-    });
+        console.log(this.timeSlot);
+        return this.timeSlot;
+      });
   }
 
   slotUnavailable(slot: string): boolean {
     return this.timeSlot.some((s: any) => s.time === slot);
   }
 
-  ngOnInit(): void {
- 
-  }
-  ngOnDestroy():void {
-    this.allBookingsSub?.unsubscribe()
+  ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.allBookingsSub?.unsubscribe();
   }
 }

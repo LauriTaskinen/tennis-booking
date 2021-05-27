@@ -3,8 +3,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CacheService } from './cache.service';
 import firebase from 'firebase/app';
 import User from './user';
+import { Observable } from 'rxjs';
 
 // import firebase from 'firebase/app'
 @Injectable({
@@ -12,29 +14,30 @@ import User from './user';
 })
 export class AuthService {
   userState: any;
-  user: User;
+  UserData: Observable<any>
+  user: User | undefined;
   errorMessage: boolean = false;
 
   constructor(
     private auth: AngularFireAuth,
-    public router: Router,
-    public dialog: MatDialog,
-    private snackbar: MatSnackBar
+    private router: Router,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private cache: CacheService
   ) {
-    this.user = {
-      id: '',
-      name: '',
-      email: '',
-    };
-    this.userState = auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log('there is user');
-        return true;
-      } else {
-        console.log('no user');
-        return false;
-      }
-    });
+    this.UserData = this.auth.authState
+    // this.userState = auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     // this.user!.id = user.uid;
+    //     // this.user!.name = user.displayName;
+    //     // this.user!.email = user.email;
+    //     console.log('there is user');
+    //     return true;
+    //   } else {
+    //     console.log('no user');
+    //     return false;
+    //   }
+    // });
   }
 
   // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
@@ -81,7 +84,6 @@ export class AuthService {
       )
       .catch((error) => {
         console.log(error.message);
-        //huono snackbar
         this.snackbar.open('Rekisteröinti epäonnistui', 'sulje', {
           duration: 3000,
         });
@@ -92,20 +94,20 @@ export class AuthService {
     this.auth
       .signInWithEmailAndPassword(email, password)
       .then((userData) => {
-        this.user = {
+        return (this.user = {
           id: userData.user!.uid,
           name: userData.user!.displayName,
           email: userData.user!.email,
-        };
+        });
       })
-      .then(() => {
-        console.log(this.user);
+      .then((user) => {
+        console.log(user);
+        this.cache.save(user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       })
-      .catch((error) => {
+      .catch(() => {
         this.openAlert();
-        console.log(error.message);
       });
   }
 
@@ -115,6 +117,7 @@ export class AuthService {
       .then(() => {
         console.log('Logged out');
         this.router.navigate(['login']);
+        this.cache.remove();
       })
       .catch((error) => {
         console.log(error.message);
