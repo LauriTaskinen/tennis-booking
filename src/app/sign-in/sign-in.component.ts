@@ -9,10 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-  ) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -20,8 +17,8 @@ export class SignInComponent implements OnInit {
     this.auth.signUp(
       data.value.nimi,
       data.value.sahkoposti,
-      data.value.salasana,
-      data.value.puhelin,
+      data.value.salasana
+      // data.value.puhelin,
     );
     data.resetForm();
     this.router.navigate(['login']);

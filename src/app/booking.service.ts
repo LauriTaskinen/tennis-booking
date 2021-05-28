@@ -1,4 +1,4 @@
-import { identifierModuleUrl } from '@angular/compiler';
+import { identifierModuleUrl, NodeWithI18n } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
@@ -37,8 +37,12 @@ export class BookingService {
     return this.store
       .collection('Bookings', (ref) =>
         ref
-          .where('id', '==', this.cache.getItem('currentUserID'))
-          .where('date', '>=', this.formatBookingDate(new Date()))
+          .where('id', '==', this.auth.user!.id)
+          .where(
+            'date',
+            '>=',
+            new Date().toLocaleDateString('en-GB').split('.').toString()
+          )
       )
       .snapshotChanges();
   }
@@ -51,7 +55,6 @@ export class BookingService {
     return this.store.collection('Users').snapshotChanges();
   }
 
-
   deleteBooking(id: string): void {
     this.store
       .collection('Bookings')
@@ -61,7 +64,7 @@ export class BookingService {
   }
 
   formatBookingDate(date: Date): string {
-    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+    return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
   }
   // getOldBookings(date: Date) {
   //   return this.store.collection('Bookings', (ref) =>

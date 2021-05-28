@@ -34,14 +34,18 @@
 
       <p> tai kirjaudu sisään Google-tunnuksilla</p>
 
-      <!-- kutsuu googleAuth() AuthServicestä
+      <!-- kutsuu googleAuth() AuthServicestä-->
 
-      <button mat-raised-button color="warn" type="button" (click)="auth.googleSignin()">GOOGLE</button>
-      <div class="formGroup">
-        <button mat-raised-button color="warn" type="button" (click)="auth.signOut()">
-          Sign Out
-        </button>
-      </div>-->
+      <div class='g-sign-in-button' (click)="LogInWithGoogle()">
+        <div class=content-wrapper>
+          <div class='logo-wrapper'>
+            <img src='https://developers.google.com/identity/images/g-logo.png'>
+          </div>
+          <span class='text-container'>
+            <span>Sign in with Google</span>
+          </span>
+        </div>
+      </div>
     </form>
   </div>
 </div>

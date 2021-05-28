@@ -75,7 +75,7 @@ export class AuthService {
           id: userData.user!.uid,
           name: name,
           email: email,
-          phone: phone,
+          //phone: phone,
         };
         this.updateUser(userInfo.id, userInfo);
       })
@@ -130,22 +130,36 @@ export class AuthService {
   doGoogleLogin() {
     //return new Promise<any>((resolve, reject) => {
     let provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
-    this.auth.signInWithPopup(provider).then((userData) => {
-      this.router.navigate(['booking']);
-      //resolve(userData);
-      this.user = {
-        id: userData.user!.uid,
-        name: userData.user!.displayName,
-        email: userData.user!.email,
-      };
-      console.log(userData.user!.displayName);
-    });
-  } //);
-  //}
-  //
+    // provider.addScope('profile');
+    // provider.addScope('email');
+
+    return this.auth
+      .signInWithPopup(provider)
+      .then((userData) => {
+        return (this.user = {
+          id: userData.user!.uid,
+          name: userData.user!.displayName,
+          email: userData.user!.email,
+        });
+      })
+      .then((user) => {
+        this.updateUser(this.user!.id, this.user!);
+        this.cache.save(user);
+        this.router.navigate(['booking']);
+        this.dialog.closeAll();
+        console.log(this.user!.id);
+      })
+      .catch((error) => console.log(error));
+  }
+
   updateUser(userID: string, userInfo: User) {
-    this.store.collection('Users').doc(userID).set(userInfo, { merge: true });
+    this.store
+      .collection('Users')
+      .doc(userID)
+      .set(userInfo)
+      .catch((error) => console.log(error));
   }
 }
+
+//this.router.navigate(['booking']);
+//resolve(userData);

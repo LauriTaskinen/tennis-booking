@@ -40,7 +40,9 @@ export class BookingComponent implements OnInit, OnDestroy {
     //console.log($event);
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
-    this.getTimeSlots(this.book.formatBookingDate(this.dateChosen));
+    this.getTimeSlots(
+      this.dateChosen.toLocaleDateString('en-GB').split('.').toString()
+    );
     //myBookings.push($event.target.value);
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
@@ -62,9 +64,10 @@ export class BookingComponent implements OnInit, OnDestroy {
   // dokumentin sisään avaimen arvoksi.
 
   confirmBooking() {
+    let date = this.dateChosen.toLocaleDateString('en-GB').split('.');
     this.book.createBooking({
       id: this.cache.getItem('currentUserID'),
-      date: this.book.formatBookingDate(this.dateChosen),
+      date: date.toString(),
       time: this.timeChosen,
     });
     // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);
@@ -95,7 +98,9 @@ export class BookingComponent implements OnInit, OnDestroy {
     return this.timeSlot.some((s: any) => s.time === slot);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.dateChosen);
+  }
   ngOnDestroy(): void {
     this.allBookingsSub?.unsubscribe();
   }

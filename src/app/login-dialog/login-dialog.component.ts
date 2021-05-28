@@ -20,7 +20,7 @@ export class LoginDialogComponent implements OnInit {
   closeAlert() {
     this.auth.errorMessage = false;
   }
-  
+
   openAlert() {
     if ((this.auth.errorMessage = true)) {
       this.showAlert = true;
@@ -39,5 +39,9 @@ export class LoginDialogComponent implements OnInit {
   logIn(data: NgForm): void {
     this.auth.logIn(data.value.sahkoposti, data.value.salasana);
     data.resetForm();
+  }
+
+  LogInWithGoogle() {
+    this.auth.doGoogleLogin();
   }
 }
