@@ -104,4 +104,23 @@ export class AuthService {
         console.log(error.message);
       });
   }
+
+  doGoogleLogin() {
+    //return new Promise<any>((resolve, reject) => {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    this.auth.signInWithPopup(provider).then((userData) => {
+      this.router.navigate(['booking']);
+      //resolve(userData);
+      this.user = {
+        id: userData.user!.uid,
+        name: userData.user!.displayName,
+        email: userData.user!.email,
+      };
+      console.log(userData.user!.displayName);
+    });
+  } //);
+  //}
+  //
 }
