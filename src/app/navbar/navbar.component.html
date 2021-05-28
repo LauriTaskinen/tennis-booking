@@ -4,7 +4,7 @@
   <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
   <div
     *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' ||router.url == '/admin' )">
-
+    <!--lisää google kirjautuminen ulos ;auth.signOut()-->
     <a mat-button (click)="logOutMethod()" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"
       [fxShow.xs]="logOutItem.mobileView" [fxShow.sm]="logOutItem.tabletView">
       <mat-icon class="mr">{{logOutItem.icon}}</mat-icon>

@@ -16,7 +16,7 @@ export class MeComponent implements OnInit, OnDestroy {
   currentDate: string;
   columnsToDisplay = ['date', 'time', 'delete'];
 
-  constructor(private book: BookingService, private auth: AuthService) {
+  constructor(private book: BookingService, public auth: AuthService) {
     this.currentUserID = this.auth.userState ? this.auth.user.id : '';
     this.currentDate = book.formatBookingDate(new Date());
     this.currentUserName = this.auth.userState ? this.auth.user.name! : '';

@@ -4,8 +4,21 @@
     <p class="greeting">Hei! {{currentUserName}}</p>
 
     <h2 class="h2"> Omat varaukset</h2>
-
-
+    <!--
+    <div *ngIf="auth.userOBS | async; then authenticated">
+       template will replace this div 
+  </div>
+-->
+    <!-- User logged in -->
+    <!--
+  <ng-template #authenticated>
+    <div *ngIf="auth.userOBS | async as user">
+      <h3>Howdy, {{ user.displayName }}</h3>
+      <img [src]="user.photoURL">
+      <p>UID: {{ user.id }}</p>
+    </div>
+  </ng-template>
+-->
     <table class="table" mat-table [dataSource]="mybookings" class="mat-elevation-z8">
       <!-- <div *ngIf="booking.payload.doc.data().date >= currentDate"> -->
       <!-- Date Column -->
@@ -24,7 +37,7 @@
         <td mat-cell *matCellDef="let booking"> <button mat-button color="accent"
             (click)="cancelBooking(booking.payload.doc.id)">peruuta</button> </td>
       </ng-container>
-      <!-- </div> -->
+
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>

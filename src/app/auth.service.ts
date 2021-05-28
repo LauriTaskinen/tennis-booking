@@ -20,25 +20,15 @@ export class AuthService {
   userState: any;
   user: User;
   errorMessage: boolean = false;
-  user$: Observable<any>;
 
   constructor(
     public auth: AngularFireAuth,
-    private afs: AngularFirestore,
-
+    private store: AngularFirestore,
     public router: Router,
+
     public dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
-    this.user$ = this.auth.authState.pipe(
-      switchMap((user) => {
-        if (user) {
-          return this.afs.doc<any>(`bookings/${user.uid}`).valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    );
     this.user = {
       id: '',
       name: '',
@@ -55,62 +45,11 @@ export class AuthService {
     });
   }
 
-  /////////////////////////////////////////////////////////
-
-  async googleSignin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const credential = await this.auth.signInWithPopup(provider);
-    return this.updateUserData(credential.user);
-  }
-
-  /////////////////////////////////////////////////////////
-
-  async signOut() {
-    await this.auth.signOut();
-    return this.router.navigate(['booking']);
-  }
-
-  //////////////////////////////////////////////////////////
-
-  private updateUserData({ uid, email, displayName, photoURL }: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `bookings/${uid}`
-    );
-    const data = {
-      uid,
-      email,
-      displayName,
-      photoURL,
-    };
-    return userRef.set(data, { merge: true });
-  }
-
   // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
   openAlert() {
     this.errorMessage = true;
   }
 
-  /* Kirjautuminen Googlen -tunniksilla
-  googleAuth() {
-    return this.googleLogin(new firebase.auth.GoogleAuthProvider());
-  }
-
-  googleLogin(provider: any) {
-    return this.auth
-      .signInWithPopup(provider)
-      .then((result: any) => {
-        console.log('Sisäänkirjautuminen onnistui');
-      })
-      .then(() => {
-        console.log(this.user);
-        this.router.navigate(['booking']);
-        this.dialog.closeAll();
-      })
-      .catch((error: any) => {
-        console.log(error.message);
-      });
-  }
-*/
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
@@ -134,7 +73,6 @@ export class AuthService {
         });
       });
   }
-
   logIn(email: string, password: string): void {
     this.auth
       .signInWithEmailAndPassword(email, password)
@@ -155,7 +93,6 @@ export class AuthService {
         console.log(error.message);
       });
   }
-
   logOut(): void {
     this.auth
       .signOut()
