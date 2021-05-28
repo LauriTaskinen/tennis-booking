@@ -19,7 +19,7 @@ import 'firebase/auth';
 })
 export class AuthService {
   userState: any;
-  UserData: Observable<any>
+  UserData: Observable<any>;
   user: User | undefined;
   errorMessage: boolean = false;
   // user: Observable<any>;
@@ -30,9 +30,9 @@ export class AuthService {
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
     private cache: CacheService,
-    private store: AngularFirestore,
+    private store: AngularFirestore
   ) {
-    this.UserData = this.auth.authState
+    this.UserData = this.auth.authState;
 
     // this.user = this.auth.authState.pipe(
     //   switchMap((user) => {
@@ -61,11 +61,11 @@ export class AuthService {
 
   /////////////////////////////////////////////////////////
 
-  // async googleSignin() {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   const credential = await this.auth.signInWithPopup(provider);
-  //   return this.updateUserData(credential.user);
-  // }
+  async googleSignin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential = await this.auth.signInWithPopup(provider);
+    // return this.updateUserData(credential.user);
+  }
 
   /////////////////////////////////////////////////////////
 
@@ -148,7 +148,8 @@ export class AuthService {
           email: userData.user!.email,
         });
       })
-      .then((user) => {
+      .then((user: User) => {
+        this.store.collection('Users').doc(user.id).set(user);
         console.log(user);
         this.cache.save(user);
         this.router.navigate(['booking']);

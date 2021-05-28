@@ -8,7 +8,11 @@ import { CacheService } from './cache.service';
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private store: AngularFirestore, private auth: AuthService, private cache: CacheService) {}
+  constructor(
+    private store: AngularFirestore,
+    private auth: AuthService,
+    private cache: CacheService
+  ) {}
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object): Promise<any> {
@@ -24,7 +28,11 @@ export class BookingService {
   // hakee käyttäjän varaukset tietokannasta
   getPersonalBookings(): Observable<any> {
     return this.store
-      .collection('Bookings', (ref) => ref.where('id', '==', this.cache.getItem('currentUserID')))
+      .collection('Bookings', (ref) =>
+        ref
+          .where('id', '==', this.cache.getItem('currentUserID'))
+          .where('date', '>=', this.formatBookingDate(new Date()))
+      )
       .snapshotChanges();
   }
 

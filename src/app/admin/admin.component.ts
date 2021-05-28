@@ -16,9 +16,9 @@ export class AdminComponent implements OnInit {
 
   // private auth: AuthService
   constructor(private book: BookingService, private auth: AuthService) {
-    this.currentUserID = this.auth.userState ? this.auth.user.id : '';
+    this.currentUserID = this.auth.userState ? this.auth.user!.id : '';
     this.currentDate = book.formatBookingDate(new Date());
-    this.currentUserName = this.auth.userState ? this.auth.user.name! : '';
+    this.currentUserName = this.auth.userState ? this.auth.user!.name! : '';
   }
 
   ngOnInit() {

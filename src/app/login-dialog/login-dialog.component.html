@@ -36,14 +36,14 @@
 
       <!-- kutsuu googleAuth() AuthServicestä-->
 
-      <div *ngIf="auth.user$ | async as user; else login">
+      <!-- <div *ngIf="auth.user$ | async as user; else login">
         {{user | json}}
         <div class="formGroup">
           <button mat-raised-button color="warn" type="button" (click)="auth.signOut()">
             Sign Out
           </button>
         </div>
-      </div>
+      </div> -->
       <ng-template #login>
         <button class="button" (click)="auth.googleSignin()"></button>
       </ng-template>
