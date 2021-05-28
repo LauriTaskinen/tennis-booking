@@ -68,6 +68,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     //"lomakkeen" nollaus
   }
 
+//hakee kaikki varaukset ja asettaa timeslot-muuttujaan ne, jotka koskevat parametriä annettua päivää.
   getTimeSlots(date: any) {
     this.allBookingsSub = this.book
       .getAllBookings()

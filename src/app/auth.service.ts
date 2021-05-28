@@ -115,14 +115,21 @@ export class AuthService {
       });
   }
 */
-  signUp(name: string, email: string, password: string): void {
+  signUp(name: string, email: string, password: string, phone: number): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then((userData) =>
+      .then((userData) => {
         userData.user?.updateProfile({
           displayName: name,
-        })
-      )
+        });
+        let userInfo: User = {
+          id: userData.user!.uid,
+          name: name,
+          email: email,
+          phone: phone,
+        };
+        this.updateUser(userInfo.id, userInfo);
+      })
       .then(() =>
         this.snackbar.open(
           'Rekisteröinti onnistui! Voit nyt kirjautua sisään.',
@@ -171,5 +178,9 @@ export class AuthService {
       .catch((error) => {
         console.log(error.message);
       });
+  }
+
+  updateUser(userID: string, userInfo: User) {
+    this.store.collection('Users').doc(userID).set(userInfo, {merge: true});
   }
 }

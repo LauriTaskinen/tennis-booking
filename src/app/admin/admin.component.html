@@ -3,30 +3,44 @@
 
     <h2 class="h2"> Kaikki varaukset</h2>
 
+    <table>
 
+      <div *ngFor="let booking of this.allbookings" >
+        <p>{{booking.name}}</p>
+        <p>{{booking.time}}</p>
+        <p>{{booking.date}}</p>
+        <!-- <p>{{booking.phone}}</p> -->
+        <p>{{booking.email}}</p>
+        <mat-divider></mat-divider>
+      </div>
+    
+
+    </table>
+
+<!-- 
     <table class="table" mat-table [dataSource]="allbookings" class="mat-elevation-z8">
       <div  >
-      <!-- Date Column -->
+ 
       
 
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nimi </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().name}} </td>
+        <td mat-cell *matCellDef="let booking"> {{booking.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="phone">
         <th mat-header-cell *matHeaderCellDef> Puhelinnumero </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().phone}} </td>
+        <td mat-cell *matCellDef="let booking"> {{booking.phone}} </td>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Päivä </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().date}} </td>
+        <td mat-cell *matCellDef="let booking"> {{booking.date}} </td>
       </ng-container>
-      <!-- Time Column -->
+     
       <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef> Aika </th>
-        <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().time}} </td>
+        <td mat-cell *matCellDef="let booking"> {{booking.time}} </td>
       </ng-container>
 
       <ng-container matColumnDef="delete">
@@ -41,8 +55,8 @@
 
 
 
-    </table>
+    </table> -->
 
-    <mat-divider></mat-divider>
+
   </div>
 </section>
