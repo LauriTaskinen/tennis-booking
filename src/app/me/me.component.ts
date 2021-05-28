@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+import { CacheService } from '../cache.service';
 
 @Component({
   selector: 'app-me',
@@ -11,20 +12,24 @@ import { Subscription } from 'rxjs';
 export class MeComponent implements OnInit, OnDestroy {
   personalBookingsSub: Subscription;
   mybookings: any;
-  currentUserID: string;
+  currentUserID: string | void;
   currentUserName: string;
   currentDate: string;
   columnsToDisplay = ['date', 'time', 'delete'];
 
-  constructor(private book: BookingService, public auth: AuthService) {
-    this.currentUserID = this.auth.userState ? this.auth.user.id : '';
+  constructor(
+    private book: BookingService,
+    private auth: AuthService,
+    private cache: CacheService
+  ) {
+    this.currentUserID = this.cache.getItem('currentUserID');
     this.currentDate = book.formatBookingDate(new Date());
-    this.currentUserName = this.auth.userState ? this.auth.user.name! : '';
+    this.currentUserName = this.auth.user ? this.auth.user!.name! : '';
     this.personalBookingsSub = this.getBookings();
   }
 
   ngOnInit(): void {
-    // this.getDataFromS();
+    this.getBookings();
   }
 
   dateMonthAgo(): Date {

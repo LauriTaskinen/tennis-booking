@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
-
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -12,8 +11,7 @@ import { AuthService } from '../auth.service';
 export class SignInComponent implements OnInit {
   constructor(
     private router: Router,
-    public auth: AuthService,
-
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {}
@@ -22,9 +20,9 @@ export class SignInComponent implements OnInit {
     this.auth.signUp(
       data.value.nimi,
       data.value.sahkoposti,
-      data.value.salasana
+      data.value.salasana,
+      data.value.puhelin,
     );
-
     data.resetForm();
     this.router.navigate(['login']);
     //tämän jälkeen snackbar-viesti, että nyt voit kirjautua

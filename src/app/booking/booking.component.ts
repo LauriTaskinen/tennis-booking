@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
+import { CacheService } from '../cache.service';
 
 @Component({
   selector: 'app-booking',
@@ -22,7 +23,11 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   timeSlot: Array<object>;
 
-  constructor(private book: BookingService, public auth: AuthService) {
+  constructor(
+    private book: BookingService,
+    private auth: AuthService,
+    private cache: CacheService
+  ) {
     this.allBookingsSub = null;
 
     // kalenterista valittu päivä muuttujassa
@@ -58,9 +63,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   confirmBooking() {
     this.book.createBooking({
-      id: this.auth.user.id,
-      name: this.auth.user.name,
-      email: this.auth.user.email,
+      id: this.cache.getItem('currentUserID'),
       date: this.book.formatBookingDate(this.dateChosen),
       time: this.timeChosen,
     });
@@ -69,6 +72,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     //"lomakkeen" nollaus
   }
 
+  //hakee kaikki varaukset ja asettaa timeslot-muuttujaan ne, jotka koskevat parametriä annettua päivää.
   getTimeSlots(date: any) {
     this.allBookingsSub = this.book
       .getAllBookings()

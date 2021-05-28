@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CacheService {
-  constructor(private auth: AuthService) {}
+  constructor() {}
 
-  save(): void {
-    let currentUser = this.auth.user;
-    localStorage.setItem('currentUser', currentUser.id);
+  save(user: any): void {
+    let currentUser = user;
+    localStorage.setItem('currentUserID', currentUser!.id);
+    localStorage.setItem('currentUserName', currentUser!.name);
+    localStorage.setItem('currentUserEmail', currentUser!.email);
     console.log('userdata set in cache');
   }
 
-  getItem(): string | void {
-    let item = localStorage.getItem('currentUser');
+  getItem(userdata: string): string | void {
+    let item = localStorage.getItem(userdata);
     if (item !== null) {
-      JSON.parse(item);
+      console.log(item);
       return item;
     } else {
       console.log('nothing in cache');
@@ -26,6 +27,7 @@ export class CacheService {
   remove(): void {
     //varmistus, että käyttäjätiedot varmasti poistuvat, koska removeItemissa mahdollisesti bugi, joissain selaimien versioissa.
     localStorage.setItem('currentUser', '');
+    localStorage.clear();
     localStorage.removeItem('currentUser');
     console.log('removed userdata from cache');
   }

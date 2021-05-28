@@ -20,8 +20,9 @@
 
       <!--Tämä näkyy jos virheellinen käyttäjätunnus tai salasana -->
       <section *ngIf="auth.errorMessage">
-        <em class="loginError">Virheellinen käyttäjätunnus tai salasana </em><button class="closeAlert" button
-          mat-stroked-button (click)="closeAlert()">Yritä uudelleen</button>
+        <em class="loginError">Virheellinen käyttäjätunnus tai salasana </em>
+        <!---<button class="closeAlert" button
+           mat-mini-fab (click)="closeAlert()">x</button> -->
       </section>
 
       <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Lähetä</button>

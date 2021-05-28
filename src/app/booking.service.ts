@@ -1,13 +1,25 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookingService {
-  constructor(private store: AngularFirestore, private auth: AuthService) {}
+  users: any;
+  allData: any;
+
+  constructor(
+    private store: AngularFirestore,
+    private auth: AuthService,
+    private cache: CacheService
+  ) {
+    this.users;
+    this.allData;
+  }
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object): Promise<any> {
@@ -23,13 +35,22 @@ export class BookingService {
   // hakee käyttäjän varaukset tietokannasta
   getPersonalBookings(): Observable<any> {
     return this.store
-      .collection('Bookings', (ref) => ref.where('id', '==', this.auth.user.id))
+      .collection('Bookings', (ref) =>
+        ref
+          .where('id', '==', this.cache.getItem('currentUserID'))
+          .where('date', '>=', this.formatBookingDate(new Date()))
+      )
       .snapshotChanges();
   }
 
   getAllBookings() {
     return this.store.collection('Bookings').snapshotChanges();
   }
+
+  getUsers() {
+    return this.store.collection('Users').snapshotChanges();
+  }
+
 
   deleteBooking(id: string): void {
     this.store

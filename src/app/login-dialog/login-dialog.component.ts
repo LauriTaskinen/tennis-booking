@@ -20,18 +20,17 @@ export class LoginDialogComponent implements OnInit {
   closeAlert() {
     this.auth.errorMessage = false;
   }
-  /*
+  
   openAlert() {
     if ((this.auth.errorMessage = true)) {
       this.showAlert = true;
     }
   }
-*/
+
   ngOnInit(): void {
     this.auth.errorMessage = false;
   }
 
-  //nämä auth-serviceen?
   signUp(): void {
     this.router.navigate(['/sign-in']);
     this.dialog.closeAll();

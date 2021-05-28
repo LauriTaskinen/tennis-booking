@@ -3,9 +3,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import firebase from 'firebase/app'; //tutorialissa auth
+import { CacheService } from './cache.service';
+import firebase from 'firebase/app';
 import User from './user';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {
   AngularFirestore,
@@ -18,17 +19,30 @@ import 'firebase/auth';
 })
 export class AuthService {
   userState: any;
-  user: User;
+  UserData: Observable<any>;
+  user: User | undefined;
   errorMessage: boolean = false;
+  // user: Observable<any>;
 
   constructor(
-    public auth: AngularFireAuth,
-    private store: AngularFirestore,
-    public router: Router,
-
-    public dialog: MatDialog,
-    private snackbar: MatSnackBar
+    private auth: AngularFireAuth,
+    private router: Router,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private cache: CacheService,
+    private store: AngularFirestore
   ) {
+    this.UserData = this.auth.authState;
+
+    // this.user = this.auth.authState.pipe(
+    //   switchMap((user) => {
+    //     if (user) {
+    //       return this.store.doc<any>(`bookings/${user.uid}`).valueChanges();
+    //     } else {
+    //       return of(null);
+    //     }
+    //   })
+    // );
     this.user = {
       id: '',
       name: '',
@@ -53,11 +67,18 @@ export class AuthService {
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then((userData) =>
+      .then((userData) => {
         userData.user?.updateProfile({
           displayName: name,
-        })
-      )
+        });
+        let userInfo: User = {
+          id: userData.user!.uid,
+          name: name,
+          email: email,
+          phone: phone,
+        };
+        this.updateUser(userInfo.id, userInfo);
+      })
       .then(() =>
         this.snackbar.open(
           'Rekisteröinti onnistui! Voit nyt kirjautua sisään.',
@@ -67,7 +88,6 @@ export class AuthService {
       )
       .catch((error) => {
         console.log(error.message);
-        //huono snackbar
         this.snackbar.open('Rekisteröinti epäonnistui', 'sulje', {
           duration: 3000,
         });
@@ -77,20 +97,21 @@ export class AuthService {
     this.auth
       .signInWithEmailAndPassword(email, password)
       .then((userData) => {
-        this.user = {
+        return (this.user = {
           id: userData.user!.uid,
           name: userData.user!.displayName,
           email: userData.user!.email,
-        };
+        });
       })
-      .then(() => {
-        console.log(this.user);
+      .then((user: User) => {
+        this.store.collection('Users').doc(user.id).set(user);
+        console.log(user);
+        this.cache.save(user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       })
-      .catch((error) => {
+      .catch(() => {
         this.openAlert();
-        console.log(error.message);
       });
   }
   logOut(): void {
@@ -99,6 +120,7 @@ export class AuthService {
       .then(() => {
         console.log('Logged out');
         this.router.navigate(['login']);
+        this.cache.remove();
       })
       .catch((error) => {
         console.log(error.message);
@@ -123,4 +145,7 @@ export class AuthService {
   } //);
   //}
   //
+  updateUser(userID: string, userInfo: User) {
+    this.store.collection('Users').doc(userID).set(userInfo, { merge: true });
+  }
 }
