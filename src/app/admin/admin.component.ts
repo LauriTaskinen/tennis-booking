@@ -2,6 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
 import { Subject, Subscription } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { BookingData } from '../bookingdata';
+import { Sort } from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-admin',
@@ -11,12 +15,15 @@ import { Subject, Subscription } from 'rxjs';
 export class AdminComponent implements OnInit, OnDestroy {
   usersSub: Subscription | null;
   bookingsSub: Subscription | null;
-  allbookings: any[] | null;
+  allbookings: BookingData[];
   allUsers: any[] | null;
   currentUserID: string;
   currentUserName: string;
   currentDate: string;
-  columnsToDisplay = ['name', 'date', 'time', 'delete'];
+  data: any;
+  columnsToDisplay = ['name', 'date', 'time'];
+  sortedData: BookingData[];
+  
 
   // private auth: AuthService
   constructor(private book: BookingService, private auth: AuthService) {
@@ -27,11 +34,37 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.allbookings = this.getAllData(this.allUsers);
     this.usersSub = null;
     this.bookingsSub = null;
+    this.data = new MatTableDataSource<any>(this.allbookings);
+    this.sortedData = this.allbookings;
+
   }
 
   ngOnInit() {
-    console.log(this.allbookings);
+    // let dataSamples: ItemModel[] ;
+    //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }
+//Sorting toteutettu angular material -esimerkin mukaisesti.
+  sortData(sort: Sort) {
+    const data = this.allbookings.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'date':
+          return compare(a.date, b.date, isAsc);
+        default:
+          return 0;
+      }
+    });
+    console.log(data)
+  }
+
+  
 
   dateMonthAgo(): Date {
     let date = new Date();
@@ -61,17 +94,18 @@ export class AdminComponent implements OnInit, OnDestroy {
         let match = await users.find(
           (user) => user.id === booking.payload.doc.data().id
         );
-        console.log(match);
         allbookings.push({
           name: match.name,
           email: match.email,
-          phone: match.phone,
+          // phone: match.phone,
           id: booking.payload.doc.data().id,
           time: booking.payload.doc.data().time,
           date: booking.payload.doc.data().date,
         });
       });
     });
+
+    console.log(allbookings);
     return allbookings;
   }
 
@@ -87,4 +121,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.usersSub!.unsubscribe();
     this.bookingsSub!.unsubscribe();
   }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

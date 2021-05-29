@@ -144,7 +144,7 @@ export class AuthService {
       })
       .then((user) => {
         this.updateUser(this.user!.id, this.user!);
-        this.cache.save(user);
+        this.cache.saveUser(user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
         console.log(this.user!.id);

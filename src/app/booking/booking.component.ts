@@ -17,7 +17,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   timeChosen = '';
   dateChosen: Date; //valitsee päivän
   booked = 'Varattu';
-  maxBookingLimit: boolean;
+  // maxBookingLimit: boolean;
 
   slots = ['08-10', '10-12', '12-14', '14-16', '16-18', '18-20'];
 
@@ -45,7 +45,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       this.dateChosen.toLocaleDateString('en-GB').split('.').toString()
     );
 
-    this.maxBookingLimit = false;
+    // this.maxBookingLimit = false;
 
     //myBookings.push($event.target.value);
   }
@@ -57,7 +57,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     console.log(slot);
   }
 
-  dateBooked(): boolean {
+  // dateBooked(): boolean {
     // this.book.getPersonalBookings().subscribe((bookings) => {
     //   console.log(bookings);
       // bookings.forEach((booking: any) => {
@@ -68,7 +68,7 @@ export class BookingComponent implements OnInit, OnDestroy {
     //   //   }
     // });
     // });
-  }
+  // }
 
   // tämä metodi laukaisee kaksi metodia
 
@@ -121,7 +121,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.dateChosen);
-    this.dateBooked();
+    // this.dateBooked();
   }
   ngOnDestroy(): void {
     this.allBookingsSub?.unsubscribe();
