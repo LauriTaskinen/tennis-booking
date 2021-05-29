@@ -10,8 +10,8 @@ import { CacheService } from '../cache.service';
   styleUrls: ['./me.component.css'],
 })
 export class MeComponent implements OnInit, OnDestroy {
-  personalBookingsSub: Subscription;
-  mybookings: any;
+  personalBookingsSub: Subscription | null;
+  mybookings: any[];
   currentUserID: string | void;
   currentUserName: string;
   currentDate: string;
@@ -25,11 +25,13 @@ export class MeComponent implements OnInit, OnDestroy {
     this.currentUserID = this.cache.getItem('currentUserID');
     this.currentDate = book.formatBookingDate(new Date());
     this.currentUserName = this.auth.user ? this.auth.user!.name! : '';
-    this.personalBookingsSub = this.getBookings();
+    this.personalBookingsSub = null;
+    this.mybookings = [];
   }
 
   ngOnInit(): void {
     this.getBookings();
+    console.log(this.mybookings);
   }
 
   dateMonthAgo(): Date {
@@ -38,10 +40,13 @@ export class MeComponent implements OnInit, OnDestroy {
     return date;
   }
 
-  getBookings() {
-    return this.book.getPersonalBookings().subscribe((bookings: any) => {
-      this.mybookings = bookings;
-    });
+  getBookings(): void {
+    this.personalBookingsSub = this.book
+      .getPersonalBookings()
+      .subscribe((bookings: any) => {
+        this.mybookings = bookings;
+        this.cache.saveBookings(bookings);
+      });
   }
 
   cancelBooking(id: string) {
@@ -58,6 +63,6 @@ export class MeComponent implements OnInit, OnDestroy {
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());
   ngOnDestroy(): void {
-    this.personalBookingsSub.unsubscribe();
+    this.personalBookingsSub!.unsubscribe();
   }
 }

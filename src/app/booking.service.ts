@@ -44,7 +44,7 @@ export class BookingService {
             new Date().toLocaleDateString('en-GB').split('.').toString()
           )
       )
-      .snapshotChanges();
+      .snapshotChanges()
   }
 
   getAllBookings() {

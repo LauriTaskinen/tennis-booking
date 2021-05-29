@@ -14,10 +14,10 @@ export class BookingComponent implements OnInit, OnDestroy {
   minDate: Date = new Date();
   touchUi = true;
   dayChosen = false; // tämä vaikuttaa vain siihen tuleeko kellonaikojen valinta näkyviin HTML-templaatissa
-
   timeChosen = '';
   dateChosen: Date; //valitsee päivän
   booked = 'Varattu';
+  maxBookingLimit: boolean;
 
   slots = ['08-10', '10-12', '12-14', '14-16', '16-18', '18-20'];
 
@@ -40,9 +40,13 @@ export class BookingComponent implements OnInit, OnDestroy {
     //console.log($event);
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
+
     this.getTimeSlots(
       this.dateChosen.toLocaleDateString('en-GB').split('.').toString()
     );
+
+    this.maxBookingLimit = false;
+
     //myBookings.push($event.target.value);
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
@@ -51,6 +55,19 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.timeChosen = slot;
 
     console.log(slot);
+  }
+
+  dateBooked(): boolean {
+    // this.book.getPersonalBookings().subscribe((bookings) => {
+    //   console.log(bookings);
+      // bookings.forEach((booking: any) => {
+      //   if (this.dateChosen === booking.payload.doc.data()) {
+      //     return true;
+      //   } else {
+      //     return true;
+    //   //   }
+    // });
+    // });
   }
 
   // tämä metodi laukaisee kaksi metodia
@@ -64,12 +81,16 @@ export class BookingComponent implements OnInit, OnDestroy {
   // dokumentin sisään avaimen arvoksi.
 
   confirmBooking() {
+
     let date = this.dateChosen.toLocaleDateString('en-GB').split('.');
     this.book.createBooking({
       id: this.cache.getItem('currentUserID'),
       date: date.toString(),
       time: this.timeChosen,
-    });
+    })
+      .catch((error) => console.log(error));
+    //jos error niin 'oops'-dialog!
+
     // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);
     console.log('booked!');
     //"lomakkeen" nollaus
@@ -81,11 +102,11 @@ export class BookingComponent implements OnInit, OnDestroy {
       .getAllBookings()
       .subscribe((bookings: any) => {
         this.timeSlot = [];
-        for (let i = 0; i < bookings.length; i++) {
-          if (bookings[i].payload.doc.data().date === date) {
+        for (const booking of bookings) {
+          if (booking.payload.doc.data().date === date) {
             this.timeSlot.push({
-              time: bookings[i].payload.doc.data().time,
-              date: bookings[i].payload.doc.data().date,
+              time: booking.payload.doc.data().time,
+              date: booking.payload.doc.data().date,
             });
           }
         }
@@ -100,6 +121,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.dateChosen);
+    this.dateBooked();
   }
   ngOnDestroy(): void {
     this.allBookingsSub?.unsubscribe();

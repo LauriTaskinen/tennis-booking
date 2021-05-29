@@ -20,7 +20,7 @@
       <mat-datepicker touchUi #picker></mat-datepicker>
     </mat-form-field>
     <br>
-    <div *ngIf="dayChosen">
+    <div *ngIf="dayChosen && !maxBookingLimit">
 
       <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
       <!--

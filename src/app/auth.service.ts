@@ -106,7 +106,7 @@ export class AuthService {
       .then((user: User) => {
         this.store.collection('Users').doc(user.id).set(user);
         console.log(user);
-        this.cache.save(user);
+        this.cache.saveUser(user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       })
