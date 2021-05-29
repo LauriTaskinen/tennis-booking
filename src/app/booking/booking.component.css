@@ -15,6 +15,7 @@ i {
 }
 .p {
   font-size: 1.5vh;
+  color: white;
 }
 .fade {
   color: black;
@@ -28,7 +29,9 @@ i {
 .greeting {
   font-size: 1.5vh;
 }
-.example-card {
+.booking {
   max-width: 100%;
-  margin-top: 5%;
+  margin-top: 0.5%;
+  background-color: rgb(248, 164, 9);
+  margin-bottom: 10%;
 }

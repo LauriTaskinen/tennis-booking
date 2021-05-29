@@ -12,16 +12,20 @@ export class BookingService {
   users: any;
   allData: any;
   currentDate: string;
+  currentUser: string | void;
 
   constructor(
     private store: AngularFirestore,
     private auth: AuthService,
+    private cache: CacheService
   ) {
     this.users;
     this.allData;
     this.currentDate = this.formatBookingDate(new Date());
+    this.currentUser = this.auth.user?.id
+      ? this.auth.user!.id
+      : this.cache.currentUserID;
   }
-  
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object): Promise<any> {
@@ -39,14 +43,14 @@ export class BookingService {
     return this.store
       .collection('Bookings', (ref) =>
         ref
-          .where('id', '==', this.auth.user!.id)
+          .where('id', '==', this.currentUser)
           .where(
             'date',
             '>=',
             new Date().toLocaleDateString('en-GB').split('.').toString()
           )
       )
-      .snapshotChanges()
+      .snapshotChanges();
   }
 
   getAllBookings() {

@@ -25,6 +25,7 @@ export class MeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getBookings();
     console.log(this.mybookings);
+    this.cache.getItem('CurrentUserName');
   }
 
   dateMonthAgo(): Date {
@@ -34,7 +35,6 @@ export class MeComponent implements OnInit, OnDestroy {
   }
 
   getBookings(): void {
-    this.mybookings = [];
     this.personalBookingsSub = this.book
       .getPersonalBookings()
       .subscribe((bookings: any) => {

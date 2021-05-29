@@ -1,6 +1,6 @@
 <section id="me" fxLayout="row" fxLayoutAlign="center">
   <div class="container ">
-    <mat-card class="example-card">
+    <mat-card class="mybookings">
       <mat-card-header>
         <mat-card-title class="greeting">Hei {{cache.currentUserName}}!</mat-card-title>
       </mat-card-header>
@@ -33,12 +33,11 @@
         </table>
 
       </mat-card-content>
-      <div *ngIf="mybookings === null"> ladataan... </div>
+      <div *ngIf="mybookings === null"> <small fxLayoutAlign="center">ladataan... </small></div>
       <div *ngIf="mybookings !== null && mybookings.length === 0">
-        <p><small fxLayoutAlign="center">
-            ei varauksia
-          </small>
-        </p>
+        <small fxLayoutAlign="center">
+          ei varauksia
+        </small>
       </div>
     </mat-card>
   </div>

@@ -46,3 +46,8 @@ p {
 .snackbarAction {
   color: blue;
 }
+
+small {
+  color: darkgray;
+  align-self: center;
+}

@@ -19,9 +19,11 @@ i {
   font-size: 2vh;
   color: #174d50;
 }
-.example-card {
+.mybookings {
   max-width: 100%;
   margin-top: 5%;
+  padding-bottom: 12vh;
+  min-height: 400px;
 }
 
 .header {
