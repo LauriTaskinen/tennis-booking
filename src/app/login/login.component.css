@@ -1,0 +1,34 @@
+i {
+  cursor: pointer;
+}
+
+.fade {
+  color: black;
+}
+.h1 {
+  font-size: 3vh;
+  color: #174d50;
+}
+.h2 {
+  padding-top: 0vh;
+}
+.p {
+  font-size: 1.5vh;
+}
+.greeting {
+  font-size: 1.5vh;
+}
+.example-card {
+  max-width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+.loginButton {
+  margin-bottom: 7%;
+}
+.loginButtonColor {
+  background-color: #174d50;
+  color: white;
+  font-size: 1.5vh;
+}

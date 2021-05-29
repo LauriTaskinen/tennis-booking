@@ -1,89 +1,54 @@
 <app-me></app-me>
-<section id="booking">
-  <div class="container" fxLayout="column">
-    <H2>Tee uusi varaus</H2>
 
-    <p>Uuden varauksen tekeminen on helppoa:
-    </p>
-    <p>1. Klikkaa kalenteria aloittaaksesi varauksen tekeminen.<br> 2. Valitse itsellesi sopiva päivä <br> 3. Varaa
-      sopiva aika vapaana olevista ajoista.<br><strong> HUOM! Voit varata maksimissaan yhden (1) vuoron/päivä.
-      </strong><br> 4. Vahvista vielä varauksesi klikkaamalla <strong>vahvista
-        varaus</strong>
-      -painikketta.<br><br><br>Tekemäsi varaukset siirtyy <strong>Omat varaukseni</strong> -näkymään.
+<section id="booking" fxLayout="row" fxLayoutAlign="center">
 
-    </p>
-    <!--Varauskalenterissa käytetty Angular materialin datepickeriä-->
-    <mat-form-field appearance="fill" class="datepicker">
-      <mat-label>Avaa varauskalenteri</mat-label>
-      <input matInput [matDatepicker]="picker" [min]="minDate" (dateChange)="dateChanged($event)">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker></mat-datepicker>
-    </mat-form-field>
-    <br>
-    <div *ngIf="dayChosen">
+  <div class="container ">
+    <mat-card class="example-card">
 
-      <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
-      <!--
-      <mat-selection-list class="times" #times [multiple]="false">
-        <mat-list-option *ngFor="let slot of slots" [value]="slot">
-          {{slot}}
-        </mat-list-option>
-      </mat-selection-list>
-    -->
-      <mat-selection-list [multiple]="false">
-        <button mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
-          [disabled]="slotUnavailable(slot)">
-          {{slot}}
-        </button>
-      </mat-selection-list>
-
-
-
-
-      <!--
-      <ul>
-        <li *ngFor="let slot of slots">
-          {{slot}}
-          <button (click)="pickTime(slot)" [disabled]="slotUnavailable(slot)">Varaa</button>
-        </li>
-      </ul>
-
-      -->
-      <!-- <ul>
-        <li>
-          <p> 08:00 - 10:00 <button (click)="pickTime(this.slot1)" [disabled]="slotUnavailable()"> Varaa <div *ngIf="timeChosen === slot1">
-              </div>
-            </button> </p>
-        </li>
-        <li>
-          <p> 10:00 - 12:00 <button (click)="pickTime(this.slot2)">Varaa<div *ngIf="timeChosen === slot2">
-
-              </div></button> </p>
-        </li>
-        <li>
-          <p> 12:00 - 14:00 <button (click)="pickTime(this.slot3)">Varaa<div *ngIf="timeChosen === slot3">
-              </div></button> </p>
-        </li>
-        <li>
-          <p> 14:00 - 16:00 <button (click)="pickTime(this.slot4)">Varaa<div *ngIf="timeChosen === slot4">
-              </div></button> </p>
-        </li>
-        <li>
-          <p> 16:00 - 18:00 <button (click)="pickTime(this.slot5)">Varaa<div *ngIf="timeChosen === slot5">
-              </div></button> </p>
-        </li>
-        <li>
-          <p> 18:00 - 20:00 <button (click)="pickTime(this.slot6)">Varaa<div *ngIf="timeChosen === slot6">
-              </div></button> </p>
-        </li>
-      </ul> -->
-      <div *ngIf="timeChosen">
-        <h3>Varauksesi:</h3>
-        <p>{{dateChosen.toLocaleDateString()}} klo {{timeChosen}}</p>
-        <button (click)="confirmBooking()">Vahvista varaus </button>
+      <mat-card-header fxLayoutAlign="center">
+        <H2 class="h2">Tee uusi varaus</H2>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <p class="p">1. Klikkaa kalenteria aloittaaksesi varauksen tekeminen.<br><br> 2. Valitse itsellesi sopiva päivä.
+          <br><br>
+          3. Varaa
+          sopiva aika vapaana olevista ajoista.<br><strong> HUOM! Voit varata maksimissaan yhden (1) vuoron/päivä.
+          </strong><br><br> 4. Vahvista vielä varauksesi klikkaamalla <strong>vahvista
+            varaus</strong>
+          -painikketta.<br><br><br>Tekemäsi varaukset siirtyvät <strong>Omat varaukseni</strong> -näkymään.
+        </p>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <!--Varauskalenterissa käytetty Angular materialin datepickeriä-->
+        <mat-form-field appearance="fill" class="datepicker">
+          <mat-label>Avaa varauskalenteri</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" (dateChange)="dateChanged($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-card-content>
+      <br>
+      <div *ngIf="dayChosen">
+        <mat-card-content fxLayoutAlign="center">
+          <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
+        </mat-card-content>
+        <mat-card-content fxLayoutAlign="center">
+          <mat-selection-list [multiple]="false">
+            <button mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
+              [disabled]="slotUnavailable(slot)">
+              {{slot}}
+            </button>
+          </mat-selection-list>
+        </mat-card-content>
+        <div *ngIf="timeChosen">
+          <mat-card-content fxLayoutAlign="center">
+            <h3>Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong> {{timeChosen}} </strong></h3>
+          </mat-card-content>
+          <mat-card-content fxLayoutAlign="center">
+            <button mat-raised-button class="confirm" (click)="confirmBooking()">Vahvista varaus </button>
+          </mat-card-content>
+        </div>
       </div>
-    </div>
-
-
+    </mat-card>
   </div>
 </section>

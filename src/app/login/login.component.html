@@ -1,36 +1,35 @@
-<section id="login">
-  <div class="container" fxLayout="column" fxLayoutAlign="center center">
-    <header class="loginFont">
-      <div>
-        <h1>Tervetuloa Tennis Booking sivustolle</h1>
-        <p> Nyt voit tehdä kenttävarauksen helposti suoraan netissä ilmaiseksi! <br>Rekisteröitymällä käyttäjäksi saat
-          käyttöösi varauskalenterin, josta voit nähdä vapaana olevat vuorot ja tehdä varauksen. <br>Kaikki tekemäsi
+<section id="login" fxLayout="column" fxLayoutAlign="center">
+  <mat-card class="example-card">
+    <div class="container">
+      <mat-card-header fxLayoutAlign="center">
+        <h1 class="h1">Tervetuloa Tennis Booking sivustolle!</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <br>
+        <p class="p"> Nyt voit varata tenniskentän suoraan netissä ilmaiseksi!<br><br>Rekisteröitymällä käyttäjäksi
+          saat
+          käyttöösi varauskalenterin, josta voit nähdä vapaana olevat vuorot ja tehdä varauksen.<br><br>Kaikki
+          tekemäsi
           varaukset tallentuvat omat varaukseni -näkymään.</p>
-      </div>
-    </header>
-
-    <mat-divider></mat-divider>
-
-    <div>
-      <h2>Varaa kenttä</h2>
-      <p>
-        Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.
-      </p>
+      </mat-card-content>
     </div>
-    <button mat-raised-button color="primary" type="button" (click)="openDialog()">Kirjaudu sisään</button><br>
-  </div>
+
+  </mat-card>
+
+  <mat-card class="example-card">
+    <mat-card-header fxLayoutAlign="center">
+
+      <h1 class="h1">Varaa kenttä</h1>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="center">
+      <p class="p">Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.</p>
+    </mat-card-content>
+    <mat-card-content fxLayoutAlign="center">
+      <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
+        (click)="openDialog()">Kirjaudu
+        sisään</button>
+      <br>
+    </mat-card-content>
+
+  </mat-card>
 </section>
-
-
-<!--
-<div *ngIf="auth.user$ | async as user; else login">
-  {{user | json }}
-  <hr>
-  <button mat-raised-button color="warn" type="button" (click)="auth.signOut()">
-    Sign Out
-  </button>
-</div>
-<ng-template #login>
-  <button class="button" (click)="auth.googleSignin()"></button>
-</ng-template>
--->

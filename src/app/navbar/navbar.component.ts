@@ -25,21 +25,20 @@ export class NavbarComponent implements OnInit {
       tabletView: false,
       desktopView: true,
     },
+    {
+      label: 'Admin',
+      icon: 'leaderboard',
+      path: 'admin',
+      mobileView: false,
+      tabletView: false,
+      desktopView: true,
+    },
   ];
 
   logOutItem = {
     label: 'Kirjaudu ulos',
     icon: 'logout',
     path: 'login',
-    mobileView: true,
-    tabletView: true,
-    desktopView: true,
-  };
-
-  adminItem = {
-    label: 'Admin',
-    icon: 'leaderboard',
-    path: 'admin',
     mobileView: true,
     tabletView: true,
     desktopView: true,
