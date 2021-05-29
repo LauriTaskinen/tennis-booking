@@ -1,10 +1,8 @@
 table {
   width: 60%;
-  max-width: 600px;
   min-width: 35%;
   margin-bottom: 50px;
 }
-
 i {
   cursor: pointer;
 }
@@ -14,9 +12,22 @@ i {
 }
 
 .h2 {
-  padding-top: 0vh;
+  font-size: 2.5vh;
+  color: #174d50;
+}
+.greeting {
+  font-size: 2vh;
+  color: #174d50;
+}
+.example-card {
+  max-width: 100%;
+  margin-top: 5%;
 }
 
-.greeting {
-  font-size: 1.5vh;
+.header {
+  color: #ffff;
+}
+
+.content {
+  justify-content: center;
 }

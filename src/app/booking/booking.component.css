@@ -1,6 +1,34 @@
 .datepicker {
   width: 60%;
-  max-width: 600px;
+
   min-width: 35%;
   margin-bottom: 50px;
+}
+
+.confirm:hover {
+  background-color: #32c265;
+  color: #ffffff;
+  font-weight: normal;
+}
+i {
+  cursor: pointer;
+}
+.p {
+  font-size: 1.5vh;
+}
+.fade {
+  color: black;
+}
+
+.h2 {
+  font-size: 2.5vh;
+  color: #174d50;
+}
+
+.greeting {
+  font-size: 1.5vh;
+}
+.example-card {
+  max-width: 100%;
+  margin-top: 5%;
 }
