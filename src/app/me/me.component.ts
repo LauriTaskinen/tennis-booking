@@ -11,22 +11,15 @@ import { CacheService } from '../cache.service';
 })
 export class MeComponent implements OnInit, OnDestroy {
   personalBookingsSub: Subscription | null;
-  mybookings: any[];
-  currentUserID: string | void;
-  currentUserName: string;
-  currentDate: string;
+  mybookings: any[] |null;
   columnsToDisplay = ['date', 'time', 'delete'];
 
   constructor(
     private book: BookingService,
-    private auth: AuthService,
-    private cache: CacheService
+    public cache: CacheService
   ) {
-    this.currentUserID = this.cache.getItem('currentUserID');
-    this.currentDate = book.formatBookingDate(new Date());
-    this.currentUserName = this.auth.user ? this.auth.user!.name! : '';
     this.personalBookingsSub = null;
-    this.mybookings = [];
+    this.mybookings = null;
   }
 
   ngOnInit(): void {
@@ -41,6 +34,7 @@ export class MeComponent implements OnInit, OnDestroy {
   }
 
   getBookings(): void {
+    this.mybookings = [];
     this.personalBookingsSub = this.book
       .getPersonalBookings()
       .subscribe((bookings: any) => {

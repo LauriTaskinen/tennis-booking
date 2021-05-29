@@ -1,9 +1,9 @@
 <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-around center" class="navbar">
   <a class="tennis" mat-button class="tennisbutton" href='#'><span fxFlex>Tennis booking</span></a>
 
-  <!-- Apukirjastona tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
-  <div
-    *ngIf="(router.url == '/booking' || router.url == '/booking#me'|| router.url == '/booking#booking' ||router.url == '/admin' )">
+  <!-- Apuna tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
+  <div *ngIf="cache.currentUserName">
+    <!--animaatio??-->
     <!--lisää google kirjautuminen ulos ;auth.signOut()-->
     <a mat-button (click)="logOutMethod()" class="navbutton" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"
       [fxShow.xs]="logOutItem.mobileView" [fxShow.sm]="logOutItem.tabletView">
@@ -40,6 +40,7 @@
       </ng-container>
     </mat-menu>
   </div>
+
 </mat-toolbar>
 
 <router-outlet></router-outlet>

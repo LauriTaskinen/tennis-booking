@@ -11,15 +11,17 @@ import { CacheService } from './cache.service';
 export class BookingService {
   users: any;
   allData: any;
+  currentDate: string;
 
   constructor(
     private store: AngularFirestore,
     private auth: AuthService,
-    private cache: CacheService
   ) {
     this.users;
     this.allData;
+    this.currentDate = this.formatBookingDate(new Date());
   }
+  
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
   createBooking(info: object): Promise<any> {

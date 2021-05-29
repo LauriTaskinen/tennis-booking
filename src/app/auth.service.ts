@@ -14,13 +14,14 @@ import {
 } from '@angular/fire/firestore';
 import 'firebase/auth';
 
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userState: any;
-  UserData: Observable<any>;
-  user: User | undefined;
+  userState: Promise<any> | null;
+  userLoggedIn: boolean
+  user: User | null;
   errorMessage: boolean = false;
   // user: Observable<any>;
 
@@ -32,7 +33,7 @@ export class AuthService {
     private cache: CacheService,
     private store: AngularFirestore
   ) {
-    this.UserData = this.auth.authState;
+    this.userLoggedIn = false;
 
     // this.user = this.auth.authState.pipe(
     //   switchMap((user) => {
@@ -50,13 +51,12 @@ export class AuthService {
     };
     this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log('there is user');
-        return true;
+        console.log(user.reload())
+        
       } else {
         console.log('no user');
-        return false;
       }
-    });
+    })
   }
 
   // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta

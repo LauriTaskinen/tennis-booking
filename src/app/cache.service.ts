@@ -4,7 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CacheService {
-  constructor() {}
+  currentUserID: string | void;
+  currentUserName: string | void;
+
+  constructor() {
+    this.currentUserID = this.getItem('currentUserID');
+    this.currentUserName = this.getItem('currentUserName');
+  }
 
   saveUser(user: any): void {
     let currentUser = user;
@@ -15,10 +21,7 @@ export class CacheService {
   }
   saveBookings(bookings: any[]) {
     bookings.forEach((booking) => {
-      localStorage.setItem(
-        'bookedDate',
-        booking.payload.doc.data().date
-      );
+      localStorage.setItem('bookedDate', booking.payload.doc.data().date);
     });
   }
 

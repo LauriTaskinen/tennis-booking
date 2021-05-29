@@ -34,10 +34,12 @@
         </mat-card-content>
         <mat-card-content fxLayoutAlign="center">
           <mat-selection-list [multiple]="false">
-            <button mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
+            <mat-button-toggle-group>
+            <mat-button-toggle mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
               [disabled]="slotUnavailable(slot)">
               {{slot}}
-            </button>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
           </mat-selection-list>
         </mat-card-content>
         <div *ngIf="timeChosen">

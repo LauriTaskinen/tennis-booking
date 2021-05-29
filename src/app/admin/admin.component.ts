@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BookingData } from '../bookingdata';
 import { Sort } from '@angular/material/sort';
 
-
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -23,7 +22,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   data: any;
   columnsToDisplay = ['name', 'date', 'time'];
   sortedData: BookingData[];
-  
+  permissionsError: any;
 
   // private auth: AuthService
   constructor(private book: BookingService, private auth: AuthService) {
@@ -36,14 +35,14 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.bookingsSub = null;
     this.data = new MatTableDataSource<any>(this.allbookings);
     this.sortedData = this.allbookings;
-
+    this.permissionsError = null;
   }
 
   ngOnInit() {
     // let dataSamples: ItemModel[] ;
     //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }
-//Sorting toteutettu angular material -esimerkin mukaisesti.
+  //Sorting toteutettu angular material -esimerkin mukaisesti.
   sortData(sort: Sort) {
     const data = this.allbookings.slice();
     if (!sort.active || sort.direction === '') {
@@ -61,10 +60,8 @@ export class AdminComponent implements OnInit, OnDestroy {
           return 0;
       }
     });
-    console.log(data)
+    console.log(data);
   }
-
-  
 
   dateMonthAgo(): Date {
     let date = new Date();
@@ -94,14 +91,19 @@ export class AdminComponent implements OnInit, OnDestroy {
         let match = await users.find(
           (user) => user.id === booking.payload.doc.data().id
         );
-        allbookings.push({
-          name: match.name,
-          email: match.email,
-          // phone: match.phone,
-          id: booking.payload.doc.data().id,
-          time: booking.payload.doc.data().time,
-          date: booking.payload.doc.data().date,
-        });
+        if (!match) {
+          this.permissionsError = true;
+        } else {
+          this.permissionsError = false;
+          allbookings.push({
+            name: match.name,
+            email: match.email,
+            // phone: match.phone,
+            id: booking.payload.doc.data().id,
+            time: booking.payload.doc.data().time,
+            date: booking.payload.doc.data().date,
+          });
+        }
       });
     });
 

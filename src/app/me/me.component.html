@@ -2,10 +2,12 @@
   <div class="container ">
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title class="greeting">Hei! {{currentUserName}}</mat-card-title>
+        <mat-card-title class="greeting">Hei {{cache.currentUserName}}!</mat-card-title>
       </mat-card-header>
+
+
       <h2 class="h2"> Omat varaukseni</h2>
-      <mat-card-content fxLayoutAlign="center">
+      <mat-card-content *ngIf="mybookings !== null && mybookings.length > 0" fxLayoutAlign="center">
 
         <table mat-table [dataSource]="mybookings" class="mat-elevation-z8">
           <!-- <div *ngIf="booking.payload.doc.data().date >= currentDate"> -->
@@ -29,9 +31,15 @@
           <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
           <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
         </table>
-        <br>
 
       </mat-card-content>
+      <div *ngIf="mybookings === null"> ladataan... </div>
+      <div *ngIf="mybookings !== null && mybookings.length === 0">
+        <p><small fxLayoutAlign="center">
+            ei varauksia
+          </small>
+        </p>
+      </div>
     </mat-card>
   </div>
 </section>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { CacheService } from '../cache.service';
 
 @Component({
   selector: 'app-navbar',
@@ -44,10 +45,16 @@ export class NavbarComponent implements OnInit {
     desktopView: true,
   };
 
+  
+  constructor(public router: Router, private auth: AuthService, public cache: CacheService ) {
+
+  }
+
   logOutMethod() {
     this.auth.logOut();
+ 
   }
-  constructor(public router: Router, public auth: AuthService) {}
+  ngOnInit(): void {
 
-  ngOnInit(): void {}
+  }
 }
