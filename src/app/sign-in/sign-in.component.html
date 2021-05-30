@@ -1,9 +1,9 @@
-<section id="signIn">
+<section id="signIn" fxLayout="row" fxLayoutAlign="center">
   <div class="container">
 
     <div class="row">
       <div>
-        <h2>Rekisteröidy käyttäjäksi</h2>
+        <h2 class="h2">Rekisteröidy käyttäjäksi</h2>
         <p>Varataksesi kenttä sinun tulee rekisteröityä käyttäjäksi.</p>
       </div>
 
@@ -15,30 +15,28 @@
             </mat-label>
             <input matInput id="name" type="text" name="nimi" required ngModel>
           </mat-form-field>
-        
-          <mat-form-field>
-            <mat-label>
-              Puhelinnumero:
-            </mat-label>
-            <input matInput id="phone" type="tel" name="puhelin" required ngModel>
-          </mat-form-field>
-          
+
           <mat-form-field>
             <mat-label>
               Sähköposti:
             </mat-label>
             <input matInput id="email" type="email" name="sahkoposti" required ngModel>
           </mat-form-field>
-    
+
           <mat-form-field>
             <mat-label>
               Salasana:
             </mat-label>
             <input matInput id="password" type="password" name="salasana" required ngModel>
           </mat-form-field>
-   
-        <button mat-raised-button type="submit" [disabled]="!registerForm.valid" >Lähetä</button>
+
+          <button mat-raised-button type="submit" [disabled]="!registerForm.valid">Lähetä</button>
         </form>
+
+        <p class="p">Kirjautumistietojoa kerätään ainoastaan kenttien varauksien todentamiseen. Ainoastaan palvelun
+          ylläpitäjällä on pääsy näihin tietoihin. Mitään palveluun syötettyjä tietoja ei luovuteta kolmansille
+          osapuolille eikä tietoja voida käyttää
+          mihinkään kaupalliseen tarkoitukseen, kuten esimerkiksi suoramarkkinointiin. </p>
 
 
       </mat-card>

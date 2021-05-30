@@ -1,4 +1,13 @@
-#register-form{
+#register-form {
   display: flex;
   flex-direction: column;
+}
+
+.p {
+  font-size: 0.9rem;
+  margin-top: 50px;
+}
+.h2 {
+  font-size: 2.5vh;
+  color: #174d50;
 }
