@@ -39,6 +39,7 @@ export class LoginDialogComponent implements OnInit {
   logIn(data: NgForm): void {
     this.auth.logIn(data.value.sahkoposti, data.value.salasana);
     data.resetForm();
+    this.dialog.closeAll();
   }
 
   LogInWithGoogle() {

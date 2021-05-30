@@ -34,11 +34,11 @@
         <mat-card-content fxLayoutAlign="center">
           <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
         </mat-card-content>
-        <mat-card-content fxLayoutAlign="center">
+        <mat-card-content>
           <mat-selection-list [multiple]="false">
-            <mat-button-toggle-group>
-              <mat-button-toggle mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
-                [disabled]="slotUnavailable(slot)">
+            <mat-button-toggle-group fxLayout="column" fxLayoutAlign="space-evenly center">
+              <mat-button-toggle class="timeButtons" mat-stroked-button *ngFor="let slot of slots" [value]="slot"
+                (click)="pickTime(slot)" [disabled]="slotUnavailable(slot)">
                 {{slot}}
               </mat-button-toggle>
             </mat-button-toggle-group>
@@ -49,15 +49,18 @@
             <h3>Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong> {{timeChosen}} </strong></h3>
           </mat-card-content>
           <mat-card-content fxLayoutAlign="center">
-            <button mat-raised-button class="confirm" (click)="confirmBooking()"> Vahvista varaus </button>
+            <button mat-raised-button class="confirm" (click)="confirmBooking()"> Vahvista varaus
+            </button>
           </mat-card-content>
         </div>
       </div>
-
-      <div *ngIf="maxBookingLimit === true" id="max-limit-reached">
-        <p>Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee ensin perua tämänhetkinen
-          varauksesi <b>omat varaukseni</b>-osiossa</p>
-      </div>
+      <mat-card-content fxLayout="row" fxLayoutAlign="center">
+        <div *ngIf="maxBookingLimit === true" id="max-limit-reached">
+          <p>Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee ensin perua
+            tämänhetkinen
+            varauksesi <b>omat varaukseni</b>-osiossa</p>
+        </div>
+      </mat-card-content>
     </mat-card>
 
     <small fxLayoutAlign="center">tänne jotain pientä lisätietoa tms.?</small>

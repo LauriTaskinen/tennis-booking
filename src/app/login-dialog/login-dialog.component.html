@@ -27,6 +27,11 @@
 
       <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Lähetä</button>
 
+      <div class="forgotPassword">
+        <span>Unohtuiko salasana?</span>
+        <button mat-raised-button type="submit" routerLink="/reset-password">Palauta salasana tästä</button>
+      </div>
+
       <div class="register">
         <p>Etkö ole vielä rekisteröitynyt?</p>
         <button mat-button type="button" (click)="signUp()">Rekisteröidy nyt</button>

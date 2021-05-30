@@ -5,6 +5,12 @@
   margin-bottom: 50px;
 }
 
+.confirm {
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+}
+
 .confirm:hover {
   background-color: #32c265;
   color: #ffffff;
@@ -34,4 +40,14 @@ i {
   margin-top: 0.5%;
   background-color: rgb(248, 164, 9);
   margin-bottom: 10%;
+}
+.timeButtons {
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+}
+.confirmButton {
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
 }

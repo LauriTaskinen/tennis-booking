@@ -60,6 +60,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AdminComponent } from './admin/admin.component';
 import { TableFilterPipe } from './admin/table-filter.pipe';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { TableFilterPipe } from './admin/table-filter.pipe';
     LoginDialogComponent,
     AdminComponent,
     TableFilterPipe,
+    ResetPasswordComponent,
   ],
   imports: [
     AppRoutingModule,

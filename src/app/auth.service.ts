@@ -75,6 +75,21 @@ export class AuthService {
     );
   }
 
+  ForgotPassword(passwordResetEmail: any) {
+    return this.auth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        this.router.navigate(['login']);
+        window.alert(
+          'Linkki salasanan palauttamiseen on lähetetty sähköpostiisi, tarkista postilaatikkosi.'
+        );
+      })
+
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)

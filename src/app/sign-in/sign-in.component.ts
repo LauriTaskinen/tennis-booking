@@ -22,6 +22,5 @@ export class SignInComponent implements OnInit {
       data.value.salasana
     );
     data.resetForm();
-    // this.router.navigate(['login']);
   }
 }
