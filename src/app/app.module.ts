@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -59,6 +59,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AdminComponent } from './admin/admin.component';
+import { TableFilterPipe } from './admin/table-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AdminComponent } from './admin/admin.component';
     SignInComponent,
     LoginDialogComponent,
     AdminComponent,
+    TableFilterPipe,
   ],
   imports: [
     AppRoutingModule,
