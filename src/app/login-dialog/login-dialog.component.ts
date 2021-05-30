@@ -43,6 +43,5 @@ export class LoginDialogComponent implements OnInit {
 
   LogInWithGoogle() {
     this.auth.GoogleLogin();
- 
   }
 }
