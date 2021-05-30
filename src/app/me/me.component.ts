@@ -13,19 +13,21 @@ export class MeComponent implements OnInit, OnDestroy {
   personalBookingsSub: Subscription | null;
   mybookings: any[] |null;
   columnsToDisplay = ['date', 'time', 'delete'];
+  currentName: string | void;
 
   constructor(
-    private book: BookingService,
-    public cache: CacheService
+    public book: BookingService,
+    private cache: CacheService,
+    private auth: AuthService
   ) {
     this.personalBookingsSub = null;
-    this.mybookings = null;
+    this.mybookings = [];
+    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
   }
 
   ngOnInit(): void {
     this.getBookings();
     console.log(this.mybookings);
-    this.cache.getItem('CurrentUserName');
   }
 
   dateMonthAgo(): Date {

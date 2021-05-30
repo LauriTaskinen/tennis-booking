@@ -9,6 +9,7 @@
         <H2 class="h2">Tee uusi varaus</H2>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
+        <!--semantiikka: tämä on lista ei p-->
         <p class="p">1. Klikkaa kalenteria aloittaaksesi varauksen tekeminen.<br><br> 2. Valitse itsellesi sopiva päivä.
           <br><br>
           3. Varaa
@@ -28,7 +29,8 @@
         </mat-form-field>
       </mat-card-content>
       <br>
-      <div *ngIf="dayChosen">
+
+      <div *ngIf="dayChosen && !maxBookingLimit" id="choose-time">
         <mat-card-content fxLayoutAlign="center">
           <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
         </mat-card-content>
@@ -47,9 +49,14 @@
             <h3>Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong> {{timeChosen}} </strong></h3>
           </mat-card-content>
           <mat-card-content fxLayoutAlign="center">
-            <button mat-raised-button class="confirm" (click)="confirmBooking()">Vahvista varaus </button>
+            <button mat-raised-button class="confirm" (click)="confirmBooking()"> Vahvista varaus </button>
           </mat-card-content>
         </div>
+      </div>
+
+      <div *ngIf="maxBookingLimit === true" id="max-limit-reached">
+        <p>Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee ensin perua tämänhetkinen
+          varauksesi <b>omat varaukseni</b>-osiossa</p>
       </div>
     </mat-card>
 

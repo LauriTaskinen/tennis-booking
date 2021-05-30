@@ -47,7 +47,8 @@ export class AuthService {
     };
     this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.reload());
+        // user.reload();
+        // console.log('user refresh')
       } else {
         console.log('no user');
       }

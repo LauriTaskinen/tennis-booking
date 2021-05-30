@@ -2,7 +2,7 @@
   <a class="tennis" mat-button class="tennisbutton" href='#'><span fxFlex>Tennis booking</span></a>
 
   <!-- Apuna tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
-  <div *ngIf="cache.currentUserName">
+  <div *ngIf="currentName">
     <!--animaatio??-->
     <!--lisää google kirjautuminen ulos ;auth.signOut()-->
     <a mat-button (click)="logOutMethod()" class="navbutton" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"

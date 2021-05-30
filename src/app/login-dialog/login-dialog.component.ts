@@ -17,9 +17,9 @@ export class LoginDialogComponent implements OnInit {
   ) {}
   showAlert = false;
 
-  closeAlert() {
-    this.auth.errorMessage = false;
-  }
+  // closeAlert() {
+  //   this.auth.errorMessage = false;
+  // }
 
   openAlert() {
     if ((this.auth.errorMessage = true)) {
