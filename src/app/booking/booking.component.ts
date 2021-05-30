@@ -40,9 +40,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   dateChanged($event: { target: { value: Date } }): void {
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
-    this.getTimeSlots(
-      this.dateChosen.toLocaleDateString('en-US')
-    );
+    this.getTimeSlots(this.dateChosen.toLocaleDateString('en-US'));
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
   pickTime(slot: string): void {
@@ -50,18 +48,6 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.timeChosen = slot;
   }
 
-  // dateBooked(): boolean {
-  // this.book.getPersonalBookings().subscribe((bookings) => {
-  //   console.log(bookings);
-  // bookings.forEach((booking: any) => {
-  //   if (this.dateChosen === booking.payload.doc.data()) {
-  //     return true;
-  //   } else {
-  //     return true;
-  //   //   }
-  // });
-  // });
-  // }
 
   // tämä metodi laukaisee kaksi metodia
 
@@ -74,7 +60,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   // dokumentin sisään avaimen arvoksi.
 
   confirmBooking() {
-    let date = this.dateChosen.toLocaleDateString('en-US').split('.');
+    let date = this.dateChosen.toLocaleDateString('en-US');
     this.book
       .createBooking({
         id: this.cache.getItem('currentUserID'),
@@ -84,7 +70,6 @@ export class BookingComponent implements OnInit, OnDestroy {
       .catch((error) => console.log(error));
     //jos error niin 'oops'-dialog!
 
-    // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);
     console.log('booked!');
     window.scroll(0, 0);
   }
@@ -96,7 +81,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       .subscribe((bookings: any) => {
         this.timeSlot = [];
         this.maxBookingLimit = false;
-        this.scrollTo('choose-time')
+        this.scrollTo('choose-time');
         for (const booking of bookings) {
           if (booking.payload.doc.data().date === date) {
             this.timeSlot.push({
@@ -105,10 +90,10 @@ export class BookingComponent implements OnInit, OnDestroy {
             });
             if (
               booking.payload.doc.data().id === this.auth.user?.id ||
-              this.cache.currentUserID
+              booking.payload.doc.data().id === this.cache.currentUserID
             ) {
               this.maxBookingLimit = true;
-              this.scrollTo('max-limit-reached')
+              this.scrollTo('max-limit-reached');
             }
           }
 
@@ -123,8 +108,8 @@ export class BookingComponent implements OnInit, OnDestroy {
     return this.timeSlot.some((s: any) => s.time === slot);
   }
 
-  scrollTo(elem: string){
-    const element = document.getElementById(elem)
+  scrollTo(elem: string) {
+    const element = document.getElementById(elem);
     element?.scrollIntoView();
   }
 

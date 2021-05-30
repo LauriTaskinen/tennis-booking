@@ -38,6 +38,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.deleteOldBookings();
     // let dataSamples: ItemModel[] ;
     //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }
@@ -55,17 +56,13 @@ export class AdminComponent implements OnInit, OnDestroy {
           return compare(a.name, b.name, isAsc);
         case 'date':
           return compare(a.date, b.date, isAsc);
+        case 'time':
+          return compare(a.time, b.time, isAsc);
         default:
           return 0;
       }
     });
     console.log(data);
-  }
-
-  dateMonthAgo(): Date {
-    let date = new Date();
-    date.setDate(date.getDate() - 30);
-    return date;
   }
 
   getAllUsers() {
@@ -97,7 +94,6 @@ export class AdminComponent implements OnInit, OnDestroy {
           allbookings.push({
             name: match.name,
             email: match.email,
-            // phone: match.phone,
             id: booking.payload.doc.data().id,
             time: booking.payload.doc.data().time,
             date: booking.payload.doc.data().date,
@@ -112,8 +108,9 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   /*poistaa vanhentuneet postaukset aina kun uusia aiotaan luoda,
     Näin tietokanta ei pääse koskaan paisumaan*/
-  //deleteOldBookings() {
-  // this.book.getOldBookings(this.dateMonthAgo());
+  deleteOldBookings() {
+    this.book.deleteOldBookings(this.book.dateMonthAgo());
+  }
 
   //let mydata = this.book.getPersonalBookings().get();
   // console.log(mydata.subscribe());
