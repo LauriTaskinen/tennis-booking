@@ -19,6 +19,8 @@
 
     <div *ngIf="permissionsError === false" id="all-bookings-table" >
       <h2 class="h2"> Kaikki varaukset</h2>
+      
+      <!--Sorting toteutettu angular marerial-aineiston mukaisesti-->
       <table matSort (matSortChange)="sortData($event)">
 
         <tr>

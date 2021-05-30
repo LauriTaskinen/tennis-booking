@@ -58,3 +58,6 @@ Eeva:
 Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
 Lähteet:
+
+Admin-datan käsittelyssä hyödynnetty:
+https://material.angular.io/components/sort/overview

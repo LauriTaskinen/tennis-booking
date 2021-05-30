@@ -10,7 +10,9 @@ import { AuthService } from '../auth.service';
 })
 export class SignInComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) {}
-
+  name = '';
+  email = '';
+  password = '';
   ngOnInit(): void {}
 
   onSubmit(data: NgForm) {
@@ -20,7 +22,6 @@ export class SignInComponent implements OnInit {
       data.value.salasana
     );
     data.resetForm();
-    this.router.navigate(['login']);
-    //tämän jälkeen snackbar-viesti, että nyt voit kirjautua
+    // this.router.navigate(['login']);
   }
 }
