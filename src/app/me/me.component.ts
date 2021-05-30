@@ -41,7 +41,6 @@ export class MeComponent implements OnInit, OnDestroy {
       .getPersonalBookings()
       .subscribe((bookings: any) => {
         this.mybookings = bookings;
-        this.cache.saveBookings(bookings);
       });
   }
 

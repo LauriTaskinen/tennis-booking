@@ -45,20 +45,21 @@ export class NavbarComponent implements OnInit {
     desktopView: true,
   };
 
-  currentName : string | void;
-  
-  constructor(public router: Router, public auth: AuthService, public cache: CacheService ) {
+
+  constructor(
+    public router: Router,
+    public auth: AuthService,
+    public cache: CacheService
+  ) {
     /* joissain tilanteissa auth.user.name ei ole käytettävissä välittömästi tai lainkaan (esim. sivun päivitys)
     ja siinä tapauksessa haemme tiedon cachesta. */
-    this.currentName = undefined;
+   
   }
 
   logOutMethod() {
     this.auth.logOut();
- 
   }
   ngOnInit(): void {
-    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
 
   }
 }

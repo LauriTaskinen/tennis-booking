@@ -1,5 +1,5 @@
 <section id="login" fxLayout="column" fxLayoutAlign="center">
-  <mat-card class="example-card">
+  <mat-card class="welcome-card">
     <div class="container">
       <mat-card-header fxLayoutAlign="center">
         <h1 class="h1">Tervetuloa Tennis Booking sivustolle!</h1>
@@ -16,20 +16,43 @@
 
   </mat-card>
 
-  <mat-card class="example-card">
-    <mat-card-header fxLayoutAlign="center">
+  <div *ngIf="" id="login">
+    <mat-card class="login-card">
 
-      <h1 class="h1">Varaa kenttä</h1>
-    </mat-card-header>
-    <mat-card-content fxLayoutAlign="center">
-      <p class="p">Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.</p>
-    </mat-card-content>
-    <mat-card-content fxLayoutAlign="center">
-      <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
-        (click)="openDialog()">Kirjaudu
-        sisään</button>
-      <br>
-    </mat-card-content>
+      <mat-card-header fxLayoutAlign="center">
 
-  </mat-card>
+        <h1 class="h1">Varaa kenttä</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <p class="p">Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.</p>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
+          (click)="openDialog()">Kirjaudu
+          sisään</button>
+        <br>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+  <div *ngIf="auth.isCacheValid" id="login">
+    <mat-card class="booking-card">
+
+      <mat-card-header fxLayoutAlign="center">
+
+        <h1 class="h1">Varaa kenttä</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <p class="p">Siirry varauksiin täältä</p>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
+          (click)="goToBooking()">Kirjaudu
+          sisään</button>
+        <br>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
 </section>
