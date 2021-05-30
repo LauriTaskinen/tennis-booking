@@ -44,7 +44,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     // let dataSamples: ItemModel[] ;
     //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }
-  //Sorting toteutettu angular material -esimerkin mukaisesti.
+
+  //Sorting toteutettu angular material -esimerkin mukaisesti myös logiikan osalta.
   sortData(sort: Sort) {
     const data = this.allbookings.slice();
     if (!sort.active || sort.direction === '') {

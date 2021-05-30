@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit {
     public auth: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.saveGoogleUser();
+  }
 
   openDialog() {
     this.dialog.open(LoginDialogComponent);

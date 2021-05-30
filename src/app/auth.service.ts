@@ -75,13 +75,14 @@ export class AuthService {
         };
         this.updateUser(userInfo.id, userInfo);
       })
-      .then(() =>
+      .then(() => {
         this.snackbar.open(
           'Rekisteröinti onnistui! Voit nyt kirjautua sisään.',
           'sulje',
           { duration: 3000 }
-        )
-      )
+        );
+        this.router.navigate(['login'])
+      })
       .catch((error) => {
         console.log(error.message);
         this.snackbar.open('Rekisteröinti epäonnistui', 'sulje', {
@@ -123,14 +124,18 @@ export class AuthService {
       });
   }
 
-  doGoogleLogin() {
+  GoogleLogin() {
     //return new Promise<any>((resolve, reject) => {
     let provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth().signInWithRedirect(provider);
     // provider.addScope('profile');
     // provider.addScope('email');
+  }
 
-    return this.auth
-      .signInWithPopup(provider)
+  saveGoogleUser(): void {
+    firebase
+      .auth()
+      .getRedirectResult()
       .then((userData) => {
         return (this.user = {
           id: userData.user!.uid,
@@ -141,11 +146,13 @@ export class AuthService {
       .then((user) => {
         this.updateUser(this.user!.id, this.user!);
         this.cache.saveUser(user);
-        this.router.navigate(['booking']);
         this.dialog.closeAll();
         console.log(this.user!.id);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        this.router.navigate(['login']);
+        console.log(error);
+      });
   }
 
   updateUser(userID: string, userInfo: User) {
