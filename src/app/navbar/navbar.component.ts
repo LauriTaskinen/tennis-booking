@@ -47,10 +47,10 @@ export class NavbarComponent implements OnInit {
 
   currentName : string | void;
   
-  constructor(public router: Router, private auth: AuthService, public cache: CacheService ) {
+  constructor(public router: Router, public auth: AuthService, public cache: CacheService ) {
     /* joissain tilanteissa auth.user.name ei ole käytettävissä välittömästi tai lainkaan (esim. sivun päivitys)
     ja siinä tapauksessa haemme tiedon cachesta. */
-    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
+    this.currentName = undefined;
   }
 
   logOutMethod() {
@@ -58,6 +58,7 @@ export class NavbarComponent implements OnInit {
  
   }
   ngOnInit(): void {
+    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
 
   }
 }
