@@ -2,7 +2,7 @@
   <div class="container ">
     <mat-card class="mybookings">
       <mat-card-header>
-        <mat-card-title class="greeting">Hei {{cache.currentUserName}}!</mat-card-title>
+        <mat-card-title class="greeting">Hei {{currentName}}!</mat-card-title>
       </mat-card-header>
 
 
@@ -14,7 +14,7 @@
           <!-- Date Column -->
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Päivä </th>
-            <td mat-cell *matCellDef="let booking"> {{booking.payload.doc.data().date}} </td>
+            <td mat-cell *matCellDef="let booking"> {{book.formatBookingDate(booking.payload.doc.data().date)}} </td>
           </ng-container>
           <!-- Time Column -->
           <ng-container matColumnDef="time">

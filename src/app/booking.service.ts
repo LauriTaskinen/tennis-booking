@@ -1,4 +1,3 @@
-import { identifierModuleUrl, NodeWithI18n } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
@@ -21,10 +20,8 @@ export class BookingService {
   ) {
     this.users;
     this.allData;
-    this.currentDate = this.formatBookingDate(new Date());
-    this.currentUser = this.auth.user?.id
-      ? this.auth.user!.id
-      : this.cache.currentUserID;
+    this.currentDate = this.formatBookingDate(new Date().toLocaleDateString('en-US'));
+    this.currentUser = this.cache.currentUserID;
   }
 
   //https://softauthor.com/firebase-get-user-data-by-uid/
@@ -47,7 +44,7 @@ export class BookingService {
           .where(
             'date',
             '>=',
-            new Date().toLocaleDateString('en-GB').split('.').toString()
+            new Date().toLocaleDateString('en-US').toString()
           )
       )
       .snapshotChanges();
@@ -69,8 +66,11 @@ export class BookingService {
       .catch((error) => console.log(error));
   }
 
-  formatBookingDate(date: Date): string {
-    return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+  formatBookingDate(date: string ): string {
+    const day = date.substring(date.indexOf('/')+1, date.lastIndexOf('/'));
+    const month = date.substring(0, date.indexOf('/'));
+    const year = date.substring(date.lastIndexOf('/'), 9);
+    return `${day}/${month}${year}`
   }
   // getOldBookings(date: Date) {
   //   return this.store.collection('Bookings', (ref) =>

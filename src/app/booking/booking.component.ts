@@ -40,19 +40,14 @@ export class BookingComponent implements OnInit, OnDestroy {
   dateChanged($event: { target: { value: Date } }): void {
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
-
     this.getTimeSlots(
-      this.dateChosen.toLocaleDateString('en-GB').split('.').toString()
+      this.dateChosen.toLocaleDateString('en-US')
     );
-
-    //myBookings.push($event.target.value);
   }
   // tässä parametrinä kellonaika, eli slot on esim 12-14 (this.slot3). Määritetty html templaatissa
   pickTime(slot: string): void {
     // muuttuja timeChosen saa nyt arvokseen slotin arvon eli vaikka 12-14
     this.timeChosen = slot;
-
-    console.log(slot);
   }
 
   // dateBooked(): boolean {
@@ -79,7 +74,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   // dokumentin sisään avaimen arvoksi.
 
   confirmBooking() {
-    let date = this.dateChosen.toLocaleDateString('en-GB').split('.');
+    let date = this.dateChosen.toLocaleDateString('en-US').split('.');
     this.book
       .createBooking({
         id: this.cache.getItem('currentUserID'),
@@ -91,7 +86,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
     // this.timeSlots.updateSlots(this.dateChosen.toString(), this.timeSlot);
     console.log('booked!');
-    //"lomakkeen" nollaus
+    window.scroll(0, 0);
   }
 
   //hakee kaikki varaukset ja asettaa timeslot-muuttujaan ne, jotka koskevat parametriä annettua päivää.
@@ -101,6 +96,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       .subscribe((bookings: any) => {
         this.timeSlot = [];
         this.maxBookingLimit = false;
+        this.scrollTo('choose-time')
         for (const booking of bookings) {
           if (booking.payload.doc.data().date === date) {
             this.timeSlot.push({
@@ -112,13 +108,13 @@ export class BookingComponent implements OnInit, OnDestroy {
               this.cache.currentUserID
             ) {
               this.maxBookingLimit = true;
-              console.log('you already booked this date!');
-            } 
+              this.scrollTo('max-limit-reached')
+            }
           }
 
           // this.fullyBookedDates
         }
-        console.log(this.timeSlot);
+
         return this.timeSlot;
       });
   }
@@ -127,8 +123,14 @@ export class BookingComponent implements OnInit, OnDestroy {
     return this.timeSlot.some((s: any) => s.time === slot);
   }
 
+  scrollTo(elem: string){
+    const element = document.getElementById(elem)
+    element?.scrollIntoView();
+  }
+
   ngOnInit(): void {
     console.log(this.dateChosen);
+
     // this.dateBooked();
   }
   ngOnDestroy(): void {
