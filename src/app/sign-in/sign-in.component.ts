@@ -18,7 +18,6 @@ export class SignInComponent implements OnInit {
       data.value.nimi,
       data.value.sahkoposti,
       data.value.salasana
-      // data.value.puhelin,
     );
     data.resetForm();
     this.router.navigate(['login']);
