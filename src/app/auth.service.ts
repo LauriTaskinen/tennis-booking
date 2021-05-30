@@ -63,7 +63,9 @@ export class AuthService {
     this.errorMessage = true;
   }
 
-  // Send email verification when new user sign up
+  // Lähettää sähköpostiin vahvistusviestin
+  // apukirjastona käytetty https://www.positronx.io/send-verification-email-new-user-firebase-angular/
+
   SendVerificationMail() {
     return (
       this.auth.currentUser
