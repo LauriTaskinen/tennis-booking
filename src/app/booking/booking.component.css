@@ -13,10 +13,12 @@
 i {
   cursor: pointer;
 }
-.p {
+p {
   font-size: 1rem;
-  color: white;
+  font-weight: 400;
+  color: #0d2e30;
 }
+
 .fade {
   color: black;
 }
@@ -32,6 +34,16 @@ i {
 .booking {
   max-width: 100%;
   margin-top: 0.5%;
-  background-color: rgb(248, 164, 9);
+
   margin-bottom: 10%;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  min-height: 40vh;
+}
+
+.bold{
+  font-weight: 600;
 }

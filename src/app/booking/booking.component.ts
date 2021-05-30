@@ -14,7 +14,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   minDate: Date = new Date(); // määrittää ettei nykyistä päivämäärää aikaisempia aikoja voi valita datepickerillä
   touchUi = true; //datepickerissä kosketuisnäytöille sopiva näkymä
   dayChosen = false; // tämä vaikuttaa vain siihen tuleeko kellonaikojen valinta näkyviin HTML-templaatissa
-  timeChosen = '';  // kertoo tämänhetkisen valitun slotin
+  timeChosen = ''; // kertoo tämänhetkisen valitun slotin
   dateChosen: Date; //valitsee päivän
   fullyBookedDates = []; //kun päivä on varattu kokonaan se siirretään tänne
   maxBookingLimit = false; //käyttäjä saa tehdä vain yhden varauksen per päivä ja silloin tästä tulee true
@@ -47,16 +47,8 @@ export class BookingComponent implements OnInit, OnDestroy {
     this.timeChosen = timeSlot;
   }
 
-  // tämä metodi laukaisee kaksi metodia
-
-  // 1) booking.servicessä createBooking-metodin
-  // ja lisää tietokantaan dokumenttin joka sisältää objektina nimen, säköpostiosoitteen,
-  // päivämäärän ja valitun ajan.
-
-  // 2) bookingslots.servicessä updateSlots-metodin joka lisää funktion parametreiksi
-  // valitun päivän (tulee dokumentin nimeksi), sekä valitun kellonajan joka menee
-  // dokumentin sisään avaimen arvoksi.
-
+  /* booking.service kutsuu createBooking-metodia ja lisää tietokantaan dokumenttin joka sisältää objektina nimen,
+   säköpostiosoitteen, päivämäärän ja valitun ajan.*/
   confirmBooking() {
     let date = this.dateChosen.toLocaleDateString('en-US');
     this.book
@@ -96,10 +88,7 @@ export class BookingComponent implements OnInit, OnDestroy {
               this.maxBookingLimit = true;
             }
           }
-
-          // this.fullyBookedDates
         }
-
         return this.timeSlot;
       });
   }

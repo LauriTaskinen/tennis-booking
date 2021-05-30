@@ -12,9 +12,17 @@ i {
 .h2 {
   padding-top: 0vh;
 }
-.p {
+.text-column{
   font-size: 1.5vh;
+  display:flex;
+  flex-direction: column;
+  min-height: 20vh;
 }
+
+.text-column >p{
+  display: block;
+}
+
 .greeting {
   font-size: 1.5vh;
 }
