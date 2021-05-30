@@ -5,6 +5,7 @@ import { Subject, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingData } from '../bookingdata';
 import { Sort } from '@angular/material/sort';
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -22,8 +23,8 @@ export class AdminComponent implements OnInit, OnDestroy {
   columnsToDisplay = ['name', 'date', 'time'];
   sortedData: BookingData[];
   permissionsError: any;
+  date: any;
 
-  // private auth: AuthService
   constructor(public book: BookingService, private auth: AuthService) {
     this.currentUserID = this.auth.userState ? this.auth.user!.id : '';
     this.currentDate = book.currentDate;
@@ -35,6 +36,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.data = new MatTableDataSource<any>(this.allbookings);
     this.sortedData = this.allbookings;
     this.permissionsError = null;
+    this.date;
   }
 
   ngOnInit() {

@@ -59,6 +59,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AdminComponent } from './admin/admin.component';
+import { TableFilterPipe } from './admin/table-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { AdminComponent } from './admin/admin.component';
     SignInComponent,
     LoginDialogComponent,
     AdminComponent,
+    TableFilterPipe,
   ],
   imports: [
     AppRoutingModule,
