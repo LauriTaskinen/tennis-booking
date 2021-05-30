@@ -5,7 +5,7 @@ import { Subject, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingData } from '../bookingdata';
 import { Sort } from '@angular/material/sort';
-
+import { TableFilterPipe } from './table-filter.pipe';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -25,7 +25,11 @@ export class AdminComponent implements OnInit, OnDestroy {
   permissionsError: any;
 
   // private auth: AuthService
-  constructor(public book: BookingService, private auth: AuthService) {
+  constructor(
+    public book: BookingService,
+    private auth: AuthService,
+    public tableFP: TableFilterPipe
+  ) {
     this.currentUserID = this.auth.userState ? this.auth.user!.id : '';
     this.currentDate = book.currentDate;
     this.currentUserName = this.auth.userState ? this.auth.user!.name! : '';

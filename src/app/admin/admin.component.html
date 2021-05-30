@@ -17,7 +17,7 @@
       <p>Sinulla ei ole oikeuksia tähän näkymään</p>
     </div>
 
-    <div *ngIf="permissionsError === false" id="all-bookings-table" >
+    <div *ngIf="permissionsError === false" id="all-bookings-table">
       <h2 class="h2"> Kaikki varaukset</h2>
       <table matSort (matSortChange)="sortData($event)">
 
