@@ -45,9 +45,12 @@ export class NavbarComponent implements OnInit {
     desktopView: true,
   };
 
+  currentName : string | void;
   
   constructor(public router: Router, private auth: AuthService, public cache: CacheService ) {
-
+    /* joissain tilanteissa auth.user.name ei ole käytettävissä välittömästi tai lainkaan (esim. sivun päivitys)
+    ja siinä tapauksessa haemme tiedon cachesta. */
+    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
   }
 
   logOutMethod() {

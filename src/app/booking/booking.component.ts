@@ -17,7 +17,8 @@ export class BookingComponent implements OnInit, OnDestroy {
   timeChosen = '';
   dateChosen: Date; //valitsee päivän
   booked = 'Varattu';
-  // maxBookingLimit: boolean;
+  fullyBookedDates = [];
+  maxBookingLimit = false;
 
   slots = ['08-10', '10-12', '12-14', '14-16', '16-18', '18-20'];
 
@@ -37,15 +38,12 @@ export class BookingComponent implements OnInit, OnDestroy {
   }
 
   dateChanged($event: { target: { value: Date } }): void {
-    //console.log($event);
     this.dateChosen = $event.target.value;
     this.dayChosen = true;
 
     this.getTimeSlots(
       this.dateChosen.toLocaleDateString('en-GB').split('.').toString()
     );
-
-    // this.maxBookingLimit = false;
 
     //myBookings.push($event.target.value);
   }
@@ -58,16 +56,16 @@ export class BookingComponent implements OnInit, OnDestroy {
   }
 
   // dateBooked(): boolean {
-    // this.book.getPersonalBookings().subscribe((bookings) => {
-    //   console.log(bookings);
-      // bookings.forEach((booking: any) => {
-      //   if (this.dateChosen === booking.payload.doc.data()) {
-      //     return true;
-      //   } else {
-      //     return true;
-    //   //   }
-    // });
-    // });
+  // this.book.getPersonalBookings().subscribe((bookings) => {
+  //   console.log(bookings);
+  // bookings.forEach((booking: any) => {
+  //   if (this.dateChosen === booking.payload.doc.data()) {
+  //     return true;
+  //   } else {
+  //     return true;
+  //   //   }
+  // });
+  // });
   // }
 
   // tämä metodi laukaisee kaksi metodia
@@ -81,13 +79,13 @@ export class BookingComponent implements OnInit, OnDestroy {
   // dokumentin sisään avaimen arvoksi.
 
   confirmBooking() {
-
     let date = this.dateChosen.toLocaleDateString('en-GB').split('.');
-    this.book.createBooking({
-      id: this.cache.getItem('currentUserID'),
-      date: date.toString(),
-      time: this.timeChosen,
-    })
+    this.book
+      .createBooking({
+        id: this.cache.getItem('currentUserID'),
+        date: date.toString(),
+        time: this.timeChosen,
+      })
       .catch((error) => console.log(error));
     //jos error niin 'oops'-dialog!
 
@@ -102,13 +100,23 @@ export class BookingComponent implements OnInit, OnDestroy {
       .getAllBookings()
       .subscribe((bookings: any) => {
         this.timeSlot = [];
+        this.maxBookingLimit = false;
         for (const booking of bookings) {
           if (booking.payload.doc.data().date === date) {
             this.timeSlot.push({
               time: booking.payload.doc.data().time,
               date: booking.payload.doc.data().date,
             });
+            if (
+              booking.payload.doc.data().id === this.auth.user?.id ||
+              this.cache.currentUserID
+            ) {
+              this.maxBookingLimit = true;
+              console.log('you already booked this date!');
+            } 
           }
+
+          // this.fullyBookedDates
         }
         console.log(this.timeSlot);
         return this.timeSlot;
