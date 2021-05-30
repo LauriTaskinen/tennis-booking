@@ -27,6 +27,7 @@
             perusteella. Voit
             myös valita yksittäisiä päiviä tarkastellaksesi päivän varauksia.</p>
 
+
           <div class="form-group">
             <strong>VALITSE PÄIVÄ</strong>
             <select class="form-control" [(ngModel)]="date">
@@ -39,6 +40,7 @@
           </div>
 
           <br /><br />
+
           <!--Sorting toteutettu angular marerial-aineiston mukaisesti-->
           <table matSort (matSortChange)="sortData($event)">
             <tr>

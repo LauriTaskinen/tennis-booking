@@ -6,11 +6,11 @@
       </mat-card-header>
 
 
-      <h2 class="h2"> Omat varaukseni</h2>
+      <h2 class="h2"> OMAT VARAUKSESI </h2>
       <mat-card-content *ngIf="mybookings !== null && mybookings.length > 0" fxLayoutAlign="center">
 
         <table mat-table [dataSource]="mybookings" class="mat-elevation-z8">
-          <!-- <div *ngIf="booking.payload.doc.data().date >= currentDate"> -->
+          
           <!-- Date Column -->
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef> Päivä </th>

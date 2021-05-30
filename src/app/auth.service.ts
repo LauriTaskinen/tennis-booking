@@ -14,6 +14,7 @@ import {
 } from '@angular/fire/firestore';
 import 'firebase/auth';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,6 +22,7 @@ export class AuthService {
   userState: Promise<any> | null;
   user: User | null;
   errorMessage: boolean = false;
+
   // user: Observable<any>;
 
   constructor(
@@ -53,6 +55,7 @@ export class AuthService {
         console.log('no user');
       }
     });
+
   }
 
   // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
@@ -207,6 +210,21 @@ export class AuthService {
       .set(userInfo)
       .catch((error) => console.log(error));
   }
+
+  // validUser(userID: any): boolean {
+  //   let isValid = false;
+  //   if (typeof userID === 'string' && userID.length > 10) {
+  //     this.store
+  //       .collection('Users')
+  //       .doc(userID)
+  //       .snapshotChanges()
+  //       .subscribe((user) => {
+  //         user.payload.id === userID ? (isValid = true) : (isValid = false);
+  //       });
+  //   }
+  //   console.log(isValid)
+  //   return isValid;
+  // }
 }
 
 //this.router.navigate(['booking']);
