@@ -36,7 +36,7 @@
     </mat-card>
   </div>
 
-  <div *ngIf="auth.isCacheValid" id="login">
+  <div *ngIf="auth.user?.id || cache.currentUserID" id="login">
     <mat-card class="booking-card">
 
       <mat-card-header fxLayoutAlign="center">
