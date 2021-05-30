@@ -1,6 +1,6 @@
-/* Välimuistia käytetään mm. angular/firebase refresh -ongelman kiertämiseksi. 
+/* Välimuistia käytetään angular/firebase refresh -ongelman kiertämiseksi. 
   Ongelma syntyy päivittäessä sivua, jolloin auth-tila nollaantuu. Näin ei pitäisi 
-  käydä firebasen ohjeistuksien mukaan. 
+  siis käydä. 
 
   Tuomalla käyttäjän tiedot välimuistiin mahdollistetaan kirjautumistilan pysyvyys, 
   kunnes käyttäjä painaa kirjaudu ulos painiketta, myös silloin kun selain suljetaan.
@@ -28,7 +28,6 @@ export class CacheService {
     let currentUser = user;
     localStorage.setItem('currentUserID', currentUser!.id);
     localStorage.setItem('currentUserName', currentUser!.name);
-    localStorage.setItem('currentUserEmail', currentUser!.email);
     console.log('userdata set in cache');
   }
 
