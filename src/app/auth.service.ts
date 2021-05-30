@@ -26,7 +26,7 @@ export class AuthService {
   // user: Observable<any>;
 
   constructor(
-    private auth: AngularFireAuth,
+    public auth: AngularFireAuth,
     private router: Router,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
@@ -63,6 +63,19 @@ export class AuthService {
     this.errorMessage = true;
   }
 
+  // Send email verification when new user sign up
+  SendVerificationMail() {
+    return (
+      this.auth.currentUser
+        .then((user) => {
+          this.router.navigate(['login']);
+          return user!.sendEmailVerification();
+        })
+        // .then(()=>)//Dialog? snackbar?
+        .catch((error) => console.log(error))
+    );
+  }
+
   signUp(name: string, email: string, password: string): void {
     this.auth
       .createUserWithEmailAndPassword(email, password)
@@ -74,29 +87,43 @@ export class AuthService {
           id: userData.user!.uid,
           name: name,
           email: email,
+
           //phone: phone,
         };
         this.updateUser(userInfo.id, userInfo);
       })
       .then(() => {
         this.snackbar.open(
-          'Rekisteröinti onnistui! Voit nyt kirjautua sisään.',
+          'Rekisteröinti onnistui! Vahvista vielä sähköpostiosoitteesi ja kirjaudu sisään.',
           'sulje',
-          { duration: 3000 }
+          { duration: 5000 }
         );
         this.router.navigate(['login']);
       })
       .catch((error) => {
         console.log(error.message);
-        this.snackbar.open('Rekisteröinti epäonnistui', 'sulje', {
-          duration: 3000,
-        });
-      });
+        this.snackbar.open(
+          'Rekisteröinti epäonnistui. Yritä uudelleen.',
+          'sulje',
+          {
+            duration: 4000,
+          }
+        );
+      })
+      .finally(() => this.SendVerificationMail());
   }
+
   logIn(email: string, password: string): void {
     this.auth
       .signInWithEmailAndPassword(email, password)
       .then((userData) => {
+        if (!userData.user?.emailVerified) {
+          this.SendVerificationMail();
+          window.alert(
+            'Melkein valmista! Käy vielä vahvistamassa sähköpostiosoitteesi ennen kirjautumista'
+          );
+          throw new Error('Email verification missing');
+        }
         return (this.user = {
           id: userData.user!.uid,
           name: userData.user!.displayName,
@@ -114,6 +141,7 @@ export class AuthService {
         this.openAlert();
       });
   }
+
   logOut(): void {
     this.auth
       .signOut()

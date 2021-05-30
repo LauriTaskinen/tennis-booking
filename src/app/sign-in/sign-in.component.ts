@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sign-in.component.css'],
 })
 export class SignInComponent implements OnInit {
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, public auth: AuthService) {}
   name = '';
   email = '';
   password = '';
