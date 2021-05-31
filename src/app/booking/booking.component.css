@@ -1,8 +1,8 @@
-#booking{
+#booking {
   margin-bottom: 3vh;
 }
 
-.booking{
+.booking {
   padding-top: 4vh;
 }
 
@@ -15,7 +15,7 @@
 
 .confirm {
   margin: 0.3rem;
-  width: 60%;
+  width: 80%;
   font-size: 1.4rem;
 }
 
@@ -36,7 +36,6 @@ p {
 .fade {
   color: black;
 }
-
 
 .h2 {
   font-size: 1.4em;
@@ -61,6 +60,21 @@ p {
   width: 60%;
   font-size: 1.4rem;
   background-color: #cb5223;
+  color: #ffffff;
+}
+.mat-button-toggle {
+  background-color: #cb5223;
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+.mat-button-toggle-disabled {
+  background-color: grey;
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
   color: #ffffff;
 }
 .confirmButton {
@@ -94,12 +108,6 @@ p {
     margin-bottom: 0px;
   }
 
-  .h2 {
-    font-size: 1.2em;
-    color: #174d50;
-    padding: 2vh;
-    padding-right: 11vw;
-  }
   .error {
     font-weight: 500;
     text-transform: uppercase;
@@ -107,4 +115,10 @@ p {
     color: rgb(201, 43, 4);
     text-align: center;
   }
+}
+.timeChosen {
+  color: #cb5223;
+}
+.confirmText {
+  font-size: 1.5rem;
 }

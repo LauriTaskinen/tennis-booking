@@ -40,13 +40,13 @@ sekä Angular Flex Layoutia-->
 
       <div *ngIf="dayChosen && !maxBookingLimit" id="choose-time">
         <mat-card-content fxLayoutAlign="center">
-          <h3>Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</h3>
+          <p class="confirmText">Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</p>
         </mat-card-content>
         <mat-card-content>
           <mat-selection-list [multiple]="false">
             <mat-button-toggle-group fxLayout="column" fxLayoutAlign="space-evenly center">
-              <mat-button-toggle class="timeButtons" mat-stroked-button *ngFor="let slot of slots" [value]="slot"
-                (click)="pickTime(slot)" [disabled]="slotUnavailable(slot)">
+              <mat-button-toggle mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
+                [disabled]="slotUnavailable(slot)">
                 {{slot}}
               </mat-button-toggle>
             </mat-button-toggle-group>
@@ -54,7 +54,9 @@ sekä Angular Flex Layoutia-->
         </mat-card-content>
         <div *ngIf="timeChosen">
           <mat-card-content fxLayoutAlign="center">
-            <h3>Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong> {{timeChosen}} </strong></h3>
+            <p class="confirmText">Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong class="timeChosen">
+                {{timeChosen}} </strong>
+            </p>
           </mat-card-content>
           <mat-card-content fxLayoutAlign="center">
             <button mat-raised-button class="confirm" (click)="confirmBooking()"> Vahvista varaus
