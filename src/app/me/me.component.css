@@ -13,7 +13,6 @@ i {
 .h2 {
   font-size: 1.5em;
   color: #ffff;
-
 }
 
 .greeting {
@@ -41,8 +40,16 @@ i {
 .content {
   justify-content: center;
 }
+.mat-column-delete {
+  text-align: right;
+  justify-content: flex-end;
+}
 
-@media screen and (max-width: 400px) {
+.mat-column-time {
+  text-align: right;
+  justify-self: end;
+}
+@media screen and (max-width: 450px) {
   table {
     width: 100%;
   }
@@ -51,7 +58,7 @@ i {
     font-size: 0.8em;
   }
 
-  .h2{
+  .h2 {
     padding-top: 2vh;
     font-weight: 400;
     font-size: 1.2em;
@@ -59,10 +66,55 @@ i {
   }
 
   .tableHeadFont {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
   }
   .tableItemFont {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 360px) {
+  table {
+    width: 100%;
   }
 
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 300;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 0.7rem;
+  }
+  .tableItemFont {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 320px) {
+  table {
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 300;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 0.55rem;
+  }
+  .tableItemFont {
+    font-size: 0.55rem;
+  }
 }
