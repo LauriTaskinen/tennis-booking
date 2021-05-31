@@ -61,3 +61,6 @@ Lähteet:
 
 Admin-datan käsittelyssä hyödynnetty:
 https://material.angular.io/components/sort/overview
+
+Kuva:
+https://pixabay.com/fi/photos/tenniskentt%C3%A4-tennis-keltainen-443267/

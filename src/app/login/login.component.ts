@@ -12,6 +12,7 @@ import { CacheService } from '../cache.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  image = '../assets/tennis.jpg'
   constructor(
     private router: Router,
     public dialog: MatDialog,
