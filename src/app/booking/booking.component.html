@@ -3,6 +3,7 @@ sekä Angular Flex Layoutia-->
 
 <!--Halutaan että "omat varaukseni"-osio <app-me></app-me> näkyy aina samassa näkymässä kuin varauskalenteri,
    vaikka molemmat ovat erillisiä komponentteja-->
+<div id="top"></div>
 <app-me></app-me>
 
 <section id="booking" fxLayout="row" fxLayoutAlign="center">
@@ -40,11 +41,11 @@ sekä Angular Flex Layoutia-->
 
       <div *ngIf="dayChosen && !maxBookingLimit" id="choose-time">
         <mat-card-content fxLayoutAlign="center">
-          <p class="confirmText">Valitse haluamasi kellonaika ja vahvista varauksesi "Vahvista varaus painikkeesta"</p>
+          <p class="confirm-text">Valitse haluamasi kellonaika ja vahvista varauksesi</p>
         </mat-card-content>
         <mat-card-content>
-          <mat-selection-list [multiple]="false">
-            <mat-button-toggle-group fxLayout="column" fxLayoutAlign="space-evenly center">
+          <mat-selection-list [multiple]="false" fxLayoutAlign="center">
+            <mat-button-toggle-group>
               <mat-button-toggle mat-stroked-button *ngFor="let slot of slots" [value]="slot" (click)="pickTime(slot)"
                 [disabled]="slotUnavailable(slot)">
                 {{slot}}
@@ -52,24 +53,22 @@ sekä Angular Flex Layoutia-->
             </mat-button-toggle-group>
           </mat-selection-list>
         </mat-card-content>
-        <div *ngIf="timeChosen">
+        <div>
           <mat-card-content fxLayoutAlign="center">
-            <p class="confirmText">Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong class="timeChosen">
+            <p class="confirm-text">Varauksesi: {{dateChosen.toLocaleDateString()}} klo <strong class="timeChosen"
+                [hidden]="timeChosen === '0'">
                 {{timeChosen}} </strong>
             </p>
           </mat-card-content>
           <mat-card-content fxLayoutAlign="center">
-            <button mat-raised-button class="confirm" (click)="confirmBooking()"> Vahvista varaus
+            <button mat-raised-button class="confirm" id="confirm" (click)="confirmBooking()"> Vahvista varaus
             </button>
           </mat-card-content>
         </div>
       </div>
       <mat-card-content fxLayout="row" fxLayoutAlign="center">
-        <div *ngIf="maxBookingLimit === true" id="max-limit-reached">
-          <p class="error">Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee
-            ensin perua
-            tämänhetkinen
-            varauksesi <b>omat varaukseni</b>-näkymässä</p>
+        <div *ngIf="maxBookingLimit && dayChosen" id="max-limit-reached">
+          <p class="error">Olet tehnyt jo varauksen tälle päivälle.</p>
         </div>
       </mat-card-content>
     </mat-card>

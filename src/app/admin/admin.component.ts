@@ -41,6 +41,7 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.deleteOldBookings();
+    console.log(this.auth.user?.id)
     // let dataSamples: ItemModel[] ;
     //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }

@@ -9,7 +9,7 @@ Sovelluksen käyttäjä saapuu ensimmäisenä sisäänkirjautumisnäkymään, jo
 
 Sisäänkirjautumisen jälkeen käyttäjälle avautuu näkymä, jossa hän näkee kaikki omat varauksensa "Omat varaukset" -kohdasta ja tämän alapuolella on toinen näkymä josta on mahdollista tehdä uusi kenttävaraus. Uusi kenttävaraus tallentuu automaattisesti "Omat varaukset" -näkymään ja sieltä käyttäjän on myös mahdollista vielä perua tekemiään varauksia.
 
-Palvelun ylläpitäjällä on pääsy admin-näkymään, josta voi nähdä ja hallinnoida kaikkia sovellukseen tehtyjä varauksia.
+Palvelun ylläpitäjällä on pääsy admin-näkymään, josta voi tutkia ja suodattaa kaikkia sovellukseen tehtyjä varauksia. 
 
 ## Kuvaus teknologiosta
 
@@ -19,7 +19,7 @@ Lyhyehkö kuvaus eri teknologioiden käyttämisestä työssä.
 
 ## Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan:
 
-Mikäli haluat pääsyn admin-näkymään ole yhteydessä projektin tekijöihin niin luomme käyttäjällesi oikeudet admin-näkymään.
+Mikäli haluat pääsyn admin-näkymään ole meihin yhteydessä niin luomme käyttäjällesi oikeudet admin-näkymään.
 
 Projektin lataaminen GitHubista:
 
@@ -51,11 +51,14 @@ Eeva:
 
 Kuinka paljon käytit aikaa loppuharjoitustyön tekemiseen?
 
-Lauri:
+Arvoisin käyttäneeni noin 60 tuntia työn tekemiseen. Aikaa meni yllättävän paljon kertaamiseen, taustatyöhön (googlettamiseen), debuggaukseen ja yhteistyöhön. Yhdessä koodaminen etenkin oli vielä ihan uutta, joten se ehdottomasti muutti työtapoja jonkin verran ja näin ollen hieman hidasti tekemistä. 
 
-Eeva:
+Kuvittelimme, että säästäisimme aikaa Firebasen käytöllä, mutta sen ominaisuuksien, outouksien ja ennenkaikkea rajoituksien opetteluun ja hyväksymiseen meni todennäköisesti vähintään yhtä kauan kuin oman backendin tekemiseen olisi mennyt. Etenkin turvallisuussäännöt aiheutti turhautusta.
 
-Mitä tietoja/taitoja sinun tulee vielä kehittää?
+Työn tekemisen jälkeen ehdottomasti koen osaavani asiat nyt paremmin ja uskon, että pystyisin toteuttamaan saman tapaisen projektin todella paljon nopeammin tulevaisuudessa. 
+
+Haluan kehittyä lisää vielä kaikessa. Koen ymmärtäväni nyt hyvin perustoiminnan frontendistä ja aika hyvin myös backendistä,mutta syvempi osaaminen on ehdottomasti tavoitteena. Frontend etenkin kiinnostaa ja harmittaa, ettei ulkoasun suunnitelulle käytetty juuri aikaa koulutuksessa tai tässä työssä, joten sitä ehdottomasti aion vielä opiskella omalla ajalla. 
+
 
 Lähteet:
 

@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     {
       label: 'Omat varaukseni',
       icon: 'perm_identity',
-      path: 'booking#me',
+      path: 'booking',
       mobileView: false,
       tabletView: false,
       desktopView: true,

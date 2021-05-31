@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
 import { CacheService } from '../cache.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import User from '../user';
 
 @Component({
   selector: 'app-booking',
@@ -14,7 +16,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   minDate: Date = new Date(); // määrittää ettei nykyistä päivämäärää aikaisempia aikoja voi valita datepickerillä
   touchUi = true; //datepickerissä kosketuisnäytöille sopiva näkymä
   dayChosen = false; // tämä vaikuttaa vain siihen tuleeko kellonaikojen valinta näkyviin HTML-templaatissa
-  timeChosen = ''; // kertoo tämänhetkisen valitun slotin
+  timeChosen ='0'; // kertoo tämänhetkisen valitun slotin
   dateChosen: Date; //valitsee päivän
   fullyBookedDates = []; //kun päivä on varattu kokonaan se siirretään tänne
   maxBookingLimit = false; //käyttäjä saa tehdä vain yhden varauksen per päivä ja silloin tästä tulee true
@@ -26,7 +28,8 @@ export class BookingComponent implements OnInit, OnDestroy {
   constructor(
     private book: BookingService,
     private auth: AuthService,
-    private cache: CacheService
+    private cache: CacheService,
+    private snackbar: MatSnackBar
   ) {
     this.allBookingsSub = null;
     this.dateChosen = new Date();
@@ -44,24 +47,35 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   // pickTime parametrina kellonaika, eli slot on esim 12-14. Määritetty html-templaatissa.
   pickTime(timeSlot: string): void {
+    this.scrollTo('confirm');
     this.timeChosen = timeSlot;
   }
 
-  /* booking.service kutsuu createBooking-metodia ja lisää tietokantaan dokumenttin joka sisältää objektina nimen,
-   säköpostiosoitteen, päivämäärän ja valitun ajan.*/
+  /* booking.service lähettää nyt käyttäjän tiedot omaan collectioniin ja kutsuu createBooking-metodia
+   joka lähettää bookings-collectioniin dokumentin joka sisältää valitun päivämäärän ja valitun ajan.*/
   confirmBooking() {
+    this.dayChosen = false;
     let date = this.dateChosen.toLocaleDateString('en-US');
+    if (this.auth.user?.id !== null) {
+      this.auth.updateUser(this.auth.user!.id, this.auth.user!);
+    }
     this.book
       .createBooking({
-        id: this.cache.getItem('currentUserID'),
+        id: this.auth.user?.id,
         date: date.toString(),
         time: this.timeChosen,
       })
-      .catch((error) => console.log(error));
-    //jos error niin 'oops'-dialog!
-
-    console.log('booked!');
-    window.scroll(0, 0);
+      .then(() => {
+        window.scrollTo(0, -2);
+      })
+      .catch((error) => {
+        console.log(error);
+        this.snackbar.open(
+          'Oops! Ei onnistunut. Kirjaudu uudelleen sisään ja yritä uudestaan',
+          'OK',
+          { duration: 4000, panelClass: ['error-message'] }
+        );
+      });
   }
 
   /*getTimeSlots hakee kaikki varaukset ja asettaa timeslot-muuttujaan ne, jotka koskevat parametrina annettua päivää ja
@@ -72,7 +86,7 @@ export class BookingComponent implements OnInit, OnDestroy {
       .subscribe((bookings: any) => {
         this.timeSlot = [];
         this.maxBookingLimit = false;
-        this.scrollTo('choose-time');
+
         /*jos varausteidoissa esiintyy varauksia parametrina annetulla päivällä, ne asetetaan timeSlot-taulukkoon,
           joka säilyttää päivän varattuja aikoja eli slotteja*/
         for (const booking of bookings) {
@@ -86,6 +100,8 @@ export class BookingComponent implements OnInit, OnDestroy {
               booking.payload.doc.data().id === this.cache.currentUserID
             ) {
               this.maxBookingLimit = true;
+            } else {
+              // window.scrollTo(0,-2)
             }
           }
         }
@@ -107,7 +123,6 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.dateChosen);
-    window.scrollTo(0,0)
   }
 
   //Varmuuden vuoksi subscibet peruutetaan komponentin poistuessa, jotta muistivuodoilta vältyttäisiin.

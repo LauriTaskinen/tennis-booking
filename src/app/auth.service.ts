@@ -31,8 +31,12 @@ export class AuthService {
     };
     this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
-        // user.reload();
-        // console.log('user refresh')
+        console.log(user);
+        this.user = {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+        };
       } else {
         console.log('no user');
       }
@@ -46,7 +50,6 @@ export class AuthService {
 
   // Lähettää sähköpostiin vahvistusviestin
   // apukirjastona käytetty https://www.positronx.io/send-verification-email-new-user-firebase-angular/
-
   SendVerificationMail() {
     return (
       this.auth.currentUser
@@ -65,13 +68,16 @@ export class AuthService {
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         this.router.navigate(['login']);
-        window.alert(
-          'Linkki salasanan palauttamiseen on lähetetty sähköpostiisi, tarkista postilaatikkosi.'
+        this.snackbar.open(
+          'Linkki salasanan palauttamiseen on lähetetty sähköpostiisi, tarkistathan postilaatikkosi.'
         );
       })
-
-      .catch((error) => {
-        window.alert(error);
+      .catch(() => {
+        this.snackbar.open(
+          'Virhe on tapahtunut. Yritä myöhemmin uudestaan.',
+          '',
+          { duration: 4000 }
+        );
       });
   }
 
@@ -82,30 +88,22 @@ export class AuthService {
         userData.user?.updateProfile({
           displayName: name,
         });
-        let userInfo: User = {
-          id: userData.user!.uid,
-          name: name,
-          email: email,
-
-          //phone: phone,
-        };
-        this.updateUser(userInfo.id, userInfo);
       })
       .then(() => {
         this.snackbar.open(
           'Rekisteröinti onnistui! Vahvista vielä sähköpostiosoitteesi ja kirjaudu sisään.',
-          'sulje',
-          { duration: 5000 }
+          '',
+          { duration: 5000, panelClass: 'success' }
         );
-        this.router.navigate(['login']);
       })
       .catch((error) => {
         console.log(error.message);
         this.snackbar.open(
-          'Rekisteröinti epäonnistui. Yritä uudelleen.',
-          'sulje',
+          'Rekisteröinti epäonnistui. Tiedoissa puutteita.',
+          '',
           {
             duration: 4000,
+            panelClass: 'error-message',
           }
         );
       })
@@ -160,6 +158,10 @@ export class AuthService {
     return firebase.auth().signInWithRedirect(provider);
   }
 
+  /*Ensin authentikoidaan käyttäjä googlen ja firebasen avulla. Otetaan
+    tiedot sovelluksen käytettäviksi ja tallennetaan sitten vielä välimuistiin.
+    Virheenkäsittelyä ei ole, koska google-käyttäjää etsitään aina etusivulle tultaessa.
+    Turhia virheitä olisi siis liikaa.*/
   saveGoogleUser(): void {
     firebase
       .auth()
@@ -172,17 +174,16 @@ export class AuthService {
         });
       })
       .then((user) => {
+        console.log(user);
         this.updateUser(this.user!.id, this.user!);
         this.cache.saveUser(user);
         this.dialog.closeAll();
-        console.log(this.user!.id);
-      })
-      .catch((error) => {
-        this.router.navigate(['login']);
-        console.log(error);
       });
   }
 
+  /*päivittää käyttäjän tiedot tietokantaan. Google-authentikaation toiminnan vuoksi
+    koettiin helpommaksi päivittää käyttäjän tiedot aina kirjautuessa, koska emme tiedä
+    onko käyttäjä uusi vai ei*/
   updateUser(userID: string, userInfo: User) {
     this.store
       .collection('Users')
@@ -190,19 +191,4 @@ export class AuthService {
       .set(userInfo)
       .catch((error) => console.log(error));
   }
-
-  // validUser(userID: any): boolean {
-  //   let isValid = false;
-  //   if (typeof userID === 'string' && userID.length > 10) {
-  //     this.store
-  //       .collection('Users')
-  //       .doc(userID)
-  //       .snapshotChanges()
-  //       .subscribe((user) => {
-  //         user.payload.id === userID ? (isValid = true) : (isValid = false);
-  //       });
-  //   }
-  //   console.log(isValid)
-  //   return isValid;
-  // }
 }

@@ -21,13 +21,12 @@ export class MeComponent implements OnInit, OnDestroy {
     private auth: AuthService
   ) {
     this.personalBookingsSub = null;
-    this.mybookings = [];
+    this.mybookings =null;
     this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
   }
 
   ngOnInit(): void {
     this.getBookings();
-    console.log(this.mybookings);
   }
 
   dateMonthAgo(): Date {
@@ -45,7 +44,6 @@ export class MeComponent implements OnInit, OnDestroy {
   }
 
   cancelBooking(id: string) {
-    console.log(id);
     this.book.deleteBooking(id);
   }
 
