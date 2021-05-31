@@ -9,6 +9,7 @@ body {
 body {
   margin-left: 0.5%;
   margin-right: 0.5%;
+  margin-top: 0.5%;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
@@ -73,11 +74,22 @@ i {
 .greeting {
   font-size: 1.5rem;
 }
-.example-card {
+.welcome-card {
   max-width: 100%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 2%;
+  margin-top: 0.5%;
+  border: 1px solid #174d50;
+  border-radius: 8px;
+}
+
+.login-card {
+  max-width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0.5%;
+  border: 1px solid #174d50;
+  border-radius: 8px;
 }
 .loginButton {
   margin-bottom: 7%;
@@ -86,4 +98,29 @@ i {
   background-color: #174d50;
   color: white;
   font-size: 1.5rem;
+}
+.footer {
+  /*background-color: #dfff4f;   tämä on tennispallon väri*/
+  position: fixed;
+
+  width: 99%;
+  background-color: #174d50;
+  height: 6vh;
+  margin-bottom: 0.5%;
+
+  display: flex;
+  position: fixed;
+  bottom: 0;
+}
+
+.footerNames {
+  color: white;
+  font-size: 1em;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-shadow: 0px 0px 0px #000, 0px -1px 0px #000, 1px -1px 0px #000,
+    -1px 0px 0px #000, 1px 0px 0px #000, -1px 1px 0px #000, 0px 1px 0px #000,
+    1px 1px 0px #000;
+  margin-left: 20%;
 }

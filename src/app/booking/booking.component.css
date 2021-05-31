@@ -20,7 +20,7 @@ i {
   cursor: pointer;
 }
 p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
   color: #0d2e30;
 }
@@ -40,13 +40,16 @@ p {
 .booking {
   max-width: 100%;
   margin-top: 0.5%;
-
   margin-bottom: 10%;
+  border: 1px solid #174d50;
+  border-radius: 8px;
 }
 .timeButtons {
   margin: 0.3rem;
   width: 60%;
   font-size: 1.4rem;
+  background-color: #cb5223;
+  color: #ffffff;
 }
 .confirmButton {
   margin: 0.3rem;
