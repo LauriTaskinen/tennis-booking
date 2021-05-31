@@ -11,3 +11,10 @@
   font-size: 2.5vh;
   color: #174d50;
 }
+
+small{
+  display: block;
+  margin-top: 2vh;
+  padding: 2%;
+
+}
