@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookingData } from '../bookingdata';
 import { Sort } from '@angular/material/sort';
@@ -67,7 +67,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     });
     console.log(data);
   }
-
+  // hakee admin näkymään kaikki käyttäjät
   getAllUsers() {
     let allUsers: any[] = [];
     this.usersSub = this.book.getUsers().subscribe((users) => {
@@ -82,7 +82,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     console.log(id);
     this.book.deleteBooking(id);
   }
-
+  // hakee admin näkymään kaikki varaukset
   getAllData(users: any[]) {
     let allbookings: any[] = [];
     this.usersSub = this.book.getAllBookings().subscribe((bookings: any) => {

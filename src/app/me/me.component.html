@@ -1,3 +1,5 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-table / mat-button
+sekä Angular Flex Layoutia-->
 <section id="me" fxLayout="row" fxLayoutAlign="center">
   <div class="container ">
     <mat-card class="mybookings">
@@ -13,13 +15,13 @@
 
         <table mat-table [dataSource]="mybookings" class="mat-elevation-z8">
 
-          <!-- Date Column -->
+          <!-- Päivät sarake -->
           <ng-container matColumnDef="date">
             <th mat-header-cell *matHeaderCellDef class="tableHeadFont"> Päivä </th>
             <td mat-cell *matCellDef="let booking" class="tableItemFont">
               {{book.formatBookingDate(booking.payload.doc.data().date)}} </td>
           </ng-container>
-          <!-- Time Column -->
+          <!-- Aika Sarake -->
           <ng-container matColumnDef="time">
             <th mat-header-cell *matHeaderCellDef class="tableHeadFont"> Aika </th>
             <td mat-cell *matCellDef="let booking" class="tableItemFont"> {{booking.payload.doc.data().time}} </td>

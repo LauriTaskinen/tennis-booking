@@ -6,15 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CacheService } from './cache.service';
 import firebase from 'firebase/app';
 import User from './user';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/auth';
-
-
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +15,6 @@ export class AuthService {
   userState: Promise<any> | null;
   user: User | null;
   errorMessage: boolean = false;
-
-  // user: Observable<any>;
 
   constructor(
     public auth: AngularFireAuth,
@@ -33,15 +24,6 @@ export class AuthService {
     private cache: CacheService,
     private store: AngularFirestore
   ) {
-    // this.user = this.auth.authState.pipe(
-    //   switchMap((user) => {
-    //     if (user) {
-    //       return this.store.doc<any>(`bookings/${user.uid}`).valueChanges();
-    //     } else {
-    //       return of(null);
-    //     }
-    //   })
-    // );
     this.user = {
       id: '',
       name: '',
@@ -55,7 +37,6 @@ export class AuthService {
         console.log('no user');
       }
     });
-
   }
 
   // laukaisee virheilmoituksen väärästä käyttäjätunnuksesta tai salasanasta
@@ -77,7 +58,8 @@ export class AuthService {
         .catch((error) => console.log(error))
     );
   }
-
+  // Unohtuneen salasanan nollaus
+  // apukirjastona käytetty https://gist.github.com/codediodeio/3e3b5f5c3a2144702d009fd8cd510dbd
   ForgotPassword(passwordResetEmail: any) {
     return this.auth
       .sendPasswordResetEmail(passwordResetEmail)
@@ -171,13 +153,11 @@ export class AuthService {
         console.log(error.message);
       });
   }
-
+  // Sisäänkirjautuminen Google-tunnuksilla
+  // apukirjastona käytetty https://www.positronx.io/angular-firebase-google-login-auth-system-tutorial/
   GoogleLogin() {
-    //return new Promise<any>((resolve, reject) => {
     let provider = new firebase.auth.GoogleAuthProvider();
     return firebase.auth().signInWithRedirect(provider);
-    // provider.addScope('profile');
-    // provider.addScope('email');
   }
 
   saveGoogleUser(): void {
@@ -226,6 +206,3 @@ export class AuthService {
   //   return isValid;
   // }
 }
-
-//this.router.navigate(['booking']);
-//resolve(userData);

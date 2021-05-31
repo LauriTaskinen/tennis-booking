@@ -1,3 +1,5 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-toolbar / mat-icon / mat-button -->
+
 <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-around center" class="navbar">
   <a class="tennis" mat-button class="tennisbutton" href='#'><span fxFlex>Tennis booking</span></a>
 
@@ -10,14 +12,6 @@
       <mat-icon class="mr">{{logOutItem.icon}}</mat-icon>
       {{logOutItem.label}}
     </a>
-    <!--
-    <a mat-button [routerLink]="['/admin']" class="navbutton" [href]='adminItem.path' [fxShow]="adminItem.desktopView"
-      [fxShow.xs]="adminItem.mobileView" [fxShow.sm]="adminItem.tabletView">
-      <mat-icon class="mr">{{adminItem.icon}}</mat-icon>
-      {{adminItem.label}}
-    </a>
-    -->
-
     <a mat-button *ngFor="let item of navItems" class="navbutton" [href]='item.path' [fxShow]="item.desktopView"
       [fxShow.xs]="item.mobileView" [fxShow.sm]="item.tabletView">
       <mat-icon class="mr">{{item.icon}}</mat-icon>
@@ -44,4 +38,3 @@
 </mat-toolbar>
 
 <router-outlet></router-outlet>
-

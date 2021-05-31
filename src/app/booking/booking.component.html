@@ -1,4 +1,9 @@
- <app-me></app-me>
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-form / mat-button
+sekä Angular Flex Layoutia-->
+
+<!--Halutaan että "omat varaukseni"-osio <app-me></app-me> näkyy aina samassa näkymässä kuin varauskalenteri,
+   vaikka molemmat ovat erillisiä komponentteja-->
+<app-me></app-me>
 
 <section id="booking" fxLayout="row" fxLayoutAlign="center">
 
@@ -6,20 +11,21 @@
     <mat-card class="booking">
 
       <mat-card-header fxLayoutAlign="center" class="h2">
-       Tee uusi varaus
+        Tee uusi varaus
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
         <div class="instructions">
-        <p>1. Klikkaa kalenteria <mat-icon class="icon">event</mat-icon> aloittaaksesi varauksen tekeminen.<br><br> 2. Valitse
-          itsellesi sopiva päivä.
-          <br><br>
-          3. Varaa
-          sopiva aika vapaana olevista ajoista.<br><br><strong> HUOM! Voit varata maksimissaan yhden (1) vuoron/päivä.
-          </strong><br><br> 4. Vahvista vielä varauksesi klikkaamalla <strong>vahvista
-            varaus</strong>
-          -painikketta.<br><br><br>Tekemäsi varaukset siirtyvät <strong>Omat varaukseni</strong> -näkymään.
-        </p>
-      </div>
+          <p>1. Klikkaa kalenteria <mat-icon class="icon">event</mat-icon> aloittaaksesi varauksen tekeminen.<br><br> 2.
+            Valitse
+            itsellesi sopiva päivä.
+            <br><br>
+            3. Varaa
+            sopiva aika vapaana olevista ajoista.<br><br><strong> HUOM! Voit varata maksimissaan yhden (1) vuoron/päivä.
+            </strong><br><br> 4. Vahvista vielä varauksesi klikkaamalla <strong>vahvista
+              varaus</strong>
+            -painikketta.<br><br><br>Tekemäsi varaukset siirtyvät <strong>Omat varaukseni</strong> -näkymään.
+          </p>
+        </div>
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
         <!--Varauskalenterissa käytetty Angular materialin datepickeriä-->
@@ -58,7 +64,8 @@
       </div>
       <mat-card-content fxLayout="row" fxLayoutAlign="center">
         <div *ngIf="maxBookingLimit === true" id="max-limit-reached">
-          <p class="error">Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee ensin perua
+          <p class="error">Olet tehnyt jo varauksen tälle päivälle. Jos haluat vaihtaa varauksesi aikaa, sinun tulee
+            ensin perua
             tämänhetkinen
             varauksesi <b>omat varaukseni</b>-näkymässä</p>
         </div>

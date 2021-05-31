@@ -59,8 +59,27 @@ Mitä tietoja/taitoja sinun tulee vielä kehittää?
 
 Lähteet:
 
+Navigointipalkki:
+https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/
+
+Sähköpostiosoitteen vahvistaminen:
+https://www.positronx.io/send-verification-email-new-user-firebase-angular/
+
+Google-tunnuksilla kirjautuminen:
+https://www.positronx.io/angular-firebase-google-login-auth-system-tutorial/
+
 Admin-datan käsittelyssä hyödynnetty:
 https://material.angular.io/components/sort/overview
 
 Kuva:
 https://pixabay.com/fi/photos/tenniskentt%C3%A4-tennis-keltainen-443267/
+
+Angular Material:
+
+    Datepicker: https://material.angular.io/components/datepicker/overview
+    Button: https://material.angular.io/components/button/overview
+    Icons: https://material.angular.io/components/icon/overview
+    Toolbar: https://material.angular.io/components/toolbar/overview
+    Card: https://material.angular.io/components/card/overview
+    Table: https://material.angular.io/components/table/overvie
+    Dialog: https://material.angular.io/components/dialog/overview

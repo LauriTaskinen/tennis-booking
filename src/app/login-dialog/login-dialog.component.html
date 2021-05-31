@@ -1,6 +1,7 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-dialog / mat-form / mat-button-->
 <div class="container">
   <h1 mat-dialog-title>Kirjaudu sisään</h1>
-  <!-- <div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div> -->
+  <!-- Angular Material Dialog "ponnahdusikkuna" -->
   <div class="pop-up" mat-dialog-actions>
 
     <form id="login-form" #loginForm="ngForm" (ngSubmit)="logIn(loginForm)">
@@ -21,8 +22,6 @@
       <!--Tämä näkyy jos virheellinen käyttäjätunnus tai salasana -->
       <section *ngIf="auth.errorMessage">
         <em class="loginError">Virheellinen käyttäjätunnus tai salasana </em>
-        <!-- <button class="closeAlert" button
-           mat-mini-fab (click)="closeAlert()">x</button> -->
       </section>
 
       <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Lähetä</button>
@@ -41,7 +40,7 @@
 
       <p> tai kirjaudu sisään Google-tunnuksilla</p>
 
-      <!-- kutsuu googleAuth() AuthServicestä-->
+      <!-- kutsuu GoogleLogin() AuthServicestä-->
 
       <div class='g-sign-in-button' (click)="LogInWithGoogle()">
         <div class=content-wrapper>
