@@ -62,6 +62,7 @@ import { AdminComponent } from './admin/admin.component';
 import { TableFilterPipe } from './admin/table-filter.pipe';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FooterComponent } from './footer/footer.component';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { FooterComponent } from './footer/footer.component';
     TableFilterPipe,
     ResetPasswordComponent,
     FooterComponent,
+    PolicyComponent,
   ],
   imports: [
     AppRoutingModule,

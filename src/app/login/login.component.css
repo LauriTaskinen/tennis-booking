@@ -2,7 +2,7 @@
 
 .booking-card, .login-card {
   max-width: 100%;
-  height: 50vh;
+  height: 50%;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 0.5%;
@@ -14,10 +14,10 @@
 
 .welcome-card {
   max-width: 100%;
-  height: 50vh;
+  height: 50%;
   margin-left: 5%;
   margin-right: 5%;
-  margin-top: 0.5%;
+  margin-top: 1vh;
   border: 1px solid #174d50;
   border-radius: 8px;
   text-align: center;
@@ -45,6 +45,13 @@ small {
   font-size: 1rem;
   background-color: #dfff4f; 
   text-transform: uppercase;
+}
+
+.footer{
+  position: absolute;
+  width: 99%;
+  bottom: 0;
+  margin: auto;
 }
 
 @media screen and (max-width: 400px)  {

@@ -107,6 +107,7 @@ export class BookingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log(this.dateChosen);
+    window.scrollTo(0,0)
   }
 
   //Varmuuden vuoksi subscibet peruutetaan komponentin poistuessa, jotta muistivuodoilta vältyttäisiin.

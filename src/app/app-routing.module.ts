@@ -7,6 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { BookingGuard } from './booking.guard';
 import { AdminComponent } from './admin/admin.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PolicyComponent } from './policy/policy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'policy', component: PolicyComponent },
 ];
 
 @NgModule({
