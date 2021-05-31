@@ -1,12 +1,14 @@
 <section id="me" fxLayout="row" fxLayoutAlign="center">
   <div class="container ">
     <mat-card class="mybookings">
-      <mat-card-header>
-        <mat-card-title class="greeting">Hei {{currentName}}!</mat-card-title>
+      <mat-card-title class="greeting">Hei {{currentName}}!</mat-card-title>
+
+      <mat-card-header class="header">
+        <mat-card-title class="h2">
+          Omat varauksesi
+        </mat-card-title>
       </mat-card-header>
 
-
-      <h2 class="h2"> Omat varauksesi </h2>
       <mat-card-content *ngIf="mybookings !== null && mybookings.length > 0" fxLayoutAlign="center">
 
         <table mat-table [dataSource]="mybookings" class="mat-elevation-z8">

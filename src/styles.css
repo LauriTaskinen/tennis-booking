@@ -61,66 +61,31 @@ i {
 .fade {
   color: black;
 }
-.h1.h1 {
-  font-size: 3rem;
+
+h1.header {
+  font-size: 1.6rem;
   color: #174d50;
 }
+
+.greeting {
+  font-size: 1.5rem;
+}
+
 .h2 {
   padding-top: 0vh;
 }
 .p {
   font-size: 1.5rem;
-}
-.greeting {
-  font-size: 1.5rem;
-}
-.welcome-card {
-  max-width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 0.5%;
-  border: 1px solid #174d50;
-  border-radius: 8px;
+  line-height: 2em;
 }
 
-.login-card {
-  max-width: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 0.5%;
-  border: 1px solid #174d50;
-  border-radius: 8px;
-}
 .loginButton {
   margin-bottom: 7%;
 }
-.loginButtonColor {
-  background-color: #174d50;
-  color: white;
-  font-size: 1.5rem;
-}
-.footer {
-  /*background-color: #dfff4f;   tämä on tennispallon väri*/
-  position: fixed;
 
-  width: 99%;
-  background-color: #174d50;
-  height: 6vh;
-  margin-bottom: 0.5%;
+@media screen and (max-width: 400px ) {
+  .p {
+    font-size: 1em;
+  }
 
-  display: flex;
-  position: fixed;
-  bottom: 0;
-}
-
-.footerNames {
-  color: white;
-  font-size: 1em;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  text-shadow: 0px 0px 0px #000, 0px -1px 0px #000, 1px -1px 0px #000,
-    -1px 0px 0px #000, 1px 0px 0px #000, -1px 1px 0px #000, 0px 1px 0px #000,
-    1px 1px 0px #000;
-  margin-left: 20%;
 }

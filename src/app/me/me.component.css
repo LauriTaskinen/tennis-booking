@@ -1,7 +1,6 @@
 table {
   width: 80%;
   min-width: 35%;
-  margin-bottom: 50px;
 }
 i {
   cursor: pointer;
@@ -14,6 +13,7 @@ i {
 .h2 {
   font-size: 1.5em;
   color: #ffff;
+
 }
 
 .greeting {
@@ -34,24 +34,35 @@ i {
 
 .header {
   color: #ffff;
+  justify-content: center;
+  margin-bottom: 2vh;
 }
 
 .content {
   justify-content: center;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 400px) {
   table {
     width: 100%;
   }
 
   .greeting {
-    font-size: 1em;
+    font-size: 0.8em;
   }
-}
-.tableHeadFont {
-  font-size: 1.2rem;
-}
-.tableItemFont {
-  font-size: 1rem;
+
+  .h2{
+    padding-top: 2vh;
+    font-weight: 400;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 1.2rem;
+  }
+  .tableItemFont {
+    font-size: 1rem;
+  }
+
 }

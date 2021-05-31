@@ -1,3 +1,9 @@
+.container{
+  width: 90%;
+  margin: auto;
+}
+
+
 #login-form {
   display: flex;
   flex-direction: column;
@@ -38,6 +44,9 @@
   border-radius: 1px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
   transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+  border-radius: 5px;
+  padding: 1%;
+  margin: auto
 }
 
 .g-sign-in-button:hover {
@@ -89,4 +98,59 @@
 .registerButton {
   margin-left: 3%;
   font-size: 1rem;
+}
+button{
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+@media screen and (max-width: 400px) {
+  .pop-up {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+
+  #login-form {
+    width: 100%;
+  }
+
+  input {
+    width: 90%;
+  }
+  .g-sign-in-button {
+    border-radius: 5px;
+    padding: 1%;
+    margin: 0px;
+  }
+
+  .g-sign-in-button .text-container {
+    margin: auto;
+  }
+
+  .forgotPassword {
+    font-size: 0.8em;
+  }
+  .registerButton {
+    max-width: 100px;
+    font-size: 0.6em;
+    padding: 0px;
+  }
+
+  p {
+    font-size: 0.8em;
+    margin-bottom: 1vh;
+    margin-top: 2vh;
+    padding: 0px;
+  }
+  button {
+    min-width: 105px;
+  }
+
+  .reset {
+    margin: 0px;
+    width: 100%;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+  }
 }

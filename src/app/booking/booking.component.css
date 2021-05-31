@@ -1,3 +1,11 @@
+#booking{
+  margin-bottom: 3vh;
+}
+
+.booking{
+  padding-top: 4vh;
+}
+
 .datepicker {
   width: 60%;
 
@@ -29,9 +37,13 @@ p {
   color: black;
 }
 
+
 .h2 {
-  font-size: 2.5vh;
+  font-size: 1.4em;
+  font-weight: 600;
   color: #174d50;
+  padding: 1vh;
+  margin-bottom: 2vh;
 }
 
 .greeting {
@@ -65,4 +77,34 @@ p {
 
 .bold {
   font-weight: 600;
+}
+.error {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1em;
+  color: rgb(201, 43, 4);
+}
+
+@media screen and (max-width: 400px) {
+  .instructions > p {
+    font-size: 1.2em;
+  }
+  .icon {
+    margin-top: 1vh;
+    margin-bottom: 0px;
+  }
+
+  .h2 {
+    font-size: 1.2em;
+    color: #174d50;
+    padding: 2vh;
+    padding-right: 11vw;
+  }
+  .error {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: rgb(201, 43, 4);
+    text-align: center;
+  }
 }

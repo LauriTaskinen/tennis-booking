@@ -1,8 +1,57 @@
-.booking-card {
+
+
+.booking-card, .login-card {
+  max-width: 100%;
+  height: 50vh;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0.5%;
+  border: 1px solid #174d50;
+  border-radius: 8px;
+  margin-bottom: 2vh;
+  text-align: center;
+}
+
+.welcome-card {
+  max-width: 100%;
+  height: 50vh;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0.5%;
+  border: 1px solid #174d50;
+  border-radius: 8px;
+  text-align: center;
+  min-height: 30vh;
+}
+/*
+.login-card {
   max-width: 100%;
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 0.5%;
   border: 1px solid #174d50;
   border-radius: 8px;
+  margin-bottom: 5%;
+  text-align: center;
+} */
+
+small {
+  display: block;
+  margin-bottom: 3vh;
+}
+
+.loginButtonColor {
+  color:  #999e91;
+  font-size: 1rem;
+  background-color: #dfff4f; 
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 400px)  {
+  small{
+    font-size: 1em;
+  }
+  .p{
+    font-size: 1.3em;
+  }
 }

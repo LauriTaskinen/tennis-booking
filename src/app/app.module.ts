@@ -61,6 +61,7 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { AdminComponent } from './admin/admin.component';
 import { TableFilterPipe } from './admin/table-filter.pipe';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AdminComponent,
     TableFilterPipe,
     ResetPasswordComponent,
+    FooterComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -2,14 +2,14 @@
   <mat-card class="welcome-card">
     <div class="container">
       <mat-card-header fxLayoutAlign="center">
-        <h1 class="h1">Tervetuloa Tennis Booking sivustolle!</h1>
+        <h1 class="header">Tervetuloa Tennis Booking sivustolle!</h1>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
         <div class="p">
-          <p> Voit varata tenniskentän suoraan netissä ilmaiseksi!</p>
+          <small> Varaa tenniskenttä käyttöösi ilmaiseksi!</small>
           <p>Rekisteröitymällä käyttäjäksi saat käyttöösi varauskalenterin, josta voit nähdä vapaana olevat vuorot ja
             tehdä varauksen.</p>
-          <p>Kaikki tekemäsi varaukset tallentuvat omat varaukseni -näkymään.</p>
+          <p>Kaikki tekemäsi varaukset tallentuvat <b>omat varaukseni -näkymään.</b></p>
         </div>
       </mat-card-content>
     </div>
@@ -21,7 +21,7 @@
 
       <mat-card-header fxLayoutAlign="center">
 
-        <h1 class="h1">Varaa kenttä</h1>
+        <h1 class="header">Varaa kenttä</h1>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
         <p class="p">Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.</p>
@@ -41,10 +41,11 @@
 
       <mat-card-header fxLayoutAlign="center">
 
-        <h1 class="h1">Varaa kenttä</h1>
+        <h1 class="header">Varaa kenttä</h1>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
-        <p class="p">Varaa tenniskenttä käyttöösi jo tänään!</p>
+        <p class="p">Voit varata kentän käyttöösi kahdeksi tunniksi kerrallaan minä tahansa päivänä viikosta. 
+          Muistathan perua aikasi, mikäli et pääsekään paikalle. </p>
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
         <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
@@ -55,3 +56,4 @@
     </mat-card>
   </div>
 </section>
+<app-footer></app-footer>
