@@ -19,7 +19,8 @@ Lyhyehkö kuvaus eri teknologioiden käyttämisestä työssä.
 
 ## Komennot, joilla kehitysversion saa Githubista omalle koneelle toimimaan:
 
-Mikäli haluat pääsyn admin-näkymään ole meihin yhteydessä niin luomme käyttäjällesi oikeudet admin-näkymään.
+Mikäli haluat pääsyn admin-näkymään hostatussa versiossa ole meihin yhteydessä niin luomme käyttäjällesi oikeudet admin-näkymään.
+Ymmärtääkseni omaan buildiin voi muokata turvallisuussääntöjä firebase.rules-tiedostossa (mm. tästä syystä projekti ei ole julkinen).
 
 Projektin lataaminen GitHubista:
 
