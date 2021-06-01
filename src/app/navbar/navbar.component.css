@@ -1,0 +1,27 @@
+.navbar {
+  /*background-color: #dfff4f;   tämä on tennispallon väri*/
+  background-color: #174d50;
+  height: 100px;
+  position: sticky;
+  top: 0; /* asettaa navbarin ensimmäiseksi */
+  z-index: 1000; /* varmistaa että sisältö ei mene limittäin navbarin kanssa */
+}
+
+.tennisbutton {
+  color: white;
+  font-size: 2rem;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-shadow: -1px -1px 0px #000, 0px -1px 5px #000, 1px -1px 0px #000,
+    -1px 0px 0px #000, 1px 0px 0px #000, -1px 1px 0px #000, 0px 1px 0px #000,
+    1px 1px 0px #000;
+}
+
+.navbutton {
+  flex: inherit;
+  color: white;
+  font-size: 1.2rem;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-shadow: 0px 0px 0px #000, 0px -1px 0px #000, 1px -1px 0px #000,
+    -1px 0px 0px #000, 1px 0px 0px #000, -1px 1px 0px #000, 0px 1px 0px #000,
+    1px 1px 0px #000;
+}

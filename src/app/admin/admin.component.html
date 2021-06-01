@@ -1,0 +1,67 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-table / mat-button sekä Angular Flex Layoutia-->
+
+<section id="admin" fxLayout="row" fxLayoutAlign="center">
+  <div class="container">
+    <mat-card>
+      <div *ngIf="permissionsError === null" class="loading">
+        <p>ladataan...</p>
+        <!--spinner tähän??-->
+      </div>
+
+      <div *ngIf="permissionsError" class="error">
+        <p>Sinulla ei ole oikeuksia tähän näkymään</p>
+      </div>
+
+      <div *ngIf="permissionsError === false" id="all-bookings-table">
+        <mat-card-header>
+          <h2 class="h2"> Kaikki varaukset</h2>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Varaukset lisätään listaan varausjärjestyksessä. Voit suodattaa tietoja varaajan nimen, päivämäärän tai
+            ajan
+            perusteella. Voit
+            myös valita yksittäisiä päiviä tarkastellaksesi päivän varauksia.</p>
+
+
+          <div class="form-group">
+            <strong>VALITSE PÄIVÄ</strong>
+            <select class="form-control" [(ngModel)]="date">
+              <option></option>
+              <option *ngFor="let booking of sortedData" value="{{booking.date}}">
+                {{book.formatBookingDate(booking.date)}}
+              </option>
+
+            </select>
+          </div>
+
+          <br /><br />
+
+          <!--Sorting toteutettu angular marerial-aineiston mukaisesti-->
+          <table matSort (matSortChange)="sortData($event)">
+            <tr>
+              <th mat-sort-header="name">Nimi</th>
+              <th mat-header="email">Sähköposti</th>
+              <th mat-sort-header="date">pvm</th>
+              <th mat-sort-header="time">aika</th>
+
+            </tr>
+
+            <tbody>
+              <tr *ngFor="let booking of sortedData | tableFilter: date">
+                <td>{{booking.name}}</td>
+                <td>{{booking.email}}</td>
+                <td>{{book.formatBookingDate(booking.date)}}</td>
+                <td>{{booking.time}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+        <br /><br />
+
+
+      </div>
+
+    </mat-card>
+  </div>
+</section>

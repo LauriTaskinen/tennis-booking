@@ -1,0 +1,131 @@
+#booking {
+  margin-bottom: 3vh;
+}
+
+.booking {
+  padding-top: 4vh;
+}
+
+.datepicker {
+  width: 60%;
+
+  min-width: 35%;
+  margin-bottom: 50px;
+}
+
+.confirm {
+  margin: 0.3rem;
+  width: 80%;
+  font-size: 1.4rem;
+}
+
+.confirm-text {
+  margin-top: 6vh;
+}
+
+.confirm:hover {
+  background-color: #32c265;
+  color: #ffffff;
+  font-weight: normal;
+}
+i {
+  cursor: pointer;
+}
+p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #0d2e30;
+}
+
+.fade {
+  color: black;
+}
+
+.h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  color: #174d50;
+  padding: 1vh;
+  margin-bottom: 2vh;
+}
+
+.greeting {
+  font-size: 1.5vh;
+}
+.booking {
+  max-width: 100%;
+  margin-top: 0.5%;
+  margin-bottom: 10%;
+  /* border: 1px solid #174d50; */
+  border-radius: 8px;
+}
+/* .timeButtons {
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+  background-color: #cb5223;
+  color: #ffffff;
+} */
+ .mat-button-toggle {
+  /* background-color: #cb5223; */
+  font-size: 1.2rem; 
+  /* color: #ffffff; */
+} 
+
+.mat-toggle-group{
+  width: 100%;
+}
+
+/* .mat-button-toggle-disabled {
+  background-color: grey;
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+  color: #ffffff;
+}  */
+.confirm {
+  margin: 0.3rem;
+  width: 60%;
+  font-size: 1.4rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  min-height: 40vh;
+}
+
+.bold {
+  font-weight: 600;
+}
+.error {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1em;
+  color: rgb(201, 43, 4);
+}
+
+@media screen and (max-width: 400px) {
+  .instructions > p {
+    font-size: 1.2em;
+  }
+  .icon {
+    margin-top: 1vh;
+    margin-bottom: 0px;
+  }
+
+  .error {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: rgb(201, 43, 4);
+    text-align: center;
+  }
+}
+.timeChosen {
+  color: #cb5223;
+}
+.confirm-text {
+  margin-top: 3vh;
+  font-size: 1.5rem;
+}

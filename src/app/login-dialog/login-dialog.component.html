@@ -1,0 +1,57 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-dialog / mat-form / mat-button-->
+<div class="container">
+  <h1 mat-dialog-title>Kirjaudu sisään</h1>
+  <!-- Angular Material Dialog "ponnahdusikkuna" -->
+  <div class="pop-up" mat-dialog-actions>
+
+    <form id="login-form" #loginForm="ngForm" (ngSubmit)="logIn(loginForm)">
+      <mat-form-field>
+        <mat-label>
+          Sähköposti:
+        </mat-label>
+        <input matInput id="email" type="email" name="sahkoposti" required ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>
+          Salasana:
+        </mat-label>
+        <input matInput id="password" type="password" name="salasana" required ngModel>
+      </mat-form-field>
+
+      <!--Tämä näkyy jos virheellinen käyttäjätunnus tai salasana -->
+      <section *ngIf="auth.errorMessage">
+        <em class="loginError">Virheellinen käyttäjätunnus tai salasana </em>
+      </section>
+
+      <button mat-raised-button type="submit" [disabled]="!loginForm.valid">Lähetä</button>
+      <br>
+      <div class="forgotPassword">
+        <span>Unohtuiko salasana?</span>
+        <button class="reset" button mat-stroked-button color="primary" (click)="resetPassword()">Palauta salasana
+          tästä</button>
+      </div>
+
+      <div class="register">
+        <span>Etkö ole vielä rekisteröitynyt?</span>
+        <button mat-raised-button color="primary" class="registerButton" (click)="signUp()">Rekisteröidy nyt</button>
+      </div>
+
+
+      <p> tai kirjaudu sisään Google-tunnuksilla</p>
+
+      <!-- kutsuu GoogleLogin() AuthServicestä-->
+
+      <div class='g-sign-in-button' (click)="LogInWithGoogle()">
+        <div class=content-wrapper>
+          <div class='logo-wrapper'>
+            <img src='https://developers.google.com/identity/images/g-logo.png'>
+          </div>
+          <span class='text-container'>
+            <span>Sign in with Google</span>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

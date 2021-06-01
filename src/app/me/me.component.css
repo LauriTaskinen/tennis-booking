@@ -1,0 +1,120 @@
+table {
+  width: 80%;
+  min-width: 35%;
+}
+i {
+  cursor: pointer;
+}
+
+.fade {
+  color: black;
+}
+
+.h2 {
+  font-size: 1.5em;
+  color: #ffff;
+}
+
+.greeting {
+  font-size: 1em;
+  font-weight: 300;
+  color: #ffff;
+}
+
+.mybookings {
+  max-width: 100%;
+  margin-top: 1vh;
+  padding-bottom: 12vh;
+  min-height: 400px;
+  background-color: #cb5223;
+  border: 1px solid #a73f16;
+  border-radius: 8px;
+}
+
+.header {
+  color: #ffff;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+
+.content {
+  justify-content: center;
+}
+.mat-column-delete {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.mat-column-time {
+  text-align: right;
+  justify-self: end;
+}
+@media screen and (max-width: 450px) {
+  table {
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 400;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 0.9rem;
+  }
+  .tableItemFont {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 360px) {
+  table {
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 300;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 0.7rem;
+  }
+  .tableItemFont {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 320px) {
+  table {
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 300;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 0.55rem;
+  }
+  .tableItemFont {
+    font-size: 0.55rem;
+  }
+}

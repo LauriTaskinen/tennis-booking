@@ -1,0 +1,50 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-table / mat-button
+sekä Angular Flex Layoutia-->
+<section id="me" fxLayout="row" fxLayoutAlign="center">
+  <div class="container ">
+    <mat-card class="mybookings">
+      <mat-card-title class="greeting">Hei {{currentName}}!</mat-card-title>
+
+      <mat-card-header class="header">
+        <mat-card-title class="h2">
+          Omat varauksesi
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content *ngIf="mybookings !== null && mybookings.length > 0" fxLayoutAlign="center">
+
+        <table mat-table [dataSource]="mybookings" class="mat-elevation-z8">
+
+          <!-- Päivät sarake -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef class="tableHeadFont"> Päivä </th>
+            <td mat-cell *matCellDef="let booking" class="tableItemFont">
+              {{book.formatBookingDate(booking.payload.doc.data().date)}} </td>
+          </ng-container>
+          <!-- Aika Sarake -->
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef class="tableHeadFont"> Aika </th>
+            <td mat-cell *matCellDef="let booking" class="tableItemFont"> {{booking.payload.doc.data().time}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef class="tableHeadFont"> </th>
+            <td mat-cell *matCellDef="let booking"> <button mat-button color="accent"
+                (click)="cancelBooking(booking.payload.doc.id)" class="tableItemFont">peru varaus <mat-icon>clear
+                </mat-icon></button> </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        </table>
+
+      </mat-card-content>
+      <div *ngIf="mybookings === null"> <small fxLayoutAlign="center">ladataan... </small></div>
+      <div *ngIf="mybookings !== null && mybookings.length === 0">
+        <small fxLayoutAlign="center">
+          ei varauksia
+        </small>
+      </div>
+    </mat-card>
+  </div>
+</section>

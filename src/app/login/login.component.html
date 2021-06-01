@@ -1,0 +1,66 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-button
+sekä Angular Flex Layoutia-->
+<section id="login" fxLayout="column" fxLayoutAlign="center">
+  <mat-card class="welcome-card">
+    <div class="container">
+      <mat-card-header fxLayoutAlign="center">
+        <h1 class="header">Tervetuloa Tennis Booking sivustolle!</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <div class="p">
+          <small> Varaa tenniskenttä käyttöösi ilmaiseksi!</small>
+          <p>Rekisteröitymällä käyttäjäksi saat käyttöösi varauskalenterin, josta voit nähdä vapaana olevat vuorot ja
+            tehdä varauksen. Kaikki tekemäsi varaukset tallentuvat <b>omat varaukseni</b> -näkymään.</p>
+
+        </div>
+
+      </mat-card-content>
+      <img [src]="image" alt="tennis ball">
+    </div>
+
+  </mat-card>
+
+  <div *ngIf=" !auth.user?.id && !cache.currentUserID" id="login">
+    <mat-card class="login-card">
+
+      <mat-card-header fxLayoutAlign="center">
+
+        <h1 class="header">Varaa kenttä</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <p class="p">Kirjaudu sisään tai rekisteröidy käyttäjäksi varataksesi tennis-kentän käyttöösi.</p>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
+          (click)="openDialog()">Kirjaudu
+          sisään</button>
+        <br>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+  <div *ngIf="auth.user?.id || cache.currentUserID" id="login">
+    <mat-card class="booking-card">
+
+      <mat-card-header fxLayoutAlign="center">
+
+        <h1 class="header">Varaa kenttä</h1>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <p class="p">Voit varata kentän käyttöösi kahdeksi tunniksi kerrallaan minä tahansa päivänä viikosta.
+          Muistathan perua aikasi, mikäli et pääsekään paikalle. </p>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button class="loginButton" mat-raised-button class="loginButtonColor" type="button"
+          (click)="goToBooking()">Varaa nyt</button>
+        <br>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+</section>
+
+<div class="footer">
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,30 @@
+.footer {
+  /* position: fixed; */
+  width: 100%;
+  background-color: #174d50;
+  height: 6vh;
+  margin-bottom: 0.5%;
+  display: block;
+  bottom: 0;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-content: center;
+}
+
+.footerNames {
+  display: inline-block;
+  color: white;
+  font-size: 1em;
+  padding-top: 2vh;
+  margin: auto;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-shadow: 0px 0px 0px #000, 0px -1px 0px #000, 1px -1px 0px #000,
+    -1px 0px 0px #000, 1px 0px 0px #000, -1px 1px 0px #000, 0px 1px 0px #000,
+    1px 1px 0px #000;
+  justify-content: center;
+  align-content: center;
+  justify-self: center;
+  width: 100%;
+  text-align: center;
+}

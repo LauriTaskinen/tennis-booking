@@ -1,0 +1,40 @@
+<!--Ulkoasuun käytetty Angular Materiala: mat-toolbar / mat-icon / mat-button -->
+
+<mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-around center" class="navbar">
+  <a class="tennis" mat-button class="tennisbutton" href='#'><span fxFlex>Tennis booking</span></a>
+
+  <!-- Apuna tässä osiossa: https://zoaibkhan.com/blog/create-a-responsive-toolbar-in-angular-using-flex-layout/ -->
+  <div *ngIf="auth.user?.id || cache.currentUserID">
+    <!--animaatio??-->
+    <!--lisää google kirjautuminen ulos ;auth.signOut()-->
+    <a mat-button (click)="logOutMethod()" class="navbutton" [href]='logOutItem.path' [fxShow]="logOutItem.desktopView"
+      [fxShow.xs]="logOutItem.mobileView" [fxShow.sm]="logOutItem.tabletView">
+      <mat-icon class="mr">{{logOutItem.icon}}</mat-icon>
+      {{logOutItem.label}}
+    </a>
+    <a mat-button *ngFor="let item of navItems" class="navbutton" [href]='item.path' [fxShow]="item.desktopView"
+      [fxShow.xs]="item.mobileView" [fxShow.sm]="item.tabletView">
+      <mat-icon class="mr">{{item.icon}}</mat-icon>
+      {{item.label}}
+    </a>
+
+    <button class="navbutton" mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.lt-md>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #dropMenu="matMenu">
+      <ng-container *ngFor="let item of navItems">
+        <div [fxShow]="!item.desktopView" [fxShow.xs]="!item.mobileView" [fxShow.sm]="!item.tabletView">
+          <a [href]='item.path' mat-menu-item>
+            <mat-icon class="mr">{{item.icon}}</mat-icon>
+            {{item.label}}
+          </a>
+          <mat-divider></mat-divider>
+        </div>
+      </ng-container>
+    </mat-menu>
+  </div>
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>
