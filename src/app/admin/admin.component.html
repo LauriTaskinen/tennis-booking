@@ -1,8 +1,8 @@
-<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-table / mat-button sekä Angular Flex Layoutia-->
+<!--Ulkoasuun käytetty Angular Materiala: mat-card / mat-sort / mat-button sekä Angular Flex Layoutia-->
 
 <section id="admin" fxLayout="row" fxLayoutAlign="center">
   <div class="container">
-    <mat-card>
+    <mat-card fxLayoutAlign="center">
       <div *ngIf="permissionsError === null" class="loading">
         <p>ladataan...</p>
         <!--spinner tähän??-->
@@ -21,41 +21,47 @@
             ajan
             perusteella. Voit
             myös valita yksittäisiä päiviä tarkastellaksesi päivän varauksia.</p>
+        
+          <div class="table">
+         
+            <div class="pick-date">
+              <p><strong>VALITSE PÄIVÄ</strong></p>
+              <select class="form-control" [(ngModel)]="date">
+                <option></option>
+                <option *ngFor="let booking of sortedData" value="{{booking.date}}">
+                  {{book.formatBookingDate(booking.date)}}
+                </option>
 
+              </select>
+            </div>
 
-          <div class="form-group">
-            <strong>VALITSE PÄIVÄ</strong>
-            <select class="form-control" [(ngModel)]="date">
-              <option></option>
-              <option *ngFor="let booking of sortedData" value="{{booking.date}}">
-                {{book.formatBookingDate(booking.date)}}
-              </option>
+            <!--Sorting toteutettu angular marerial-aineiston mukaisesti-->
+            <table matSort (matSortChange)="sortData($event)">
+              <thead>
+                <tr>
+                  <th mat-sort-header="name">Nimi</th>
+                  <th mat-header="email">Sähköposti</th>
+                  <th mat-sort-header="date">pvm</th>
+                  <th mat-sort-header="time">aika</th>
+                </tr>
+              </thead>
 
-            </select>
+              <tbody>
+                <tr *ngFor="let booking of sortedData | tableFilter: date">
+                  <td>{{booking.name}}</td>
+               
+                  <td>{{booking.email}}</td>
+            
+                  <td>{{book.formatBookingDate(booking.date)}}</td>
+
+                  <td>{{booking.time}}</td>
+                  <mat-divider></mat-divider>
+
+                </tr>
+                
+              </tbody>
+            </table>
           </div>
-
-          <br /><br />
-
-          <!--Sorting toteutettu angular marerial-aineiston mukaisesti-->
-          <table matSort (matSortChange)="sortData($event)">
-            <tr>
-              <th mat-sort-header="name">Nimi</th>
-              <th mat-header="email">Sähköposti</th>
-              <th mat-sort-header="date">pvm</th>
-              <th mat-sort-header="time">aika</th>
-
-            </tr>
-
-            <tbody>
-              <tr *ngFor="let booking of sortedData | tableFilter: date">
-                <td>{{booking.name}}</td>
-                <td>{{booking.email}}</td>
-                <td>{{book.formatBookingDate(booking.date)}}</td>
-                <td>{{booking.time}}</td>
-
-              </tr>
-            </tbody>
-          </table>
         </mat-card-content>
         <br /><br />
 

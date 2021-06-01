@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
-import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
 import { BookingData } from '../bookingdata';
 import { Sort } from '@angular/material/sort';
 
@@ -16,37 +14,27 @@ export class AdminComponent implements OnInit, OnDestroy {
   bookingsSub: Subscription | null;
   allbookings: BookingData[];
   allUsers: any[] | null;
-  currentUserID: string;
-  currentUserName: string;
-  currentDate: string;
   data: any;
   columnsToDisplay = ['name', 'date', 'time'];
   sortedData: BookingData[];
   permissionsError: any;
   date: any;
 
-  constructor(public book: BookingService, private auth: AuthService) {
-    this.currentUserID = this.auth.userState ? this.auth.user!.id : '';
-    this.currentDate = book.currentDate;
-    this.currentUserName = this.auth.userState ? this.auth.user!.name! : '';
-    this.allUsers = this.getAllUsers();
-    this.allbookings = this.getAllData(this.allUsers);
-    this.usersSub = null;
+  constructor(public book: BookingService) {
+    this.allUsers = this.getAllUsers(); //noudetaan jo alustuksessa käyttäjät
+    this.allbookings = this.getAllData(this.allUsers); // ja niihin liittyvät varaukset
+    this.usersSub = null; //nämä vain unsubscribeä varten
     this.bookingsSub = null;
-    this.data = new MatTableDataSource<any>(this.allbookings);
-    this.sortedData = this.allbookings;
+    this.sortedData = this.allbookings; //tässä on aluksi suodattamatonta dataa
     this.permissionsError = null;
     this.date;
   }
 
   ngOnInit() {
     this.deleteOldBookings();
-    console.log(this.auth.user?.id)
-    // let dataSamples: ItemModel[] ;
-    //init your list with ItemModel Objects (can be manual or come from server etc) And put it in data source
   }
 
-  //Sorting toteutettu angular material -esimerkin mukaisesti myös logiikan osalta.
+  //Sorting toteutettu angular material sorting-esimerkin mukaisesti myös logiikan osalta.
   sortData(sort: Sort) {
     const data = this.allbookings.slice();
     if (!sort.active || sort.direction === '') {
@@ -66,9 +54,10 @@ export class AdminComponent implements OnInit, OnDestroy {
           return 0;
       }
     });
-    console.log(data);
   }
-  // hakee admin näkymään kaikki käyttäjät
+
+  /* getAllUsers hakee taulukkoon kaikki käyttäjät users-collectionista.
+  Sallittu vain jos on kirjautunut admin-käyttäjällä*/
   getAllUsers() {
     let allUsers: any[] = [];
     this.usersSub = this.book.getUsers().subscribe((users) => {
@@ -79,16 +68,21 @@ export class AdminComponent implements OnInit, OnDestroy {
     return allUsers;
   }
 
+  /*cancelBooking peruuttaa varauksen id:n perusteella. 
+    Metodi kutsuu bookingservicen metodia.*/
   cancelBooking(id: string) {
-    console.log(id);
     this.book.deleteBooking(id);
   }
-  // hakee admin näkymään kaikki varaukset
+
+  /* getAllData hakee admin-näkymään kaikki varaukset käytttäjineen.
+    Metodi noutaa ensin kaikki varaukset ja sitten vertaa niitä parametrina
+  saatuun users-taulukkoon löytääkseen varaukselle varaajan tiedot. Metodi 
+  palauttaa taulukon yhdistetyillä tiedoilla */
   getAllData(users: any[]) {
     let allbookings: any[] = [];
-    this.usersSub = this.book.getAllBookings().subscribe((bookings: any) => {
-      bookings.forEach(async (booking: any) => {
-        let match = await users.find(
+    this.bookingsSub = this.book.getAllBookings().subscribe((bookings: any) => {
+      bookings.forEach((booking: any) => {
+        let match = users.find(
           (user) => user.id === booking.payload.doc.data().id
         );
         if (!match) {
@@ -105,8 +99,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         }
       });
     });
-
-    console.log(allbookings);
     return allbookings;
   }
 
