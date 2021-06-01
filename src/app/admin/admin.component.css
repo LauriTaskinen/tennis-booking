@@ -1,13 +1,28 @@
-#admin{
+#admin {
   margin-top: 3vh;
 }
 
+p {
+  display: inline;
+  padding-right: 2vw;
+  justify-self: center;
+}
+
 table {
-  width: 60%;
-  max-width: 600px;
   min-width: 35%;
   margin-bottom: 50px;
+  width: 67%;
 }
+
+.mat-sort{
+  margin: auto;
+  border-spacing: 30px;
+}
+
+.table{
+  margin: auto;
+}
+
 
 i {
   cursor: pointer;
@@ -23,4 +38,11 @@ i {
 
 .greeting {
   font-size: 1.5vh;
+}
+
+.pick-date {
+  padding-bottom: 2vh;
+  padding-top: 3vh;
+  width: 60%;
+  margin: auto
 }

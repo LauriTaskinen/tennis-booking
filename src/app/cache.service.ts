@@ -1,3 +1,6 @@
+/* Luulin työtä aloittaessa, että cache ja local storage on sama asia.
+  Nyt tiedämme paremmin, mutta nimet jäivät. */
+
 /* Välimuistia käytetään angular/firebase refresh -ongelman kiertämiseksi. 
   Ongelma syntyy päivittäessä sivua, jolloin auth-tila nollaantuu. Näin ei pitäisi 
   siis käydä. 
@@ -34,7 +37,6 @@ export class CacheService {
   getItem(userdata: string): string | undefined {
     let item = localStorage.getItem(userdata);
     if (item !== null) {
-      console.log(item);
       return item;
     } else {
       return undefined;
