@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookingService } from '../booking.service';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
-import { CacheService } from '../cache.service';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-me',
@@ -11,18 +11,20 @@ import { CacheService } from '../cache.service';
 })
 export class MeComponent implements OnInit, OnDestroy {
   personalBookingsSub: Subscription | null;
-  mybookings: any[] |null;
+  mybookings: any[] | null;
   columnsToDisplay = ['date', 'time', 'delete'];
   currentName: string | void;
 
   constructor(
     public book: BookingService,
-    private cache: CacheService,
+    private localstorage: LocalstorageService,
     private auth: AuthService
   ) {
     this.personalBookingsSub = null;
-    this.mybookings =null;
-    this.currentName = this.auth.user?.name ? this.auth.user!.name : this.cache.currentUserName;
+    this.mybookings = null;
+    this.currentName = this.auth.user?.name
+      ? this.auth.user!.name
+      : this.localstorage.currentUserName;
   }
 
   ngOnInit(): void {

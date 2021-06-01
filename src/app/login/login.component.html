@@ -20,7 +20,7 @@ sekä Angular Flex Layoutia-->
 
   </mat-card>
 
-  <div *ngIf=" !auth.user?.id && !cache.currentUserID" id="login">
+  <div *ngIf=" !auth.user?.id && !localstorage.currentUserID" id="login">
     <mat-card class="login-card">
 
       <mat-card-header fxLayoutAlign="center">
@@ -40,7 +40,7 @@ sekä Angular Flex Layoutia-->
     </mat-card>
   </div>
 
-  <div *ngIf="auth.user?.id || cache.currentUserID" id="login">
+  <div *ngIf="auth.user?.id || localstorage.currentUserID" id="login">
     <mat-card class="booking-card">
 
       <mat-card-header fxLayoutAlign="center">

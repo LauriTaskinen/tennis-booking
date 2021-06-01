@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CacheService } from './cache.service';
+import { LocalstorageService } from './localstorage.service';
 import firebase from 'firebase/app';
 import User from './user';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -21,7 +21,7 @@ export class AuthService {
     private router: Router,
     private dialog: MatDialog,
     private snackbar: MatSnackBar,
-    private cache: CacheService,
+    private localstorage: LocalstorageService,
     private store: AngularFirestore
   ) {
     this.user = {
@@ -130,7 +130,7 @@ export class AuthService {
       .then((user: User) => {
         this.store.collection('Users').doc(user.id).set(user);
         console.log(user);
-        this.cache.saveUser(user);
+        this.localstorage.saveUser(user);
         this.router.navigate(['booking']);
         this.dialog.closeAll();
       })
@@ -145,7 +145,7 @@ export class AuthService {
       .then(() => {
         console.log('Logged out');
         this.router.navigate(['login']);
-        this.cache.remove();
+        this.localstorage.remove();
       })
       .catch((error) => {
         console.log(error.message);
@@ -176,7 +176,7 @@ export class AuthService {
       .then((user) => {
         console.log(user);
         this.updateUser(this.user!.id, this.user!);
-        this.cache.saveUser(user);
+        this.localstorage.saveUser(user);
         this.dialog.closeAll();
       });
   }

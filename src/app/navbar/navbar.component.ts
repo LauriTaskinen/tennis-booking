@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { CacheService } from '../cache.service';
+import { LocalstorageService } from '../localstorage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -45,21 +45,17 @@ export class NavbarComponent implements OnInit {
     desktopView: true,
   };
 
-
   constructor(
     public router: Router,
     public auth: AuthService,
-    public cache: CacheService
+    public localstorage: LocalstorageService
   ) {
     /* joissain tilanteissa auth.user.name ei ole käytettävissä välittömästi tai lainkaan (esim. sivun päivitys)
-    ja siinä tapauksessa haemme tiedon cachesta. */
-   
+    ja siinä tapauksessa haemme tiedon localstoragesta. */
   }
 
   logOutMethod() {
     this.auth.logOut();
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

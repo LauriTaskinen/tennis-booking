@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
-import { CacheService } from './cache.service';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class BookingService {
   constructor(
     private store: AngularFirestore,
     private auth: AuthService,
-    private cache: CacheService
+    private localstorage: LocalstorageService
   ) {
     this.users;
     this.allData;
@@ -25,7 +25,7 @@ export class BookingService {
     );
     this.currentUser = this.auth.user?.id
       ? this.auth.user!.id
-      : this.cache.currentUserID;
+      : this.localstorage.currentUserID;
   }
 
   //https://softauthor.com/firebase-get-user-data-by-uid/

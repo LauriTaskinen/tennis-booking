@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { AuthService } from '../auth.service';
-import { CacheService } from '../cache.service';
+import { LocalstorageService } from '../localstorage.service';
 // import { LoginData } from '../logindata'; // otetaan sisään testikäyttäjän tunnnus ja salasana
 
 @Component({
@@ -12,12 +12,12 @@ import { CacheService } from '../cache.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  image = '../assets/tennis.jpg'
+  image = '../assets/tennis.jpg';
   constructor(
     private router: Router,
     public dialog: MatDialog,
     public auth: AuthService,
-    public cache: CacheService,
+    public localstorage: LocalstorageService
   ) {}
 
   /*kun käyttäjä kirjautuu googlella, sisäänkirjautuessa
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.dialog.open(LoginDialogComponent);
   }
 
-  goToBooking(){
-    this.router.navigate(['booking'])
+  goToBooking() {
+    this.router.navigate(['booking']);
   }
 }
