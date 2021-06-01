@@ -35,7 +35,7 @@ export class LoginDialogComponent implements OnInit {
   logIn(data: NgForm): void {
     this.auth.logIn(data.value.sahkoposti, data.value.salasana);
     data.resetForm();
-    if(!this.auth.errorMessage){
+    if(!this.auth.errorMessage && this.auth.user?.emailVerified){
       this.dialog.closeAll();
     }
   }
