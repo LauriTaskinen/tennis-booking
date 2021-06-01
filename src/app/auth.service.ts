@@ -15,6 +15,8 @@ export class AuthService {
   userState: Promise<any> | null;
   user: User | null;
   errorMessage: boolean = false;
+  verified: boolean = false;
+  authorized: boolean = false;
 
   constructor(
     public auth: AngularFireAuth,
@@ -28,17 +30,21 @@ export class AuthService {
       id: '',
       name: '',
       email: '',
+      emailVerified: undefined,
     };
+
     this.userState = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
         this.user = {
           id: user.uid,
           name: user.displayName,
           email: user.email,
+          emailVerified: user.emailVerified,
         };
+        this.authorized = true;
       } else {
         console.log('no user');
+        this.authorized = false;
       }
     });
   }
@@ -116,25 +122,22 @@ export class AuthService {
       .then((userData) => {
         if (!userData.user?.emailVerified) {
           this.SendVerificationMail();
-          window.alert(
-            'Melkein valmista! Käy vielä vahvistamassa sähköpostiosoitteesi ennen kirjautumista'
+          this.snackbar.open(
+            'Melkein valmista! Käy vielä vahvistamassa sähköpostiosoitteesi ennen kirjautumista',
+            '',
+            { duration: 5000 }
           );
           throw new Error('Email verification missing');
+        } else {
+          this.cache.saveUser(this.user);
+          
+          this.router.navigate(['booking']);
+          this.dialog.closeAll();
+          console.log('verified');
         }
-        return (this.user = {
-          id: userData.user!.uid,
-          name: userData.user!.displayName,
-          email: userData.user!.email,
-        });
       })
-      .then((user: User) => {
-        this.store.collection('Users').doc(user.id).set(user);
-        console.log(user);
-        this.cache.saveUser(user);
-        this.router.navigate(['booking']);
-        this.dialog.closeAll();
-      })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         this.openAlert();
       });
   }
@@ -167,18 +170,28 @@ export class AuthService {
       .auth()
       .getRedirectResult()
       .then((userData) => {
-        return (this.user = {
-          id: userData.user!.uid,
-          name: userData.user!.displayName,
-          email: userData.user!.email,
-        });
+        if (userData.user !== null) {
+          this.verified = true;
+          return (this.user = {
+            id: userData.user.uid,
+            name: userData.user.displayName,
+            email: userData.user.email,
+            emailVerified: userData.user.emailVerified,
+          });
+        } else {
+          return null;
+        }
       })
       .then((user) => {
-        console.log(user);
-        this.updateUser(this.user!.id, this.user!);
-        this.cache.saveUser(user);
-        this.dialog.closeAll();
-      });
+        if (user) {
+          this.updateUser(this.user!.id, this.user!);
+          this.cache.saveUser(user);
+          this.dialog.closeAll();
+        }
+      })
+      .catch((error) =>
+        console.log('no need to worry about this error:' + error.message)
+      );
   }
 
   /*päivittää käyttäjän tiedot tietokantaan. Google-authentikaation toiminnan vuoksi
