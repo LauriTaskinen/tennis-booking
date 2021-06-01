@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'booking', component: BookingComponent, canActivate: [BookingGuard] },
   { path: 'sign-in', component: SignInComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', component: AdminComponent, canActivate:[BookingGuard] },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'policy', component: PolicyComponent },
   { path: 'privacy', component: PrivacyComponent },
