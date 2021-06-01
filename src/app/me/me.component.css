@@ -40,6 +40,12 @@ i {
 .content {
   justify-content: center;
 }
+.mat-header-cell {
+  font-size: 1.5rem;
+}
+.mat-cell {
+  font-size: 1.5rem;
+}
 .mat-column-delete {
   text-align: right;
   justify-content: flex-end;
@@ -49,6 +55,30 @@ i {
   text-align: right;
   justify-self: end;
 }
+@media screen and (max-width: 545px) {
+  table {
+    width: 100%;
+  }
+
+  .greeting {
+    font-size: 0.8em;
+  }
+
+  .h2 {
+    padding-top: 2vh;
+    font-weight: 400;
+    font-size: 1.2em;
+    padding-left: 8vw;
+  }
+
+  .tableHeadFont {
+    font-size: 1rem;
+  }
+  .tableItemFont {
+    font-size: 1rem;
+  }
+}
+
 @media screen and (max-width: 450px) {
   table {
     width: 100%;

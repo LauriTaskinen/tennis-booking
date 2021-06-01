@@ -16,7 +16,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class CacheService {
+export class LocalstorageService {
   currentUserID: string | void;
   currentUserName: string | void;
 
@@ -31,7 +31,7 @@ export class CacheService {
     let currentUser = user;
     localStorage.setItem('currentUserID', currentUser!.id);
     localStorage.setItem('currentUserName', currentUser!.name);
-    console.log('userdata set in cache');
+    console.log('userdata set in localstorage');
   }
 
   getItem(userdata: string): string | undefined {
@@ -45,6 +45,6 @@ export class CacheService {
 
   remove(): void {
     localStorage.clear();
-    console.log('removed userdata from cache');
+    console.log('removed userdata from localstorage');
   }
 }

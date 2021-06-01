@@ -22,6 +22,9 @@
 .confirm-text {
   margin-top: 6vh;
 }
+.instructions {
+  font-size: 1.2em;
+}
 
 .confirm:hover {
   background-color: #32c265;
@@ -56,7 +59,6 @@ p {
   max-width: 100%;
   margin-top: 0.5%;
   margin-bottom: 10%;
-  /* border: 1px solid #174d50; */
   border-radius: 8px;
 }
 /* .timeButtons {
@@ -66,16 +68,19 @@ p {
   background-color: #cb5223;
   color: #ffffff;
 } */
- .mat-button-toggle {
+.mat-button-toggle {
   /* background-color: #cb5223; */
-  font-size: 1.2rem; 
+  font-size: 1.4rem;
+  width: auto;
   /* color: #ffffff; */
-} 
-
-.mat-toggle-group{
-  width: 100%;
 }
 
+.mat-toggle-group {
+  width: 100%;
+}
+.mat-button-toggle-group {
+  flex-wrap: wrap;
+}
 /* .mat-button-toggle-disabled {
   background-color: grey;
   margin: 0.3rem;
@@ -104,8 +109,17 @@ p {
   font-size: 1em;
   color: rgb(201, 43, 4);
 }
+@media screen and (max-width: 600px) {
+  .mat-button-toggle {
+    font-size: 2rem;
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 400px) {
+  .mat-button-toggle {
+    font-size: 2rem;
+  }
   .instructions > p {
     font-size: 1.2em;
   }
@@ -121,11 +135,37 @@ p {
     color: rgb(201, 43, 4);
     text-align: center;
   }
-}
-.timeChosen {
-  color: #cb5223;
-}
-.confirm-text {
-  margin-top: 3vh;
-  font-size: 1.5rem;
+
+  @media screen and (max-width: 370px) {
+    .mat-button-toggle {
+      font-size: 2rem;
+    }
+    .instructions > p {
+      font-size: 1.2em;
+    }
+    .icon {
+      margin-top: 1vh;
+      margin-bottom: 0px;
+    }
+
+    .error {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 1em;
+      color: rgb(201, 43, 4);
+      text-align: center;
+    }
+  }
+  .timeChosen {
+    color: #cb5223;
+  }
+  .confirm-text {
+    margin-top: 3vh;
+    font-size: 1.5rem;
+  }
+  .confirm {
+    margin: 0.15rem;
+    width: 100%;
+    font-size: 1.3rem;
+  }
 }

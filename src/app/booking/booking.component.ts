@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { BookingService } from '../booking.service';
-import { CacheService } from '../cache.service';
+import { LocalstorageService } from '../localstorage.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import User from '../user';
 
@@ -16,7 +16,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   minDate: Date = new Date(); // määrittää ettei nykyistä päivämäärää aikaisempia aikoja voi valita datepickerillä
   touchUi = true; //datepickerissä kosketuisnäytöille sopiva näkymä
   dayChosen = false; // tämä vaikuttaa vain siihen tuleeko kellonaikojen valinta näkyviin HTML-templaatissa
-  timeChosen ='0'; // kertoo tämänhetkisen valitun slotin
+  timeChosen = '0'; // kertoo tämänhetkisen valitun slotin
   dateChosen: Date; //valitsee päivän
   fullyBookedDates = []; //kun päivä on varattu kokonaan se siirretään tänne
   maxBookingLimit = false; //käyttäjä saa tehdä vain yhden varauksen per päivä ja silloin tästä tulee true
@@ -28,7 +28,7 @@ export class BookingComponent implements OnInit, OnDestroy {
   constructor(
     private book: BookingService,
     private auth: AuthService,
-    private cache: CacheService,
+    private localstorage: LocalstorageService,
     private snackbar: MatSnackBar
   ) {
     this.allBookingsSub = null;
@@ -97,7 +97,7 @@ export class BookingComponent implements OnInit, OnDestroy {
             });
             if (
               booking.payload.doc.data().id === this.auth.user?.id ||
-              booking.payload.doc.data().id === this.cache.currentUserID
+              booking.payload.doc.data().id === this.localstorage.currentUserID
             ) {
               this.maxBookingLimit = true;
             } else {
